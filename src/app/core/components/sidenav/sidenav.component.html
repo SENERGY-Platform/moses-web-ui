@@ -1,0 +1,42 @@
+<mat-sidenav-container [ngStyle]="{'z-index': zIndex}" (backdropClick)="closeSidenav()">
+    <mat-sidenav disableClose #sidenav role="navigation" class="sidenav" [fixedInViewport]="true"
+                 class="mat-elevation-z1">
+        <ul class="side-menu">
+            <li *ngFor="let section of sections">
+                    <button mat-button  type=button routerLink="{{section.state}}" routerLinkActive="background-color-accent" *ngIf="section.type === 'link'"
+                    (click)="toggleSection(section)"
+                    class="md-button-toggle">
+                    <mat-icon>{{section.icon}}</mat-icon>
+                    {{section.name | uppercase}}
+                    </button>
+                <button mat-button *ngIf="section.type === 'toggle'"
+                        (click)="toggleSection(section)"
+                        [ngClass]="{'background-color-accent': isSectionOpen(section)}"
+                        class="md-button-toggle">
+                    <div fxLayout="row" fxLayoutAlign=" center">
+                        <mat-icon>{{section.icon}}</mat-icon>
+                        <div fxFlexOffset="5px">{{section.name | uppercase}}</div>
+                        <mat-icon class="md-toggle-icon"
+                                  [ngClass]="{'toggled': isSectionOpen(section)}">
+                            keyboard_arrow_down
+                        </mat-icon>
+                    </div>
+                </button>
+                <ul [ngClass]="{'toggled': isSectionOpen(section)}"
+                    class="menu-toggle-list">
+                    <li *ngFor="let page of section.pages">
+                            <button mat-button
+                                    routerLink="{{page.state}}" routerLinkActive="background-color-accent"
+                                    (click)="closeSidenav()" class="md-button-toggle">
+                                <mat-icon>{{page.icon}}</mat-icon>
+                                {{page.name}}
+                            </button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </mat-sidenav>
+    <mat-sidenav-content role="main">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
