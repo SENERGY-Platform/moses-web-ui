@@ -10,6 +10,11 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  addWorld(): void {
+    console.log('add world');
   }
 
 }
