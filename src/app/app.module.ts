@@ -9,6 +9,7 @@ import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeModule} from './modules/home/home.module';
+import {WorldModule} from './modules/world/world.module';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import {HomeModule} from './modules/home/home.module';
         CoreModule,
         AppRoutingModule,
         HomeModule,
+        WorldModule,
         KeycloakAngularModule,
         HttpClientModule
     ],
