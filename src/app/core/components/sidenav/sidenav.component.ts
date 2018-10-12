@@ -89,7 +89,11 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     }
 
     private getSections(): void {
-        this.sections = this.sidenavService.getSections();
+        this.sidenavService.currentSidenavSections.subscribe(sections => {
+                this.sections = sections;
+            }
+        );
+        this.sidenavService.initSidenav();
     }
 
     private getActiveSection() {
@@ -100,6 +104,6 @@ export class SidenavComponent implements OnInit, AfterViewInit {
                 return this.activatedRoute.firstChild;
             }),
             mergeMap((activatedRoute: ActivatedRoute) => activatedRoute.url)
-        ).subscribe((activeRoute: any) => this.openSection = '/'  + activeRoute[0].path);
+        ).subscribe((activeRoute: any) => this.openSection = '/' + activeRoute[0].path);
     }
 }

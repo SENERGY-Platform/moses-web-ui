@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HomeService} from './shared/home.service';
 
 @Component({
   selector: 'moses-home',
@@ -7,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private homeService: HomeService) { }
 
   ngOnInit() {
 
+  }
+
+  add(): void {
+    this.homeService.openNewWorldDialog();
   }
 
   addWorld(): void {

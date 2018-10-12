@@ -1,17 +1,23 @@
 import {NgModule} from '@angular/core';
 import {HomeComponent} from './home.component';
-import {MatButtonModule, MatIconModule} from '@angular/material';
+import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {HomeNewWorldDialogComponent} from './dialogs/home-new-world-dialog.component';
 
 @NgModule({
     imports: [
         MatButtonModule,
         MatIconModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
     ],
     declarations: [
         HomeComponent,
-    ]
+        HomeNewWorldDialogComponent
+    ],
+    entryComponents: [HomeNewWorldDialogComponent],
 })
 export class HomeModule {
 }
