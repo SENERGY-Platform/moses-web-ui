@@ -31,16 +31,16 @@ export class SidenavService {
 
     initSidenav() {
         this.worldService.getWorlds().subscribe((worlds: WorldModel[]) => {
-            this.sections.push(new SidenavSectionModel('home', 'link', 'home', '/home', []));
+            this.sections.push(new SidenavSectionModel('home', 'link', 'home', '/home', '', []));
             worlds.forEach((world: WorldModel) => {
-                this.sections.push(new SidenavSectionModel(world.name, 'link', 'public', '/world', []));
+                this.sections.push(new SidenavSectionModel(world.name, 'link', 'public', '/world', world.id, []));
             });
             this.sidenavSections.next(this.sections);
         });
     }
 
     addWorldSection(world: WorldModel) {
-        this.sections.push(new SidenavSectionModel(world.name, 'link', 'public', '/world', []));
+        this.sections.push(new SidenavSectionModel(world.name, 'link', 'public', '/world', world.id, []));
         this.sidenavSections.next(this.sections);
     }
 

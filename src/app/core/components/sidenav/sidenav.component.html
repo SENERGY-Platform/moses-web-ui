@@ -3,7 +3,7 @@
                  class="mat-elevation-z1">
         <ul class="side-menu">
             <li *ngFor="let section of sections">
-                    <button mat-button  type=button routerLink="{{section.state}}" routerLinkActive="background-color-accent" *ngIf="section.type === 'link'"
+                    <button mat-button  type=button [routerLink]="[section.state, section.id]" routerLinkActive="background-color-accent" *ngIf="section.type === 'link'"
                     (click)="toggleSection(section)"
                     class="md-button-toggle">
                     <mat-icon>{{section.icon}}</mat-icon>

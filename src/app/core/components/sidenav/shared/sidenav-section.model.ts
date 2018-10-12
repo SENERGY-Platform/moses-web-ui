@@ -6,6 +6,7 @@ export class SidenavSectionModel {
         public type: string,
         public icon: string,
         public state: string,
+        public id: string,
         public pages: SidenavPageModel[]) {
     }
 }
