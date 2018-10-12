@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    keyCloakRealm: 'master',
+    keyCloakClientId: 'frontend',
+    /** URLs */
+    mosesUrl: 'https://api.sepl.infai.org/moses',
+    keycloakUrl: 'https://auth.sepl.infai.org',
 };
 
 /*
