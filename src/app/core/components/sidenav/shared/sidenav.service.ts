@@ -7,6 +7,8 @@ import {environment} from '../../../../../environments/environment';
 import {ErrorHandlerService} from '../../../services/error-handler.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {RoomModel} from '../../../../modules/room/shared/room.model';
+import {SidenavPageModel} from './sidenav-page.model';
 
 @Injectable({
     providedIn: 'root',
@@ -40,14 +42,20 @@ export class SidenavService {
         this.getWorlds().subscribe((worlds: WorldModel[]) => {
             this.sections.push(new SidenavSectionModel('home', 'link', 'home', '/home', 'start', []));
             worlds.forEach((world: WorldModel) => {
-                this.sections.push(new SidenavSectionModel(world.name, 'link', 'public', '/world', world.id, []));
+                const pages: SidenavPageModel[] = [];
+                if (world.rooms !== null) {
+                    Object.values(world.rooms).forEach((room: RoomModel) => {
+                        pages.push(new SidenavPageModel(room.name, 'link', 'meeting_room', '/room'));
+                    } );
+                }
+                this.sections.push(new SidenavSectionModel(world.name, 'toggle', 'public', '/world', world.id, pages));
             });
             this.sidenavSections.next(this.sections);
         });
     }
 
     addWorldSection(world: WorldModel) {
-        this.sections.push(new SidenavSectionModel(world.name, 'link', 'public', '/world', world.id, []));
+        this.sections.push(new SidenavSectionModel(world.name, 'toggle', 'public', '/world', world.id, []));
         this.sidenavSections.next(this.sections);
     }
 

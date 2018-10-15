@@ -10,7 +10,7 @@ import {WorldModel} from './shared/world.model';
 })
 export class WorldComponent implements OnInit {
 
-    private world: WorldModel = {id: '', name: ''};
+    private world: WorldModel = {id: '', name: '', rooms: null};
 
     constructor(private activatedRoute: ActivatedRoute,
                 private worldService: WorldService) {

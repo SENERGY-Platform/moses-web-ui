@@ -40,12 +40,13 @@ export class SidenavComponent implements OnInit, AfterViewInit {
         if (this.openSection === null) {
             return false;
         } else {
-            return this.openSection === section.state;
+            return this.openSection === section.state + '/' + section.id;
         }
     }
 
     toggleSection(section: SidenavSectionModel): void {
-        this.openSection = (this.openSection === section.state ? null : section.state);
+        const urlSuffix = section.state + '/' + section.id;
+        this.openSection = (this.openSection === urlSuffix ? null : urlSuffix);
         if (section.type === 'link') {
             this.closeSidenav();
         }
@@ -67,7 +68,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
             this.sidenav.toggle(isToggle);
         });
         this.sidenavService.sectionChanged.subscribe((section: SidenavSectionModel) => {
-            this.openSection = section.state;
+            this.openSection = section.state + '/' + section.id;
         });
     }
 
@@ -105,8 +106,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
             }),
             mergeMap((activatedRoute: ActivatedRoute) => activatedRoute.url)
         ).subscribe((activeRoute: any) => {
-                console.log(activeRoute);
-                this.openSection = '/' + activeRoute[0].path;
+                this.openSection = '/' + activeRoute[0].path + '/' + activeRoute[1].path;
             });
     }
 }

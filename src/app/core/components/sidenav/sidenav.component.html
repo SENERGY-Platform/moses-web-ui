@@ -12,7 +12,8 @@
                 <button mat-button *ngIf="section.type === 'toggle'"
                         (click)="toggleSection(section)"
                         [ngClass]="{'background-color-accent': isSectionOpen(section)}"
-                        class="md-button-toggle">
+                        class="md-button-toggle"
+                        [routerLink]="[section.state, section.id]" routerLinkActive="background-color-accent">
                     <div fxLayout="row" fxLayoutAlign=" center">
                         <mat-icon>{{section.icon}}</mat-icon>
                         <div fxFlexOffset="5px">{{section.name | uppercase}}</div>
