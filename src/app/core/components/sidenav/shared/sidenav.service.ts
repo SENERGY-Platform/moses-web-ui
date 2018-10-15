@@ -51,10 +51,10 @@ export class SidenavService {
         this.sidenavSections.next(this.sections);
     }
 
-    deleteWorldSection(worldId: string) {
+    deleteWorldSection(world: WorldModel) {
         let deleteIndex = 0;
         this.sections.forEach((section: SidenavSectionModel, index: number) => {
-            if (section.id === worldId) {
+            if (section.id === world.id) {
                 deleteIndex = index;
             }
         });

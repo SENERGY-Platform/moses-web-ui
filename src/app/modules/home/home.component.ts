@@ -18,8 +18,4 @@ export class HomeComponent implements OnInit {
     this.homeService.openNewWorldDialog();
   }
 
-  addWorld(): void {
-    console.log('add world');
-  }
-
 }

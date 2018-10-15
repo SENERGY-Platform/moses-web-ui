@@ -9,6 +9,8 @@ import {environment} from '../../../../environments/environment';
 import {WorldModel} from './world.model';
 import {WorldDeleteDialogComponent} from '../dialogs/world-delete-dialog.component';
 import {SidenavService} from '../../../core/components/sidenav/shared/sidenav.service';
+import {WorldCreateRoomDialogComponent} from '../dialogs/world-create-room-dialog.component';
+import {RoomService} from '../../room/shared/room.service';
 
 @Injectable({
     providedIn: 'root'
@@ -18,27 +20,46 @@ export class WorldService {
     constructor(private dialog: MatDialog,
                 private http: HttpClient,
                 private errorHandlerService: ErrorHandlerService,
-                private sidenavService: SidenavService) {
+                private sidenavService: SidenavService,
+                private roomService: RoomService) {
     }
 
-    add(name: string): Observable<WorldModel | null> {
+    create(name: string): Observable<WorldModel | null> {
         return this.http.post<WorldModel>(environment.mosesUrl + '/world', {'name': name}).pipe(
-            catchError(this.errorHandlerService.handleError(WorldService.name, 'add', null))
+            catchError(this.errorHandlerService.handleError(WorldService.name, 'create', null))
         );
     }
 
-    openDeleteDialog(worldId: string) {
+    get(worldId: string): Observable<WorldModel | null> {
+        return this.http.get<WorldModel>(environment.mosesUrl + '/world/' + worldId).pipe(
+            catchError(this.errorHandlerService.handleError(WorldService.name, 'get', null))
+        );
+    }
+
+    openDeleteDialog(world: WorldModel) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(WorldDeleteDialogComponent, dialogConfig);
 
         editDialogRef.afterClosed().subscribe((deleteWorld: boolean) => {
             if (deleteWorld === true) {
-                this.delete(worldId).subscribe((status: (string | null)) => {
+                this.delete(world.id).subscribe((status: (string | null)) => {
                     if (status === 'ok') {
-                        this.sidenavService.deleteWorldSection(worldId);
+                        this.sidenavService.deleteWorldSection(world);
                     }
                 });
+            }
+        });
+    }
+
+    openCreateRoomDialog(world: WorldModel) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        const editDialogRef = this.dialog.open(WorldCreateRoomDialogComponent, dialogConfig);
+
+        editDialogRef.afterClosed().subscribe((roomName: string) => {
+            if (roomName !== undefined) {
+              this.roomService.create(world, roomName).subscribe();
             }
         });
     }

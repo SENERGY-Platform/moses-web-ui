@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {WorldService} from './shared/world.service';
+import {WorldModel} from './shared/world.model';
 
 @Component({
     selector: 'moses-home',
@@ -9,29 +10,32 @@ import {WorldService} from './shared/world.service';
 })
 export class WorldComponent implements OnInit {
 
-    private id = '';
+    private world: WorldModel = {id: '', name: ''};
 
     constructor(private activatedRoute: ActivatedRoute,
                 private worldService: WorldService) {
     }
 
     ngOnInit() {
-        this.initId();
+        this.init();
     }
 
     add() {
-        console.log('add');
+        this.worldService.openCreateRoomDialog(this.world);
     }
 
     delete() {
-        this.worldService.openDeleteDialog(this.id);
+        this.worldService.openDeleteDialog(this.world);
     }
 
-    private initId() {
+    private init() {
         this.activatedRoute.params.subscribe(
             (params: Params) => {
-                this.id = params['id'];
-                console.log(this.id);
+                this.worldService.get(params['id']).subscribe((world: WorldModel | null) => {
+                    if (world !== null) {
+                        this.world = world ;
+                    }
+                });
             }
         );
     }
