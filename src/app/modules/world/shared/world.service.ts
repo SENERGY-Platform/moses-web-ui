@@ -11,6 +11,7 @@ import {WorldDeleteDialogComponent} from '../dialogs/world-delete-dialog.compone
 import {SidenavService} from '../../../core/components/sidenav/shared/sidenav.service';
 import {WorldCreateRoomDialogComponent} from '../dialogs/world-create-room-dialog.component';
 import {RoomService} from '../../room/shared/room.service';
+import {RoomResponseModel} from '../../room/shared/room-response.model';
 
 @Injectable({
     providedIn: 'root'
@@ -59,7 +60,12 @@ export class WorldService {
 
         editDialogRef.afterClosed().subscribe((roomName: string) => {
             if (roomName !== undefined) {
-              this.roomService.create(world, roomName).subscribe();
+                this.roomService.create(world, roomName).subscribe((room: RoomResponseModel | null) => {
+                        if (room !== null) {
+                            this.sidenavService.addRoomdSection(world, room);
+                        }
+                    }
+                );
             }
         });
     }

@@ -23,8 +23,8 @@ export class RoomService {
         );
     }
 
-    create(world: WorldModel, name: string): Observable<WorldModel | null> {
-        return this.http.post<WorldModel>(environment.mosesUrl + '/room', {'world': world.id, 'name': name}).pipe(
+    create(world: WorldModel, name: string): Observable<RoomResponseModel | null> {
+        return this.http.post<RoomResponseModel>(environment.mosesUrl + '/room', {'world': world.id, 'name': name}).pipe(
             catchError(this.errorHandlerService.handleError(RoomService.name, 'create', null))
         );
     }
