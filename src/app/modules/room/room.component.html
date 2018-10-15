@@ -1,0 +1,11 @@
+<div>
+  <div>This is {{room.room.name}} !</div>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button mat-icon-button color="accent" (click)="delete()"  matTooltip="Delete room">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <button mat-fab class="fab" (click)="add()" matTooltip="Create a device">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

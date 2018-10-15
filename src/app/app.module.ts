@@ -10,6 +10,7 @@ import {CoreModule} from './core/core.module';
 import {AppRoutingModule} from './app-routing.module';
 import {HomeModule} from './modules/home/home.module';
 import {WorldModule} from './modules/world/world.module';
+import {RoomModule} from './modules/room/room.module';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import {WorldModule} from './modules/world/world.module';
         AppRoutingModule,
         HomeModule,
         WorldModule,
+        RoomModule,
         KeycloakAngularModule,
         HttpClientModule
     ],

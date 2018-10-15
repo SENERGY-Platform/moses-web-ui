@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {WorldService} from './shared/world.service';
 import {WorldModel} from './shared/world.model';
@@ -10,7 +10,7 @@ import {WorldModel} from './shared/world.model';
 })
 export class WorldComponent implements OnInit {
 
-    private world: WorldModel = {id: '', name: '', rooms: null};
+    @Output() world: WorldModel = {id: '', name: '', rooms: null};
 
     constructor(private activatedRoute: ActivatedRoute,
                 private worldService: WorldService) {

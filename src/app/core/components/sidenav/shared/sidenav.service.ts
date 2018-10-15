@@ -45,7 +45,7 @@ export class SidenavService {
                 const pages: SidenavPageModel[] = [];
                 if (world.rooms !== null) {
                     Object.values(world.rooms).forEach((room: RoomModel) => {
-                        pages.push(new SidenavPageModel(room.name, 'link', 'meeting_room', '/room'));
+                        pages.push(new SidenavPageModel(room.name, 'link', 'meeting_room', '/world/' + world.id + '/room/' + room.id));
                     } );
                 }
                 this.sections.push(new SidenavSectionModel(world.name, 'toggle', 'public', '/world', world.id, pages));
