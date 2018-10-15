@@ -8,15 +8,14 @@ import {MatDialogRef} from '@angular/material';
 export class WorldDeleteDialogComponent {
 
     constructor(private dialogRef: MatDialogRef<WorldDeleteDialogComponent>) {
-
     }
 
     close(): void {
         this.dialogRef.close();
     }
 
-    create(name: string): void {
-        this.dialogRef.close(name);
+    delete(): void {
+        this.dialogRef.close(true);
     }
 
 }

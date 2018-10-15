@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
+import {WorldService} from './shared/world.service';
 
 @Component({
     selector: 'moses-home',
@@ -10,7 +11,8 @@ export class WorldComponent implements OnInit {
 
     private id = '';
 
-    constructor(private activatedRoute: ActivatedRoute) {
+    constructor(private activatedRoute: ActivatedRoute,
+                private worldService: WorldService) {
     }
 
     ngOnInit() {
@@ -22,7 +24,7 @@ export class WorldComponent implements OnInit {
     }
 
     delete() {
-
+        this.worldService.openDeleteDialog(this.id);
     }
 
     private initId() {
