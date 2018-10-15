@@ -22,7 +22,7 @@ export class HomeService {
 
         editDialogRef.afterClosed().subscribe((name: string) => {
             if (name !== undefined) {
-                this.worldService.addWorld(name).subscribe((world: WorldModel | null) => {
+                this.worldService.add(name).subscribe((world: WorldModel | null) => {
                         if (world !== null) {
                             this.sidenavService.addWorldSection(world);
                         }

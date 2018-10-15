@@ -22,9 +22,13 @@ export class WorldService {
         console.log('getWorlds');
     }
 
-    addWorld(name: string): Observable<WorldModel | null> {
+    add(name: string): Observable<WorldModel | null> {
        return this.http.post<WorldModel>(environment.mosesUrl + '/world', {'name': name}).pipe(
-            catchError(this.errorHandlerService.handleError(WorldService.name, 'addWorld', null))
+            catchError(this.errorHandlerService.handleError(WorldService.name, 'add', null))
         );
+    }
+
+    delete(id: string): void {
+        this.http.delete(environment.mosesUrl + '/world/' + id).subscribe();
     }
 }

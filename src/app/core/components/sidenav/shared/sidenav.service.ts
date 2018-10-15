@@ -31,7 +31,7 @@ export class SidenavService {
 
     initSidenav() {
         this.worldService.getWorlds().subscribe((worlds: WorldModel[]) => {
-            this.sections.push(new SidenavSectionModel('home', 'link', 'home', '/home', '', []));
+            this.sections.push(new SidenavSectionModel('home', 'link', 'home', '/home', 'start', []));
             worlds.forEach((world: WorldModel) => {
                 this.sections.push(new SidenavSectionModel(world.name, 'link', 'public', '/world', world.id, []));
             });
