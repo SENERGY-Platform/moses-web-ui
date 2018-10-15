@@ -26,7 +26,7 @@ export class RoomComponent implements OnInit {
     }
 
     delete() {
-
+        this.roomService.openDeleteDialog(this.room);
     }
 
     private init() {

@@ -46,7 +46,7 @@ export class SidenavService {
                 const pages: SidenavPageModel[] = [];
                 if (world.rooms !== null) {
                     Object.values(world.rooms).forEach((room: RoomModel) => {
-                        pages.push(new SidenavPageModel(room.name, 'link', 'meeting_room', '/world/' + world.id + '/room/' + room.id));
+                        pages.push(new SidenavPageModel(room.name, 'link', 'meeting_room', '/world/' + world.id + '/room/' + room.id, room.id));
                     });
                 }
                 this.sections.push(new SidenavSectionModel(world.name, 'toggle', 'public', '/world', world.id, pages));
@@ -60,11 +60,11 @@ export class SidenavService {
         this.sidenavSections.next(this.sections);
     }
 
-    addRoomdSection(world: WorldModel, room: RoomResponseModel) {
+    addRoomSection(world: WorldModel, room: RoomResponseModel) {
         this.sections.forEach((section: SidenavSectionModel) => {
             if (section.id === world.id) {
                 section.pages.push(new SidenavPageModel(room.room.name, 'link', 'meeting_room',
-                    '/world/' + world.id + '/room/' + room.room.id));
+                    '/world/' + world.id + '/room/' + room.room.id, room.room.id));
                 this.sidenavSections.next(this.sections);
             }
         });
@@ -83,7 +83,32 @@ export class SidenavService {
             this.sidenavSections.next(this.sections);
             this.router.navigate(['/home/start']);
         }
+    }
 
+    deleteRoomSection(room: RoomResponseModel) {
+        let sidenavIndex = 0;
+        this.sections.forEach((section: SidenavSectionModel, index: number) => {
+            if (section.id === room.world) {
+                sidenavIndex = index;
+            }
+        });
+
+        console.log(sidenavIndex);
+
+        if (sidenavIndex > 0) {
+            let deletePageIndex = -1;
+            this.sections[sidenavIndex].pages.forEach((page: SidenavPageModel, index: number) => {
+                if (page.id = room.room.id) {
+                    deletePageIndex = index;
+                }
+            });
+
+            if (deletePageIndex >= 0) {
+                this.sections[sidenavIndex].pages.splice(deletePageIndex, 1);
+                this.sidenavSections.next(this.sections);
+                this.router.navigate([this.sections[sidenavIndex].state, this.sections[sidenavIndex].id]);
+            }
+        }
     }
 
     private getWorlds(): Observable<WorldModel[]> {

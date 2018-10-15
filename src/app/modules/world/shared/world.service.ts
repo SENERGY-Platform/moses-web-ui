@@ -62,7 +62,7 @@ export class WorldService {
             if (roomName !== undefined) {
                 this.roomService.create(world, roomName).subscribe((room: RoomResponseModel | null) => {
                         if (room !== null) {
-                            this.sidenavService.addRoomdSection(world, room);
+                            this.sidenavService.addRoomSection(world, room);
                         }
                     }
                 );
