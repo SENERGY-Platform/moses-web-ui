@@ -91,9 +91,7 @@ export class SidenavService {
                 sidenavIndex = index;
             }
         });
-
-        console.log(sidenavIndex);
-
+        
         if (sidenavIndex > 0) {
             let deletePageIndex = -1;
             this.sections[sidenavIndex].pages.forEach((page: SidenavPageModel, index: number) => {
