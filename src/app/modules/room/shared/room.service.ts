@@ -68,11 +68,10 @@ export class RoomService {
         editDialogRef.afterClosed().subscribe((name: string) => {
             if (name !== undefined) {
                 this.deviceService.create(room, name).subscribe((device: DeviceHttpModel | null) => {
-                        if (device !== null) {
-                            this.refreshDevices(room);
-                        }
+                    if (device !== null) {
+                        this.refreshDevices(room);
                     }
-                );
+                });
             }
         });
     }
@@ -93,20 +92,12 @@ export class RoomService {
         });
     }
 
-    initDevices(room: RoomModel) {
-        this.devices.next(this.convertToDevicesArray(room));
-    }
-
-    deleteDevices(room: RoomModel, deviceId: string): void {
-        const devicesArray: DeviceModel[] = [];
-        if (room.room.devices !== null) {
-            Object.values(room.room.devices).forEach((resp: DeviceModel) => {
-                if (resp.id !== deviceId) {
-                    devicesArray.push(resp);
-                }
-            });
-        }
-        this.devices.next(devicesArray);
+    refreshDevices(room: RoomModel): void {
+        this.get(room.room.id).subscribe((roomResp: (RoomModel | null)) => {
+            if (roomResp !== null) {
+                this.devices.next(this.convertToDevicesArray(roomResp));
+            }
+        });
     }
 
     private convertToDevicesArray(room: RoomModel): DeviceModel[] {
@@ -123,13 +114,5 @@ export class RoomService {
         return this.http.delete(environment.mosesUrl + '/room/' + id, {responseType: 'text'}).pipe(
             catchError(this.errorHandlerService.handleError(RoomService.name, 'delete', null))
         );
-    }
-
-    private refreshDevices(room: RoomModel): void {
-        this.get(room.room.id).subscribe((roomResp: (RoomModel | null)) => {
-            if (roomResp !== null) {
-                this.devices.next(this.convertToDevicesArray(roomResp));
-            }
-        });
     }
 }
