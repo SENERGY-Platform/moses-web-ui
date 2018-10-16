@@ -101,14 +101,27 @@ export class RoomService {
     }
 
     private convertToDevicesArray(room: RoomModel): DeviceModel[] {
+
         const devicesArray: DeviceModel[] = [];
         if (room.room.devices !== null) {
             Object.values(room.room.devices).forEach((device: DeviceModel) => {
                 devicesArray.push(device);
             });
         }
+
+        devicesArray.sort((a, b) => {
+            if (a.name < b.name) {
+                return -1;
+            }
+            if (a.name > b.name) {
+                return 1;
+            }
+            return 0;
+        });
+
         return devicesArray;
     }
+
 
     private deleteRoom(id: string) {
         return this.http.delete(environment.mosesUrl + '/room/' + id, {responseType: 'text'}).pipe(
