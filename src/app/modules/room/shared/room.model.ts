@@ -1,5 +1,12 @@
 export interface RoomModel {
-    id: string;
-    name: string;
+    world: string;
+    room: {
+        id: string;
+        name: string;
+    };
+    devices: {[key: string]: {
+            id: string;
+            name: string;
+        }} | null ;
 }
 

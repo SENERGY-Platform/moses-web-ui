@@ -4,7 +4,7 @@ import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs/index';
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {HttpClient} from '@angular/common/http';
-import {RoomResponseModel} from './room-response.model';
+import {RoomModel} from './room.model';
 import {WorldModel} from '../../world/shared/world.model';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {RoomDeleteDialogComponent} from '../dialogs/room-delete-dialog.component';
@@ -26,19 +26,19 @@ export class RoomService {
                 private deviceService: DeviceService) {
     }
 
-    get(roomId: string): Observable<RoomResponseModel | null> {
-        return this.http.get<RoomResponseModel>(environment.mosesUrl + '/room/' + roomId).pipe(
+    get(roomId: string): Observable<RoomModel | null> {
+        return this.http.get<RoomModel>(environment.mosesUrl + '/room/' + roomId).pipe(
             catchError(this.errorHandlerService.handleError(RoomService.name, 'get', null))
         );
     }
 
-    create(world: WorldModel, name: string): Observable<RoomResponseModel | null> {
-        return this.http.post<RoomResponseModel>(environment.mosesUrl + '/room', {'world': world.id, 'name': name}).pipe(
+    create(world: WorldModel, name: string): Observable<RoomModel | null> {
+        return this.http.post<RoomModel>(environment.mosesUrl + '/room', {'world': world.id, 'name': name}).pipe(
             catchError(this.errorHandlerService.handleError(RoomService.name, 'create', null))
         );
     }
 
-    openDeleteDialog(room: RoomResponseModel) {
+    openDeleteDialog(room: RoomModel) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(RoomDeleteDialogComponent, dialogConfig);
@@ -54,7 +54,7 @@ export class RoomService {
         });
     }
 
-    openCreateDialog(room: RoomResponseModel) {
+    openCreateDialog(room: RoomModel) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(RoomNewDeviceDialogComponent, dialogConfig);

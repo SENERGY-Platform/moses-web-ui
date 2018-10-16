@@ -1,7 +1,7 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {RoomService} from './shared/room.service';
-import {RoomResponseModel} from './shared/room-response.model';
+import {RoomModel} from './shared/room.model';
 
 @Component({
     selector: 'moses-home',
@@ -10,7 +10,7 @@ import {RoomResponseModel} from './shared/room-response.model';
 })
 export class RoomComponent implements OnInit {
 
-    @Output() room: RoomResponseModel = {world: '', room: {id: '', name: ''}};
+    @Output() room: RoomModel = {world: '', room: {id: '', name: ''}, devices: null};
 
     constructor(private activatedRoute: ActivatedRoute,
                 private roomService: RoomService,
@@ -32,7 +32,7 @@ export class RoomComponent implements OnInit {
     private init() {
         this.activatedRoute.params.subscribe(
             (params: Params) => {
-                this.roomService.get(params['roomid']).subscribe((roomResponse: RoomResponseModel | null) => {
+                this.roomService.get(params['roomid']).subscribe((roomResponse: RoomModel | null) => {
                     if (roomResponse !== null) {
                         this.room = roomResponse;
                         console.log(this.room);

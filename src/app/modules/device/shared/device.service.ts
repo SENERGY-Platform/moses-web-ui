@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {catchError} from 'rxjs/internal/operators';
 import {environment} from '../../../../environments/environment';
-import {RoomResponseModel} from '../../room/shared/room-response.model';
+import {RoomModel} from '../../room/shared/room.model';
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {HttpClient} from '@angular/common/http';
 import {DeviceModel} from './device.model';
@@ -18,7 +18,7 @@ export class DeviceService {
                 ) {
     }
 
-    create(room: RoomResponseModel, name: string): Observable<DeviceModel | null>   {
+    create(room: RoomModel, name: string): Observable<DeviceModel | null>   {
         return this.http.post<DeviceModel>(environment.mosesUrl + '/device', {
             'room': room.room.id,
             'name': name

@@ -7,9 +7,8 @@ import {environment} from '../../../../../environments/environment';
 import {ErrorHandlerService} from '../../../services/error-handler.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {RoomModel} from '../../../../modules/room/shared/room.model';
 import {SidenavPageModel} from './sidenav-page.model';
-import {RoomResponseModel} from '../../../../modules/room/shared/room-response.model';
+import {RoomModel} from '../../../../modules/room/shared/room.model';
 
 @Injectable({
     providedIn: 'root',
@@ -45,7 +44,7 @@ export class SidenavService {
             worlds.forEach((world: WorldModel) => {
                 const pages: SidenavPageModel[] = [];
                 if (world.rooms !== null) {
-                    Object.values(world.rooms).forEach((room: RoomModel) => {
+                    Object.values(world.rooms).forEach((room) => {
                         pages.push(new SidenavPageModel(room.name, 'link', 'meeting_room', '/world/' + world.id + '/room/' + room.id, room.id));
                     });
                 }
@@ -60,7 +59,7 @@ export class SidenavService {
         this.sidenavSections.next(this.sections);
     }
 
-    addRoomSection(world: WorldModel, room: RoomResponseModel) {
+    addRoomSection(world: WorldModel, room: RoomModel) {
         this.sections.forEach((section: SidenavSectionModel) => {
             if (section.id === world.id) {
                 section.pages.push(new SidenavPageModel(room.room.name, 'link', 'meeting_room',
@@ -85,7 +84,7 @@ export class SidenavService {
         }
     }
 
-    deleteRoomSection(room: RoomResponseModel) {
+    deleteRoomSection(room: RoomModel) {
         let sidenavIndex = 0;
         this.sections.forEach((section: SidenavSectionModel, index: number) => {
             if (section.id === room.world) {
