@@ -11,7 +11,7 @@ import {RoomDeleteDialogComponent} from '../dialogs/room-delete-dialog.component
 import {SidenavService} from '../../../core/components/sidenav/shared/sidenav.service';
 import {RoomNewDeviceDialogComponent} from '../dialogs/room-new-device-dialog.component';
 import {DeviceService} from '../../device/shared/device.service';
-import {DeviceModel} from '../../device/shared/device.model';
+import {DeviceHttpModel} from '../../device/shared/deviceHttp.model';
 
 
 @Injectable({
@@ -61,7 +61,7 @@ export class RoomService {
 
         editDialogRef.afterClosed().subscribe((name: string) => {
             if (name !== undefined) {
-                this.deviceService.create(room, name).subscribe((device: DeviceModel | null) => {
+                this.deviceService.create(room, name).subscribe((device: DeviceHttpModel | null) => {
                         if (device !== null) {
                             console.log(device);
                         }

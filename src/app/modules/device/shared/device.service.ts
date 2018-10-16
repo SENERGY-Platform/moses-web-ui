@@ -4,7 +4,7 @@ import {environment} from '../../../../environments/environment';
 import {RoomModel} from '../../room/shared/room.model';
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {HttpClient} from '@angular/common/http';
-import {DeviceModel} from './device.model';
+import {DeviceHttpModel} from './deviceHttp.model';
 import {Observable} from 'rxjs/index';
 
 
@@ -18,8 +18,8 @@ export class DeviceService {
                 ) {
     }
 
-    create(room: RoomModel, name: string): Observable<DeviceModel | null>   {
-        return this.http.post<DeviceModel>(environment.mosesUrl + '/device', {
+    create(room: RoomModel, name: string): Observable<DeviceHttpModel | null>   {
+        return this.http.post<DeviceHttpModel>(environment.mosesUrl + '/device', {
             'room': room.room.id,
             'name': name
         }).pipe(

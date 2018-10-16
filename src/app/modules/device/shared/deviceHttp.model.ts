@@ -1,4 +1,4 @@
-export interface DeviceModel {
+export interface DeviceHttpModel {
     world: string;
     room: string;
     device: {
