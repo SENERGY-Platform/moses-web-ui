@@ -7,7 +7,7 @@ import {
     MatDialogModule, MatDividerModule,
     MatFormFieldModule, MatGridListModule,
     MatIconModule,
-    MatInputModule,
+    MatInputModule, MatMenuModule,
     MatTooltipModule
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -29,6 +29,7 @@ const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component:
         MatGridListModule,
         CommonModule,
         MatDividerModule,
+        MatMenuModule,
         RouterModule.forChild([room])],
     declarations: [
         RoomComponent,

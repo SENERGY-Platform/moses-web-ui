@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {catchError} from 'rxjs/internal/operators';
-import {environment} from '../../../../environments/environment';
-import {RoomModel} from '../../room/shared/room.model';
-import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {HttpClient} from '@angular/common/http';
-import {DeviceHttpModel} from './deviceHttp.model';
 import {Observable} from 'rxjs/index';
 
+import {RoomModel} from '../../room/shared/room.model';
+import {ErrorHandlerService} from '../../../core/services/error-handler.service';
+import {DeviceHttpModel} from './deviceHttp.model';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +24,12 @@ export class DeviceService {
             'name': name
         }).pipe(
             catchError(this.errorHandlerService.handleError(DeviceService.name, 'create', null))
+        );
+    }
+
+    delete(id: string) {
+        return this.http.delete(environment.mosesUrl + '/device/' + id, {responseType: 'text'}).pipe(
+            catchError(this.errorHandlerService.handleError(DeviceService.name, 'delete', null))
         );
     }
 

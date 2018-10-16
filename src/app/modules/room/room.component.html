@@ -1,6 +1,6 @@
 <div>
     <div fxLayout="row" fxLayoutAlign="end center">
-        <button mat-icon-button color="accent" (click)="delete()" matTooltip="Delete room">
+        <button mat-icon-button color="accent" (click)="deleteRoom()" matTooltip="Delete room">
             <mat-icon>delete</mat-icon>
         </button>
     </div>
@@ -18,12 +18,18 @@
                 <mat-grid-tile-footer>
                     <div fxLayout="row" fxLayout="row" fxLayoutAlign="start center" fxFill>
                         <div fxFlex="70" fxLayout="column">
-                            <div class="truncate" matTooltip="{{device.name}}">{{device.name}}</div>
+                            <div class="truncate" matTooltip="{{device.id}}">{{device.name}}</div>
                         </div>
                         <div fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
-                            <button mat-icon-button color="accent">
+                            <button mat-icon-button [matMenuTriggerFor]="menu" color="accent">
                                 <mat-icon>more_vert</mat-icon>
                             </button>
+                            <mat-menu #menu="matMenu" [overlapTrigger]="false">
+                                <button mat-menu-item (click)="deleteDevice(device.id)">
+                                    <mat-icon>delete</mat-icon>
+                                    <span>Delete device</span>
+                                </button>
+                            </mat-menu>
                         </div>
                     </div>
                 </mat-grid-tile-footer>

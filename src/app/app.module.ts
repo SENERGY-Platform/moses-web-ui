@@ -11,6 +11,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {HomeModule} from './modules/home/home.module';
 import {WorldModule} from './modules/world/world.module';
 import {RoomModule} from './modules/room/room.module';
+import {DeviceModule} from './modules/device/device.module';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import {RoomModule} from './modules/room/room.module';
         HomeModule,
         WorldModule,
         RoomModule,
+        DeviceModule,
         KeycloakAngularModule,
         HttpClientModule
     ],

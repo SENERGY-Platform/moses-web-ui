@@ -25,11 +25,15 @@ export class RoomComponent implements OnInit {
     }
 
     add() {
-        this.roomService.openCreateDialog(this.room);
+        this.roomService.openDeviceCreateDialog(this.room);
     }
 
-    delete() {
-        this.roomService.openDeleteDialog(this.room);
+    deleteRoom() {
+        this.roomService.openRoomDeleteDialog(this.room);
+    }
+
+    deleteDevice(deviceId: string) {
+        this.roomService.openDeviceDeleteDialog(this.room, deviceId);
     }
 
     private initDevices() {

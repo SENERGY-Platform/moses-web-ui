@@ -13,6 +13,7 @@ import {RoomNewDeviceDialogComponent} from '../dialogs/room-new-device-dialog.co
 import {DeviceService} from '../../device/shared/device.service';
 import {DeviceHttpModel} from '../../device/shared/deviceHttp.model';
 import {DeviceModel} from '../../device/shared/device.model';
+import {DeviceDeleteDialogComponent} from '../../device/dialogs/device-delete-dialog.component';
 
 
 @Injectable({
@@ -43,14 +44,14 @@ export class RoomService {
         );
     }
 
-    openDeleteDialog(room: RoomModel) {
+    openRoomDeleteDialog(room: RoomModel) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(RoomDeleteDialogComponent, dialogConfig);
 
         editDialogRef.afterClosed().subscribe((roomDelete: boolean) => {
             if (roomDelete === true) {
-                this.delete(room.room.id).subscribe((status: (string | null)) => {
+                this.deleteRoom(room.room.id).subscribe((status: (string | null)) => {
                     if (status === 'ok') {
                         this.sidenavService.deleteRoomSection(room);
                     }
@@ -59,7 +60,7 @@ export class RoomService {
         });
     }
 
-    openCreateDialog(room: RoomModel) {
+    openDeviceCreateDialog(room: RoomModel) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(RoomNewDeviceDialogComponent, dialogConfig);
@@ -68,10 +69,26 @@ export class RoomService {
             if (name !== undefined) {
                 this.deviceService.create(room, name).subscribe((device: DeviceHttpModel | null) => {
                         if (device !== null) {
-                            this.addDevices(room, device);
+                            this.refreshDevices(room);
                         }
                     }
                 );
+            }
+        });
+    }
+
+    openDeviceDeleteDialog(room: RoomModel, deviceId: string) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        const editDialogRef = this.dialog.open(DeviceDeleteDialogComponent, dialogConfig);
+
+        editDialogRef.afterClosed().subscribe((deviceDelete: boolean) => {
+            if (deviceDelete === true) {
+                this.deviceService.delete(deviceId).subscribe((status: (string | null)) => {
+                    if (status === 'ok') {
+                        this.refreshDevices(room);
+                    }
+                });
             }
         });
     }
@@ -80,25 +97,39 @@ export class RoomService {
         this.devices.next(this.convertToDevicesArray(room));
     }
 
-    private delete(id: string) {
-        return this.http.delete(environment.mosesUrl + '/room/' + id, {responseType: 'text'}).pipe(
-            catchError(this.errorHandlerService.handleError(RoomService.name, 'delete', null))
-        );
-    }
-
-    private addDevices(room: RoomModel, deviceIn: DeviceHttpModel): void {
-        const devicesArray = this.convertToDevicesArray(room);
-        devicesArray.push({id: deviceIn.device.id, name: deviceIn.device.name});
+    deleteDevices(room: RoomModel, deviceId: string): void {
+        const devicesArray: DeviceModel[] = [];
+        if (room.room.devices !== null) {
+            Object.values(room.room.devices).forEach((resp: DeviceModel) => {
+                if (resp.id !== deviceId) {
+                    devicesArray.push(resp);
+                }
+            });
+        }
         this.devices.next(devicesArray);
     }
 
     private convertToDevicesArray(room: RoomModel): DeviceModel[] {
         const devicesArray: DeviceModel[] = [];
         if (room.room.devices !== null) {
-            Object.values(room.room.devices).forEach((resp: DeviceModel) => {
-                devicesArray.push(resp);
+            Object.values(room.room.devices).forEach((device: DeviceModel) => {
+                devicesArray.push(device);
             });
         }
         return devicesArray;
+    }
+
+    private deleteRoom(id: string) {
+        return this.http.delete(environment.mosesUrl + '/room/' + id, {responseType: 'text'}).pipe(
+            catchError(this.errorHandlerService.handleError(RoomService.name, 'delete', null))
+        );
+    }
+
+    private refreshDevices(room: RoomModel): void {
+        this.get(room.room.id).subscribe((roomResp: (RoomModel | null)) => {
+            if (roomResp !== null) {
+                this.devices.next(this.convertToDevicesArray(roomResp));
+            }
+        });
     }
 }
