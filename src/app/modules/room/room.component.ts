@@ -46,10 +46,10 @@ export class RoomComponent implements OnInit {
 
         this.activatedRoute.params.subscribe(
             (params: Params) => {
-                this.roomService.get(params['roomid']).subscribe((roomResponse: RoomModel | null) => {
-                    if (roomResponse !== null) {
-                        this.room = roomResponse;
-                        this.roomService.initDevices(this.room);
+                this.roomService.get(params['roomid']).subscribe((room: RoomModel | null) => {
+                    if (room !== null) {
+                        this.room = room;
+                        this.roomService.refreshDevices(this.room);
                     }
                 });
             }
