@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Output} from '@angular/core';
 import {catchError} from 'rxjs/internal/operators';
 import {environment} from '../../../../environments/environment';
-import {Observable} from 'rxjs/index';
+import {Observable, Subject} from 'rxjs/index';
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {HttpClient} from '@angular/common/http';
 import {RoomModel} from './room.model';
@@ -12,12 +12,17 @@ import {SidenavService} from '../../../core/components/sidenav/shared/sidenav.se
 import {RoomNewDeviceDialogComponent} from '../dialogs/room-new-device-dialog.component';
 import {DeviceService} from '../../device/shared/device.service';
 import {DeviceHttpModel} from '../../device/shared/deviceHttp.model';
+import {DeviceModel} from '../../device/shared/device.model';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class RoomService {
+
+    private devices = new Subject<DeviceModel[]>();
+
+    @Output() currentDevices = this.devices.asObservable();
 
     constructor(private dialog: MatDialog,
                 private http: HttpClient,
@@ -63,12 +68,16 @@ export class RoomService {
             if (name !== undefined) {
                 this.deviceService.create(room, name).subscribe((device: DeviceHttpModel | null) => {
                         if (device !== null) {
-                            console.log(device);
+                            this.addDevices(room, device);
                         }
                     }
                 );
             }
         });
+    }
+
+    initDevices(room: RoomModel) {
+        this.devices.next(this.convertToDevicesArray(room));
     }
 
     private delete(id: string) {
@@ -77,4 +86,19 @@ export class RoomService {
         );
     }
 
+    private addDevices(room: RoomModel, deviceIn: DeviceHttpModel): void {
+        const devicesArray = this.convertToDevicesArray(room);
+        devicesArray.push({id: deviceIn.device.id, name: deviceIn.device.name});
+        this.devices.next(devicesArray);
+    }
+
+    private convertToDevicesArray(room: RoomModel): DeviceModel[] {
+        const devicesArray: DeviceModel[] = [];
+        if (room.room.devices !== null) {
+            Object.values(room.room.devices).forEach((resp: DeviceModel) => {
+                devicesArray.push(resp);
+            });
+        }
+        return devicesArray;
+    }
 }

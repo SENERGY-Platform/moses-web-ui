@@ -20,37 +20,35 @@ export class RoomComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.init();
+        this.initRoom();
+        this.initDevices();
     }
 
     add() {
-       this.roomService.openCreateDialog(this.room);
+        this.roomService.openCreateDialog(this.room);
     }
 
     delete() {
         this.roomService.openDeleteDialog(this.room);
     }
 
-    private init() {
+    private initDevices() {
+        this.roomService.currentDevices.subscribe((devices: DeviceModel[]) => {
+            this.devices = devices;
+        });
+    }
+
+    private initRoom() {
+
         this.activatedRoute.params.subscribe(
             (params: Params) => {
                 this.roomService.get(params['roomid']).subscribe((roomResponse: RoomModel | null) => {
                     if (roomResponse !== null) {
                         this.room = roomResponse;
-                        this.convert(roomResponse);
+                        this.roomService.initDevices(this.room);
                     }
                 });
             }
         );
     }
-
-    private convert(room: RoomModel) {
-        this.devices = [];
-        if (room.room.devices !== null) {
-            Object.values(room.room.devices).forEach((resp: DeviceModel) => {
-                this.devices.push(resp);
-            });
-        }
-    }
-
 }
