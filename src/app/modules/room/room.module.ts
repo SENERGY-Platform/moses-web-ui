@@ -4,10 +4,14 @@ import {RouterModule} from '@angular/router';
 import {RoomComponent} from './room.component';
 import {
     MatButtonModule,
-    MatDialogModule, MatDividerModule,
-    MatFormFieldModule, MatGridListModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatGridListModule,
     MatIconModule,
-    MatInputModule, MatMenuModule, MatSelectModule,
+    MatInputModule,
+    MatMenuModule,
+    MatSelectModule,
     MatTooltipModule
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';

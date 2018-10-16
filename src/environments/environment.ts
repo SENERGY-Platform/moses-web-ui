@@ -9,6 +9,7 @@ export const environment = {
     /** URLs */
     mosesUrl: 'https://api.sepl.infai.org/moses',
     keycloakUrl: 'https://auth.sepl.infai.org',
+    permissionSearchUrl: 'https://api.sepl.infai.org/permission/search',
 };
 
 /*
