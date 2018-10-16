@@ -4,8 +4,8 @@ import {RouterModule} from '@angular/router';
 import {RoomComponent} from './room.component';
 import {
     MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
+    MatDialogModule, MatDividerModule,
+    MatFormFieldModule, MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatTooltipModule
@@ -13,6 +13,7 @@ import {
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RoomDeleteDialogComponent} from './dialogs/room-delete-dialog.component';
 import {RoomNewDeviceDialogComponent} from './dialogs/room-new-device-dialog.component';
+import {CommonModule} from '@angular/common';
 
 const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component: RoomComponent, data: {header: 'Room'}};
 
@@ -25,6 +26,9 @@ const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component:
         MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
+        MatGridListModule,
+        CommonModule,
+        MatDividerModule,
         RouterModule.forChild([room])],
     declarations: [
         RoomComponent,

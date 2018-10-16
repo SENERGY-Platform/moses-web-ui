@@ -3,10 +3,10 @@ export interface RoomModel {
     room: {
         id: string;
         name: string;
+        devices: {[key: string]: {
+                id: string;
+                name: string;
+            }} | null ;
     };
-    devices: {[key: string]: {
-            id: string;
-            name: string;
-        }} | null ;
 }
 

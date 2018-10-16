@@ -1,11 +1,38 @@
 <div>
-  <div>This is {{room.room.name}} !</div>
-  <div fxLayout="row" fxLayoutAlign="end center">
-    <button mat-icon-button color="accent" (click)="delete()"  matTooltip="Delete room">
-      <mat-icon>delete</mat-icon>
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-icon-button color="accent" (click)="delete()" matTooltip="Delete room">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+
+    <div class="layout-margin" fxLayout="column">
+        <mat-grid-list cols="{{6}}" rowHeight="250px" gutterSize="16px"
+                       *ngIf="devices.length > 0">
+            <mat-grid-tile class="mat-elevation-z1" *ngFor="let device of devices">
+                <div class="background" fxFill>
+                    <div class="device-icon">
+                        <mat-icon class="icon">devices_other</mat-icon>
+                    </div>
+                    <!--<img class="device-icon" src="{{device.img}}">-->
+                </div>
+                <mat-grid-tile-footer>
+                    <div fxLayout="row" fxLayout="row" fxLayoutAlign="start center" fxFill>
+                        <div fxFlex="70" fxLayout="column">
+                            <div class="truncate" matTooltip="{{device.name}}">{{device.name}}</div>
+                        </div>
+                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
+                            <button mat-icon-button color="accent">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </mat-grid-tile-footer>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <div *ngIf="devices.length === 0">No device instances found.</div>
+    </div>
+
+    <button mat-fab class="fab" (click)="add()" matTooltip="Create a device">
+        <mat-icon>add</mat-icon>
     </button>
-  </div>
-  <button mat-fab class="fab" (click)="add()" matTooltip="Create a device">
-    <mat-icon>add</mat-icon>
-  </button>
 </div>

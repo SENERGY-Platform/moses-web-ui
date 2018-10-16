@@ -2,6 +2,7 @@ import {Component, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {RoomService} from './shared/room.service';
 import {RoomModel} from './shared/room.model';
+import {DeviceModel} from '../device/shared/device.model';
 
 @Component({
     selector: 'moses-home',
@@ -10,7 +11,8 @@ import {RoomModel} from './shared/room.model';
 })
 export class RoomComponent implements OnInit {
 
-    @Output() room: RoomModel = {world: '', room: {id: '', name: ''}, devices: null};
+    @Output() room: RoomModel = {world: '', room: {id: '', name: '', devices: null}};
+    @Output() devices: DeviceModel[] = [];
 
     constructor(private activatedRoute: ActivatedRoute,
                 private roomService: RoomService,
@@ -35,11 +37,20 @@ export class RoomComponent implements OnInit {
                 this.roomService.get(params['roomid']).subscribe((roomResponse: RoomModel | null) => {
                     if (roomResponse !== null) {
                         this.room = roomResponse;
-                        console.log(this.room);
+                        this.convert(roomResponse);
                     }
                 });
             }
         );
+    }
+
+    private convert(room: RoomModel) {
+        this.devices = [];
+        if (room.room.devices !== null) {
+            Object.values(room.room.devices).forEach((resp: DeviceModel) => {
+                this.devices.push(resp);
+            });
+        }
     }
 
 }

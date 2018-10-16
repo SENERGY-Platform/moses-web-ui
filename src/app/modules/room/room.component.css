@@ -4,3 +4,38 @@
     right: 15px;
     z-index: 100;
 }
+
+.layout-margin {
+    margin: 8px;
+}
+
+mat-grid-tile-footer {
+    background-color: white !important;
+    height: 68px !important;
+    color: black !important;
+}
+
+mat-grid-list {
+    margin-bottom: 100px;
+}
+
+.background {
+    background-image: url('/src/img/background_deviceTypes.png');
+    background-size: contain;
+}
+
+.device-icon {
+    top: 40px;
+    max-height: 100px;
+    max-width: 200px;
+    margin: auto;
+    display: block;
+    position: relative;
+}
+
+.icon {
+    color: white;
+    height: 120px;
+    width: 120px;
+    font-size: 120px;
+}
