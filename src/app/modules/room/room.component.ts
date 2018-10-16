@@ -22,7 +22,7 @@ export class RoomComponent implements OnInit {
     }
 
     add() {
-
+       this.roomService.openCreateDialog(this.room);
     }
 
     delete() {
@@ -35,6 +35,7 @@ export class RoomComponent implements OnInit {
                 this.roomService.get(params['roomid']).subscribe((roomResponse: RoomResponseModel | null) => {
                     if (roomResponse !== null) {
                         this.room = roomResponse;
+                        console.log(this.room);
                     }
                 });
             }

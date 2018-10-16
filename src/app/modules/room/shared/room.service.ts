@@ -9,6 +9,9 @@ import {WorldModel} from '../../world/shared/world.model';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {RoomDeleteDialogComponent} from '../dialogs/room-delete-dialog.component';
 import {SidenavService} from '../../../core/components/sidenav/shared/sidenav.service';
+import {RoomNewDeviceDialogComponent} from '../dialogs/room-new-device-dialog.component';
+import {DeviceService} from '../../device/shared/device.service';
+import {DeviceModel} from '../../device/shared/device.model';
 
 
 @Injectable({
@@ -19,7 +22,8 @@ export class RoomService {
     constructor(private dialog: MatDialog,
                 private http: HttpClient,
                 private errorHandlerService: ErrorHandlerService,
-                private sidenavService: SidenavService) {
+                private sidenavService: SidenavService,
+                private deviceService: DeviceService) {
     }
 
     get(roomId: string): Observable<RoomResponseModel | null> {
@@ -43,9 +47,26 @@ export class RoomService {
             if (roomDelete === true) {
                 this.delete(room.room.id).subscribe((status: (string | null)) => {
                     if (status === 'ok') {
-                       this.sidenavService.deleteRoomSection(room);
+                        this.sidenavService.deleteRoomSection(room);
                     }
                 });
+            }
+        });
+    }
+
+    openCreateDialog(room: RoomResponseModel) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        const editDialogRef = this.dialog.open(RoomNewDeviceDialogComponent, dialogConfig);
+
+        editDialogRef.afterClosed().subscribe((name: string) => {
+            if (name !== undefined) {
+                this.deviceService.create(room, name).subscribe((device: DeviceModel | null) => {
+                        if (device !== null) {
+                            console.log(device);
+                        }
+                    }
+                );
             }
         });
     }
