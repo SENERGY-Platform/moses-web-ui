@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-
 import {RouterModule} from '@angular/router';
 import {RoomComponent} from './room.component';
 import {
@@ -18,6 +17,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {RoomDeleteDialogComponent} from './dialogs/room-delete-dialog.component';
 import {RoomNewDeviceDialogComponent} from './dialogs/room-new-device-dialog.component';
 import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
 
 const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component: RoomComponent, data: {header: 'Room'}};
 
@@ -35,6 +35,7 @@ const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component:
         MatDividerModule,
         MatMenuModule,
         MatSelectModule,
+        ReactiveFormsModule,
         RouterModule.forChild([room])],
     declarations: [
         RoomComponent,

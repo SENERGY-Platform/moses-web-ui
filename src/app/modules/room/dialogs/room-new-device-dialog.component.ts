@@ -1,5 +1,7 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
+import {FormControl, Validators} from '@angular/forms';
+
 import {DeviceTypesService} from '../../device-types/shared/device-types.service';
 import {DeviceTypeModel} from '../../device-types/shared/device-type.model';
 
@@ -10,6 +12,9 @@ import {DeviceTypeModel} from '../../device-types/shared/device-type.model';
 export class RoomNewDeviceDialogComponent implements OnInit {
 
     @Output() deviceTypes: DeviceTypeModel[] = [];
+    @Output() selected = new FormControl('', [
+        Validators.required,
+    ]);
 
     constructor(private dialogRef: MatDialogRef<RoomNewDeviceDialogComponent>,
                 private deviceTypesService: DeviceTypesService) {
@@ -35,3 +40,4 @@ export class RoomNewDeviceDialogComponent implements OnInit {
         });
     }
 }
+
