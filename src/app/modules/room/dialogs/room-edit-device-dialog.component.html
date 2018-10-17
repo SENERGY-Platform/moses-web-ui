@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Create Devices</h2>
+
+<mat-dialog-content>
+    <mat-form-field color="accent" fxFill>
+        <input #input matInput placeholder="Name">
+    </mat-form-field>
+    <mat-form-field color="accent" fxFill>
+        <mat-select placeholder="Device type" [formControl]="selected">
+            <mat-option *ngFor="let deviceType of deviceTypes" value="{{deviceType.id}}">{{deviceType.name}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="selected.hasError('required')">You must make a selection</mat-error>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayoutAlign="end center">
+    <button class="mat-raised-button color-accent" (click)="close()">Cancel</button>
+    <button [disabled]="selected.value === ''" class="mat-raised-button mat-accent" (click)="create(input.value, selected.value)">
+        Create
+    </button>
+</mat-dialog-actions>

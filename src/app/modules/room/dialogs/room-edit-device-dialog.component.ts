@@ -35,6 +35,8 @@ export class RoomNewDeviceDialogComponent implements OnInit {
 
     create(name: string, deviceTypeId: string): void {
         const deviceRequest: DeviceRequestModel = {device_type_id: deviceTypeId, name: name, room: this.room.room.id};
+        console.log(this.room);
+        console.log(deviceRequest);
         this.dialogRef.close(deviceRequest);
     }
 

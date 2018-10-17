@@ -1,8 +1,8 @@
-import {DeviceMapModel} from './device-map.model';
+import {DeviceModel} from './device.model';
 
 export interface DeviceResponseModel {
     world: string;
     room: string;
-    device: DeviceMapModel;
+    device: DeviceModel;
 }
 
