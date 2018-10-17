@@ -36,6 +36,10 @@ export class RoomComponent implements OnInit {
         this.roomService.openDeviceDeleteDialog(this.room, deviceId);
     }
 
+    editDevice(deviceId: string) {
+        this.roomService.openDeviceEditDialog(deviceId);
+    }
+
     private initDevices() {
         this.roomService.currentDevices.subscribe((devices: DeviceModel[]) => {
             this.devices = devices;

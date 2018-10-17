@@ -7,6 +7,7 @@ import {ErrorHandlerService} from '../../../core/services/error-handler.service'
 import {DeviceResponseModel} from './deviceResponse.model';
 import {environment} from '../../../../environments/environment';
 import {DeviceRequestModel} from './deviceRequest.model';
+import {DeviceModel} from './device.model';
 
 @Injectable({
     providedIn: 'root'
@@ -29,5 +30,18 @@ export class DeviceService {
             catchError(this.errorHandlerService.handleError(DeviceService.name, 'delete', null))
         );
     }
+
+    get(deviceID: string): Observable<DeviceResponseModel | null>   {
+        return this.http.get<DeviceResponseModel>(environment.mosesUrl + '/device/' + deviceID).pipe(
+            catchError(this.errorHandlerService.handleError(DeviceService.name, 'get', null))
+        );
+    }
+
+    update(device: DeviceModel): Observable<DeviceModel | null>   {
+        return this.http.put<DeviceModel>(environment.mosesUrl + '/device', device).pipe(
+            catchError(this.errorHandlerService.handleError(DeviceService.name, 'update', null))
+        );
+    }
+
 
 }

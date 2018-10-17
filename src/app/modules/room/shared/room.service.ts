@@ -15,6 +15,7 @@ import {DeviceResponseModel} from '../../device/shared/deviceResponse.model';
 import {DeviceDeleteDialogComponent} from '../../device/dialogs/device-delete-dialog.component';
 import {DeviceRequestModel} from '../../device/shared/deviceRequest.model';
 import {DeviceModel} from '../../device/shared/device.model';
+import {RoomEditDeviceDialogComponent} from '../dialogs/room-edit-device-dialog.component';
 
 
 @Injectable({
@@ -23,6 +24,7 @@ import {DeviceModel} from '../../device/shared/device.model';
 export class RoomService {
 
     private devices = new Subject<DeviceModel[]>();
+    private devicesArray: DeviceModel[] = [];
 
     @Output() currentDevices = this.devices.asObservable();
 
@@ -94,6 +96,19 @@ export class RoomService {
         });
     }
 
+    openDeviceEditDialog(deviceId: string) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = deviceId;
+        const editDialogRef = this.dialog.open(RoomEditDeviceDialogComponent, dialogConfig);
+
+        editDialogRef.afterClosed().subscribe((device: DeviceResponseModel) => {
+            if (device !== undefined) {
+                this.deviceService.update(device.device).subscribe();
+            }
+        });
+    }
+
     refreshDevices(room: RoomResponseModel): void {
         this.get(room.room.id).subscribe((roomResp: (RoomResponseModel | null)) => {
             if (roomResp !== null) {
@@ -103,15 +118,21 @@ export class RoomService {
     }
 
     private convertToDevicesArray(room: RoomResponseModel): DeviceModel[] {
+        this.devicesArray = [];
 
-        const devicesArray: DeviceModel[] = [];
         if (room.room.devices !== null) {
             Object.values(room.room.devices).forEach((device: DeviceModel) => {
-                devicesArray.push(device);
+                this.devicesArray.push(device);
             });
         }
+        this.sortDevicesArray();
 
-        devicesArray.sort((a, b) => {
+        return this.devicesArray;
+    }
+
+
+    private sortDevicesArray() {
+        this.devicesArray.sort((a, b) => {
             if (a.name < b.name) {
                 return -1;
             }
@@ -120,10 +141,7 @@ export class RoomService {
             }
             return 0;
         });
-
-        return devicesArray;
     }
-
 
     private deleteRoom(id: string) {
         return this.http.delete(environment.mosesUrl + '/room/' + id, {responseType: 'text'}).pipe(

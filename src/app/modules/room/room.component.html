@@ -26,6 +26,10 @@
                                     <mat-icon>delete</mat-icon>
                                     <span>Delete device</span>
                                 </button>
+                                <button mat-menu-item (click)="editDevice(device.id)">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>Edit device</span>
+                                </button>
                             </mat-menu>
                         </div>
                     </div>
