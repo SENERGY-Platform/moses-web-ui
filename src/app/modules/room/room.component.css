@@ -32,10 +32,3 @@ mat-grid-list {
     display: block;
     position: relative;
 }
-
-.icon {
-    color: white;
-    height: 120px;
-    width: 120px;
-    font-size: 120px;
-}
