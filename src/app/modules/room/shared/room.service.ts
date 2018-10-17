@@ -16,6 +16,7 @@ import {DeviceDeleteDialogComponent} from '../../device/dialogs/device-delete-di
 import {DeviceRequestModel} from '../../device/shared/deviceRequest.model';
 import {DeviceModel} from '../../device/shared/device.model';
 import {RoomEditDeviceDialogComponent} from '../dialogs/room-edit-device-dialog.component';
+import {RoomAddChangeRoutineDialogComponent} from '../dialogs/room-add-change-routine-dialog.component';
 
 
 @Injectable({
@@ -106,6 +107,22 @@ export class RoomService {
             if (device !== undefined) {
                 this.deviceService.update(device.device).subscribe();
             }
+        });
+    }
+
+    openCreateChangeRoutineDialog(deviceId: string) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        const editDialogRef = this.dialog.open(RoomAddChangeRoutineDialogComponent, dialogConfig);
+
+        editDialogRef.afterClosed().subscribe((deviceRequest: DeviceRequestModel) => {
+            /*if (deviceRequest !== undefined) {
+                this.deviceService.create(deviceRequest).subscribe((device: DeviceResponseModel | null) => {
+                    if (device !== null) {
+                        this.refreshDevices(room);
+                    }
+                });
+            }*/
         });
     }
 

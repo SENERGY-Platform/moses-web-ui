@@ -40,6 +40,10 @@ export class RoomComponent implements OnInit {
         this.roomService.openDeviceEditDialog(deviceId);
     }
 
+    addChangeRoutine(deviceId: string) {
+        this.roomService.openCreateChangeRoutineDialog(deviceId);
+    }
+
     private initDevices() {
         this.roomService.currentDevices.subscribe((devices: DeviceModel[]) => {
             this.devices = devices;

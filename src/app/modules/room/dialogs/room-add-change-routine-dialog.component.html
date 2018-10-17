@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Add Change Routine</h2>
+
+<mat-dialog-content>
+    <mat-form-field fxFill color="accent">
+        <textarea [(ngModel)]="changeRoutine.code" [rows]="3" matInput placeholder="Code"></textarea>
+    </mat-form-field>
+    <mat-form-field fxFill color="accent">
+        <input [(ngModel)]="changeRoutine.interval" matInput placeholder="Interval">
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayoutAlign="end center">
+    <button class="mat-raised-button color-accent" (click)="close()">Cancel</button>
+    <button class="mat-raised-button mat-accent" (click)="create()">Create</button>
+</mat-dialog-actions>
