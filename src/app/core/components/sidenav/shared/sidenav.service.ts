@@ -8,7 +8,7 @@ import {ErrorHandlerService} from '../../../services/error-handler.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {SidenavPageModel} from './sidenav-page.model';
-import {RoomModel} from '../../../../modules/room/shared/room.model';
+import {RoomResponseModel} from '../../../../modules/room/shared/roomResponse.model';
 
 @Injectable({
     providedIn: 'root',
@@ -59,7 +59,7 @@ export class SidenavService {
         this.sidenavSections.next(this.sections);
     }
 
-    addRoomSection(world: WorldModel, room: RoomModel) {
+    addRoomSection(world: WorldModel, room: RoomResponseModel) {
         this.sections.forEach((section: SidenavSectionModel) => {
             if (section.id === world.id) {
                 section.pages.push(new SidenavPageModel(room.room.name, 'link', 'meeting_room',
@@ -84,7 +84,7 @@ export class SidenavService {
         }
     }
 
-    deleteRoomSection(room: RoomModel) {
+    deleteRoomSection(room: RoomResponseModel) {
         let sidenavIndex = 0;
         this.sections.forEach((section: SidenavSectionModel, index: number) => {
             if (section.id === room.world) {

@@ -1,9 +1,11 @@
-import {Component, OnInit, Output} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import {Component, Inject, OnInit, Output} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {FormControl, Validators} from '@angular/forms';
 
 import {DeviceTypesService} from '../../device-types/shared/device-types.service';
 import {DeviceTypeModel} from '../../device-types/shared/device-type.model';
+import {RoomResponseModel} from '../shared/roomResponse.model';
+import {DeviceRequestModel} from '../../device/shared/deviceRequest.model';
 
 @Component({
     templateUrl: './room-new-device-dialog.component.html',
@@ -15,9 +17,12 @@ export class RoomNewDeviceDialogComponent implements OnInit {
     @Output() selected = new FormControl('', [
         Validators.required,
     ]);
+    @Output() room: RoomResponseModel;
 
     constructor(private dialogRef: MatDialogRef<RoomNewDeviceDialogComponent>,
-                private deviceTypesService: DeviceTypesService) {
+                private deviceTypesService: DeviceTypesService,
+                @Inject(MAT_DIALOG_DATA) room: RoomResponseModel) {
+        this.room = room;
     }
 
     ngOnInit() {
@@ -28,8 +33,11 @@ export class RoomNewDeviceDialogComponent implements OnInit {
         this.dialogRef.close();
     }
 
-    create(name: string): void {
-        this.dialogRef.close(name);
+    create(name: string, deviceTypeId: string): void {
+        const deviceRequest: DeviceRequestModel = {device_type_id: deviceTypeId, name: name, room: this.room.room.id};
+        console.log(this.room);
+        console.log(deviceRequest);
+        this.dialogRef.close(deviceRequest);
     }
 
     private get() {

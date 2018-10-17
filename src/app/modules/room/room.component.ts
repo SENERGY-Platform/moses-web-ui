@@ -1,7 +1,7 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {RoomService} from './shared/room.service';
-import {RoomModel} from './shared/room.model';
+import {RoomResponseModel} from './shared/roomResponse.model';
 import {DeviceModel} from '../device/shared/device.model';
 
 @Component({
@@ -11,7 +11,7 @@ import {DeviceModel} from '../device/shared/device.model';
 })
 export class RoomComponent implements OnInit {
 
-    @Output() room: RoomModel = {world: '', room: {id: '', name: '', devices: null}};
+    @Output() room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null}};
     @Output() devices: DeviceModel[] = [];
 
     constructor(private activatedRoute: ActivatedRoute,
@@ -46,7 +46,7 @@ export class RoomComponent implements OnInit {
 
         this.activatedRoute.params.subscribe(
             (params: Params) => {
-                this.roomService.get(params['roomid']).subscribe((room: RoomModel | null) => {
+                this.roomService.get(params['roomid']).subscribe((room: RoomResponseModel | null) => {
                     if (room !== null) {
                         this.room = room;
                         this.roomService.refreshDevices(this.room);

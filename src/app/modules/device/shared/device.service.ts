@@ -3,10 +3,10 @@ import {catchError} from 'rxjs/internal/operators';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/index';
 
-import {RoomModel} from '../../room/shared/room.model';
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
-import {DeviceHttpModel} from './deviceHttp.model';
+import {DeviceResponseModel} from './deviceResponse.model';
 import {environment} from '../../../../environments/environment';
+import {DeviceRequestModel} from './deviceRequest.model';
 
 @Injectable({
     providedIn: 'root'
@@ -18,11 +18,8 @@ export class DeviceService {
                 ) {
     }
 
-    create(room: RoomModel, name: string): Observable<DeviceHttpModel | null>   {
-        return this.http.post<DeviceHttpModel>(environment.mosesUrl + '/device', {
-            'room': room.room.id,
-            'name': name
-        }).pipe(
+    create(deviceRequest: DeviceRequestModel): Observable<DeviceResponseModel | null>   {
+        return this.http.post<DeviceResponseModel>(environment.mosesUrl + '/device/bydevicetype', deviceRequest).pipe(
             catchError(this.errorHandlerService.handleError(DeviceService.name, 'create', null))
         );
     }

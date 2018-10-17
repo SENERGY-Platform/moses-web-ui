@@ -15,7 +15,7 @@
 
 <mat-dialog-actions fxLayoutAlign="end center">
     <button class="mat-raised-button color-accent" (click)="close()">Cancel</button>
-    <button [disabled]="selected.value === ''" class="mat-raised-button mat-accent" (click)="create(input.value)">
+    <button [disabled]="selected.value === ''" class="mat-raised-button mat-accent" (click)="create(input.value, selected.value)">
         Create
     </button>
 </mat-dialog-actions>

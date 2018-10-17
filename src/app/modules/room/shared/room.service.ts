@@ -4,16 +4,17 @@ import {environment} from '../../../../environments/environment';
 import {Observable, Subject} from 'rxjs/index';
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {HttpClient} from '@angular/common/http';
-import {RoomModel} from './room.model';
+import {RoomResponseModel} from './roomResponse.model';
 import {WorldModel} from '../../world/shared/world.model';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {RoomDeleteDialogComponent} from '../dialogs/room-delete-dialog.component';
 import {SidenavService} from '../../../core/components/sidenav/shared/sidenav.service';
 import {RoomNewDeviceDialogComponent} from '../dialogs/room-new-device-dialog.component';
 import {DeviceService} from '../../device/shared/device.service';
-import {DeviceHttpModel} from '../../device/shared/deviceHttp.model';
-import {DeviceModel} from '../../device/shared/device.model';
+import {DeviceResponseModel} from '../../device/shared/deviceResponse.model';
+import {DeviceArrayModel} from '../../device/shared/device.model';
 import {DeviceDeleteDialogComponent} from '../../device/dialogs/device-delete-dialog.component';
+import {DeviceRequestModel} from '../../device/shared/deviceRequest.model';
 
 
 @Injectable({
@@ -21,7 +22,7 @@ import {DeviceDeleteDialogComponent} from '../../device/dialogs/device-delete-di
 })
 export class RoomService {
 
-    private devices = new Subject<DeviceModel[]>();
+    private devices = new Subject<DeviceArrayModel[]>();
 
     @Output() currentDevices = this.devices.asObservable();
 
@@ -32,19 +33,19 @@ export class RoomService {
                 private deviceService: DeviceService) {
     }
 
-    get(roomId: string): Observable<RoomModel | null> {
-        return this.http.get<RoomModel>(environment.mosesUrl + '/room/' + roomId).pipe(
+    get(roomId: string): Observable<RoomResponseModel | null> {
+        return this.http.get<RoomResponseModel>(environment.mosesUrl + '/room/' + roomId).pipe(
             catchError(this.errorHandlerService.handleError(RoomService.name, 'get', null))
         );
     }
 
-    create(world: WorldModel, name: string): Observable<RoomModel | null> {
-        return this.http.post<RoomModel>(environment.mosesUrl + '/room', {'world': world.id, 'name': name}).pipe(
+    create(world: WorldModel, name: string): Observable<RoomResponseModel | null> {
+        return this.http.post<RoomResponseModel>(environment.mosesUrl + '/room', {'world': world.id, 'name': name}).pipe(
             catchError(this.errorHandlerService.handleError(RoomService.name, 'create', null))
         );
     }
 
-    openRoomDeleteDialog(room: RoomModel) {
+    openRoomDeleteDialog(room: RoomResponseModel) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(RoomDeleteDialogComponent, dialogConfig);
@@ -60,14 +61,15 @@ export class RoomService {
         });
     }
 
-    openDeviceCreateDialog(room: RoomModel) {
+    openDeviceCreateDialog(room: RoomResponseModel) {
         const dialogConfig = new MatDialogConfig();
+        dialogConfig.data = room;
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(RoomNewDeviceDialogComponent, dialogConfig);
 
-        editDialogRef.afterClosed().subscribe((name: string) => {
-            if (name !== undefined) {
-                this.deviceService.create(room, name).subscribe((device: DeviceHttpModel | null) => {
+        editDialogRef.afterClosed().subscribe((deviceRequest: DeviceRequestModel) => {
+            if (deviceRequest !== undefined) {
+                this.deviceService.create(deviceRequest).subscribe((device: DeviceResponseModel | null) => {
                     if (device !== null) {
                         this.refreshDevices(room);
                     }
@@ -76,7 +78,7 @@ export class RoomService {
         });
     }
 
-    openDeviceDeleteDialog(room: RoomModel, deviceId: string) {
+    openDeviceDeleteDialog(room: RoomResponseModel, deviceId: string) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(DeviceDeleteDialogComponent, dialogConfig);
@@ -92,19 +94,19 @@ export class RoomService {
         });
     }
 
-    refreshDevices(room: RoomModel): void {
-        this.get(room.room.id).subscribe((roomResp: (RoomModel | null)) => {
+    refreshDevices(room: RoomResponseModel): void {
+        this.get(room.room.id).subscribe((roomResp: (RoomResponseModel | null)) => {
             if (roomResp !== null) {
                 this.devices.next(this.convertToDevicesArray(roomResp));
             }
         });
     }
 
-    private convertToDevicesArray(room: RoomModel): DeviceModel[] {
+    private convertToDevicesArray(room: RoomResponseModel): DeviceArrayModel[] {
 
-        const devicesArray: DeviceModel[] = [];
+        const devicesArray: DeviceArrayModel[] = [];
         if (room.room.devices !== null) {
-            Object.values(room.room.devices).forEach((device: DeviceModel) => {
+            Object.values(room.room.devices).forEach((device) => {
                 devicesArray.push(device);
             });
         }

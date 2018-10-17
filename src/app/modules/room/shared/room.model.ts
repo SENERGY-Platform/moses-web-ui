@@ -1,12 +1,8 @@
+import {DeviceMapModel} from '../../device/shared/device-map.model';
+
 export interface RoomModel {
-    world: string;
-    room: {
-        id: string;
-        name: string;
-        devices: {[key: string]: {
-                id: string;
-                name: string;
-            }} | null ;
-    };
+    id: string;
+    name: string;
+    devices: DeviceMapModel | null;
 }
 
