@@ -12,9 +12,9 @@ import {SidenavService} from '../../../core/components/sidenav/shared/sidenav.se
 import {RoomNewDeviceDialogComponent} from '../dialogs/room-new-device-dialog.component';
 import {DeviceService} from '../../device/shared/device.service';
 import {DeviceResponseModel} from '../../device/shared/deviceResponse.model';
-import {DeviceArrayModel} from '../../device/shared/device.model';
 import {DeviceDeleteDialogComponent} from '../../device/dialogs/device-delete-dialog.component';
 import {DeviceRequestModel} from '../../device/shared/deviceRequest.model';
+import {DeviceModel} from '../../device/shared/device.model';
 
 
 @Injectable({
@@ -22,7 +22,7 @@ import {DeviceRequestModel} from '../../device/shared/deviceRequest.model';
 })
 export class RoomService {
 
-    private devices = new Subject<DeviceArrayModel[]>();
+    private devices = new Subject<DeviceModel[]>();
 
     @Output() currentDevices = this.devices.asObservable();
 
@@ -102,11 +102,11 @@ export class RoomService {
         });
     }
 
-    private convertToDevicesArray(room: RoomResponseModel): DeviceArrayModel[] {
+    private convertToDevicesArray(room: RoomResponseModel): DeviceModel[] {
 
-        const devicesArray: DeviceArrayModel[] = [];
+        const devicesArray: DeviceModel[] = [];
         if (room.room.devices !== null) {
-            Object.values(room.room.devices).forEach((device) => {
+            Object.values(room.room.devices).forEach((device: DeviceModel) => {
                 devicesArray.push(device);
             });
         }
