@@ -44,8 +44,8 @@ export class RoomComponent implements OnInit {
         this.roomService.openCreateChangeRoutineDialog(deviceId);
     }
 
-    addState() {
-        this.roomService.openStateCreateDialog(this.room);
+    addState(device: DeviceModel) {
+        this.roomService.openStateCreateDialog(device);
     }
 
     editChangeRoutine(deviceId: string) {

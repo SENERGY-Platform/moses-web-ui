@@ -32,7 +32,6 @@ export class RoomEditChangeRoutineDialogComponent implements OnInit {
 
     delete(index: number): void {
         this.changeRoutines.splice(index, 1);
-        console.log(index);
     }
 
     edit(): void {
@@ -43,7 +42,6 @@ export class RoomEditChangeRoutineDialogComponent implements OnInit {
         if (this.device) {
             this.device.device.change_routines = changeRoutinesMap;
         }
-        console.log(this.device);
         this.dialogRef.close(this.device);
     }
 
@@ -56,7 +54,6 @@ export class RoomEditChangeRoutineDialogComponent implements OnInit {
                         this.changeRoutines.push(changeRoutines);
                     });
                     this.sortServicesArray();
-                    console.log(this.changeRoutines);
                 }
             }
         });

@@ -9,7 +9,7 @@ import {
     MatGridListModule,
     MatIconModule,
     MatInputModule,
-    MatMenuModule,
+    MatMenuModule, MatRadioModule,
     MatSelectModule,
     MatTooltipModule
 } from '@angular/material';
@@ -41,6 +41,7 @@ const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component:
         MatSelectModule,
         ReactiveFormsModule,
         FormsModule,
+        MatRadioModule,
         RouterModule.forChild([room])],
     declarations: [
         RoomComponent,

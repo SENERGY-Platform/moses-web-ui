@@ -1,3 +1,7 @@
 .right-align {
     text-align: right;
 }
+
+.example-radio-group {
+    margin-bottom: 15px;
+}

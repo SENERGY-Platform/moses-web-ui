@@ -7,7 +7,7 @@
     <h3>Services</h3>
     <div *ngIf="services.length > 0">
         <div *ngFor="let service of services; let i = index">
-            <h4>{{i + 1}}.</h4>
+            <mat-label>Service: {{service.name}}</mat-label>
             <mat-form-field color="accent" fxFill appearance="outline">
                 <mat-label>Code</mat-label>
                 <textarea [rows]="3" matInput

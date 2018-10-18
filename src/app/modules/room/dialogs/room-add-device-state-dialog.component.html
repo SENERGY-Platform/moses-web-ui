@@ -2,13 +2,18 @@
 
 <mat-dialog-content>
     <mat-form-field fxFill color="accent" appearance="outline">
-        <mat-label>Code</mat-label>
-        <textarea [(ngModel)]="changeRoutine.code" [rows]="3" matInput placeholder="Code"></textarea>
+        <mat-label>Name</mat-label>
+        <input [(ngModel)]="stateUserInput.name" matInput placeholder="Name">
     </mat-form-field>
+    <mat-radio-group class="example-radio-group" [(ngModel)]="stateUserInput.type" fxLayout="column" fxLayoutGap="5px">
+        <mat-label>Device type</mat-label>
+        <mat-radio-button *ngFor="let type of types" [value]="type" fxFill>
+            {{type}}
+        </mat-radio-button>
+    </mat-radio-group>
     <mat-form-field fxFill color="accent" appearance="outline">
-        <mat-label>Interval</mat-label>
-        <input class="right-align" type="number" [(ngModel)]="changeRoutine.interval" matInput placeholder="Interval">
-        <div matSuffix>s</div>
+        <mat-label>Value</mat-label>
+        <input [(ngModel)]="stateUserInput.value" matInput placeholder="Value">
     </mat-form-field>
 </mat-dialog-content>
 

@@ -2,11 +2,12 @@ import {Injectable, Output} from '@angular/core';
 import {catchError} from 'rxjs/internal/operators';
 import {environment} from '../../../../environments/environment';
 import {Observable, Subject} from 'rxjs/index';
-import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {HttpClient} from '@angular/common/http';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+
+import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {RoomResponseModel} from './roomResponse.model';
 import {WorldModel} from '../../world/shared/world.model';
-import {MatDialog, MatDialogConfig} from '@angular/material';
 import {RoomDeleteDialogComponent} from '../dialogs/room-delete-dialog.component';
 import {SidenavService} from '../../../core/components/sidenav/shared/sidenav.service';
 import {RoomNewDeviceDialogComponent} from '../dialogs/room-new-device-dialog.component';
@@ -21,7 +22,7 @@ import {ChangeRequestModel} from '../../change-routines/shared/change-request.mo
 import {ChangeRoutineService} from '../../change-routines/shared/change-routine.service';
 import {RoomEditChangeRoutineDialogComponent} from '../dialogs/room-edit-change-routine-dialog.component';
 import {RoomAddDeviceStateDialogComponent} from '../dialogs/room-add-device-state-dialog.component';
-
+import {StatesModel} from '../../states/shared/states.model';
 
 @Injectable({
     providedIn: 'root'
@@ -86,19 +87,18 @@ export class RoomService {
         });
     }
 
-    openStateCreateDialog(room: RoomResponseModel) {
+    openStateCreateDialog(device: DeviceModel) {
         const dialogConfig = new MatDialogConfig();
-        dialogConfig.data = room;
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(RoomAddDeviceStateDialogComponent, dialogConfig);
 
-        editDialogRef.afterClosed().subscribe((deviceRequest: DeviceRequestModel) => {
-            if (deviceRequest !== undefined) {
-                this.deviceService.create(deviceRequest).subscribe((device: DeviceResponseModel | null) => {
-                    if (device !== null) {
-                        this.refreshDevices(room);
-                    }
-                });
+        editDialogRef.afterClosed().subscribe((state: StatesModel) => {
+            if (state !== undefined) {
+                if (!device.states) {
+                    device.states = {};
+                }
+                device.states[state.name] = state.value;
+                this.updateDevice(device);
             }
         });
     }
@@ -126,7 +126,7 @@ export class RoomService {
         const editDialogRef = this.dialog.open(RoomEditDeviceDialogComponent, dialogConfig);
 
         editDialogRef.afterClosed().subscribe((device: DeviceResponseModel) => {
-            this.updateDevice(device);
+            this.updateDevice(device.device);
         });
     }
 
@@ -151,7 +151,7 @@ export class RoomService {
         const editDialogRef = this.dialog.open(RoomEditChangeRoutineDialogComponent, dialogConfig);
 
         editDialogRef.afterClosed().subscribe((device: DeviceResponseModel) => {
-            this.updateDevice(device);
+            this.updateDevice(device.device);
         });
     }
 
@@ -163,9 +163,9 @@ export class RoomService {
         });
     }
 
-    private updateDevice(device: DeviceResponseModel) {
+    private updateDevice(device: DeviceModel) {
         if (device !== undefined) {
-            this.deviceService.update(device.device).subscribe();
+            this.deviceService.update(device).subscribe();
         }
     }
 
