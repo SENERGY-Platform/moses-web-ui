@@ -1,13 +1,27 @@
-<h2 mat-dialog-title>Edit Device</h2>
+<h2 mat-dialog-title>Edit Services</h2>
 
 <mat-dialog-content>
     <mat-form-field color="accent" fxFill>
         <input disabled matInput placeholder="Name" value="{{device?.device.name}}">
     </mat-form-field>
     <h3>Services</h3>
-    <mat-form-field color="accent" *ngFor="let service of services" fxFill>
-        <textarea  [(ngModel)]="service.code" [rows]="3" matInput placeholder="{{service.name}}" value="{{service.code}}"></textarea>
-    </mat-form-field>
+    <div *ngIf="services.length > 0">
+        <div *ngFor="let service of services; let i = index">
+            <h4>{{i + 1}}.</h4>
+            <mat-form-field color="accent" fxFill appearance="outline">
+                <mat-label>Code</mat-label>
+                <textarea [rows]="3" matInput
+                          placeholder="Code" [(ngModel)]="service.code"
+                          [ngModelOptions]="{standalone: true}"></textarea>
+            </mat-form-field>
+            <mat-form-field color="accent" fxFill appearance="outline">
+                <mat-label>Interval</mat-label>
+                <input class="right-align" type="number" matInput placeholder="Interval"
+                       [(ngModel)]="service.sensor_interval" [ngModelOptions]="{standalone: true}">
+                <div matSuffix>s</div>
+            </mat-form-field>
+        </div>
+    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions fxLayoutAlign="end center">
