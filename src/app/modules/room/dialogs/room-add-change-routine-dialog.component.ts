@@ -18,8 +18,8 @@ export class RoomAddChangeRoutineDialogComponent {
         this.dialogRef.close();
     }
 
-    create(name: string): void {
-        this.dialogRef.close(name);
+    create(): void {
+        this.dialogRef.close(this.changeRoutine);
     }
 
 }

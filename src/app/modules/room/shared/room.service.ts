@@ -17,6 +17,8 @@ import {DeviceRequestModel} from '../../device/shared/deviceRequest.model';
 import {DeviceModel} from '../../device/shared/device.model';
 import {RoomEditDeviceDialogComponent} from '../dialogs/room-edit-device-dialog.component';
 import {RoomAddChangeRoutineDialogComponent} from '../dialogs/room-add-change-routine-dialog.component';
+import {ChangeRequestModel} from '../../change-routines/shared/change-request.model';
+import {ChangeRoutineService} from '../../change-routines/shared/change-routine.service';
 
 
 @Injectable({
@@ -33,7 +35,8 @@ export class RoomService {
                 private http: HttpClient,
                 private errorHandlerService: ErrorHandlerService,
                 private sidenavService: SidenavService,
-                private deviceService: DeviceService) {
+                private deviceService: DeviceService,
+                private changeRoutineService: ChangeRoutineService) {
     }
 
     get(roomId: string): Observable<RoomResponseModel | null> {
@@ -115,14 +118,12 @@ export class RoomService {
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(RoomAddChangeRoutineDialogComponent, dialogConfig);
 
-        editDialogRef.afterClosed().subscribe((deviceRequest: DeviceRequestModel) => {
-            /*if (deviceRequest !== undefined) {
-                this.deviceService.create(deviceRequest).subscribe((device: DeviceResponseModel | null) => {
-                    if (device !== null) {
-                        this.refreshDevices(room);
-                    }
-                });
-            }*/
+        editDialogRef.afterClosed().subscribe((changeRequest: ChangeRequestModel) => {
+            if (changeRequest !== undefined) {
+                changeRequest.ref_type = 'device';
+                changeRequest.ref_id = deviceId;
+                this.changeRoutineService.create(changeRequest).subscribe();
+            }
         });
     }
 
