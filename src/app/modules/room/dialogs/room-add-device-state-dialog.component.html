@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Add State</h2>
+
+<mat-dialog-content>
+    <mat-form-field fxFill color="accent" appearance="outline">
+        <mat-label>Code</mat-label>
+        <textarea [(ngModel)]="changeRoutine.code" [rows]="3" matInput placeholder="Code"></textarea>
+    </mat-form-field>
+    <mat-form-field fxFill color="accent" appearance="outline">
+        <mat-label>Interval</mat-label>
+        <input class="right-align" type="number" [(ngModel)]="changeRoutine.interval" matInput placeholder="Interval">
+        <div matSuffix>s</div>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayoutAlign="end center">
+    <button class="mat-raised-button color-accent" (click)="close()">Cancel</button>
+    <button class="mat-raised-button mat-accent" (click)="create()">Add</button>
+</mat-dialog-actions>
