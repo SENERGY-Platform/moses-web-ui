@@ -2,19 +2,22 @@
 
 <mat-dialog-content>
     <form class="size">
-        <mat-form-field color="accent" fxFill>
+        <mat-form-field color="accent" fxFill appearance="outline">
+            <mat-label>Name</mat-label>
             <input disabled matInput placeholder="Name" value="{{device?.device.name}}">
         </mat-form-field>
         <h3>Change Routine</h3>
         <div *ngIf="changeRoutines.length > 0">
             <div *ngFor="let changeRoutine of changeRoutines; let i = index">
-                <mat-form-field color="accent" fxFill>
+                <mat-form-field color="accent" fxFill appearance="outline">
+                    <mat-label>Code</mat-label>
                     <textarea [rows]="3" matInput
                               placeholder="Code" [(ngModel)]="changeRoutine.code" [ngModelOptions]="{standalone: true}"></textarea>
                 </mat-form-field>
-                <mat-form-field color="accent" fxFill>
+                <mat-form-field color="accent" fxFill appearance="outline">
+                    <mat-label>Interval</mat-label>
                     <input class="right-align" type="number" matInput placeholder="Interval" [(ngModel)]="changeRoutine.interval" [ngModelOptions]="{standalone: true}">
-                    <div matSuffix>s</div>
+                    <span matSuffix>s</span>
                 </mat-form-field>
                 <button mat-icon-button (click)="delete(i)" color="accent" matTooltip="Delete change routine">
                     <mat-icon>delete</mat-icon>
