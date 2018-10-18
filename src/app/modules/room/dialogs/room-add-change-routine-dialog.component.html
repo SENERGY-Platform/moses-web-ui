@@ -5,7 +5,8 @@
         <textarea [(ngModel)]="changeRoutine.code" [rows]="3" matInput placeholder="Code"></textarea>
     </mat-form-field>
     <mat-form-field fxFill color="accent">
-        <input type="number" [(ngModel)]="changeRoutine.interval" matInput placeholder="Interval">
+        <input class="right-align" type="number" [(ngModel)]="changeRoutine.interval" matInput placeholder="Interval">
+        <div matSuffix>s</div>
     </mat-form-field>
 </mat-dialog-content>
 

@@ -19,6 +19,7 @@ import {RoomEditDeviceDialogComponent} from '../dialogs/room-edit-device-dialog.
 import {RoomAddChangeRoutineDialogComponent} from '../dialogs/room-add-change-routine-dialog.component';
 import {ChangeRequestModel} from '../../change-routines/shared/change-request.model';
 import {ChangeRoutineService} from '../../change-routines/shared/change-routine.service';
+import {RoomEditChangeRoutineDialogComponent} from '../dialogs/room-edit-change-routine-dialog.component';
 
 
 @Injectable({
@@ -107,9 +108,7 @@ export class RoomService {
         const editDialogRef = this.dialog.open(RoomEditDeviceDialogComponent, dialogConfig);
 
         editDialogRef.afterClosed().subscribe((device: DeviceResponseModel) => {
-            if (device !== undefined) {
-                this.deviceService.update(device.device).subscribe();
-            }
+            this.updateDevice(device);
         });
     }
 
@@ -127,12 +126,29 @@ export class RoomService {
         });
     }
 
+    openEditChangeRoutineDialog(deviceId: string) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = deviceId;
+        const editDialogRef = this.dialog.open(RoomEditChangeRoutineDialogComponent, dialogConfig);
+
+        editDialogRef.afterClosed().subscribe((device: DeviceResponseModel) => {
+            this.updateDevice(device);
+        });
+    }
+
     refreshDevices(room: RoomResponseModel): void {
         this.get(room.room.id).subscribe((roomResp: (RoomResponseModel | null)) => {
             if (roomResp !== null) {
                 this.devices.next(this.convertToDevicesArray(roomResp));
             }
         });
+    }
+
+    private updateDevice(device: DeviceResponseModel) {
+        if (device !== undefined) {
+            this.deviceService.update(device.device).subscribe();
+        }
     }
 
     private convertToDevicesArray(room: RoomResponseModel): DeviceModel[] {

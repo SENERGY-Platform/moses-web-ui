@@ -20,6 +20,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RoomEditDeviceDialogComponent} from './dialogs/room-edit-device-dialog.component';
 import {RoomAddChangeRoutineDialogComponent} from './dialogs/room-add-change-routine-dialog.component';
+import {RoomEditChangeRoutineDialogComponent} from './dialogs/room-edit-change-routine-dialog.component';
 
 const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component: RoomComponent, data: {header: 'Room'}};
 
@@ -46,11 +47,13 @@ const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component:
         RoomNewDeviceDialogComponent,
         RoomEditDeviceDialogComponent,
         RoomAddChangeRoutineDialogComponent,
+        RoomEditChangeRoutineDialogComponent,
     ],
     entryComponents: [RoomDeleteDialogComponent,
         RoomNewDeviceDialogComponent,
         RoomEditDeviceDialogComponent,
         RoomAddChangeRoutineDialogComponent,
+        RoomEditChangeRoutineDialogComponent,
     ],
 })
 export class RoomModule {
