@@ -127,7 +127,9 @@ export class RoomService {
         const editDialogRef = this.dialog.open(RoomEditDeviceDialogComponent, dialogConfig);
 
         editDialogRef.afterClosed().subscribe((device: DeviceResponseModel) => {
-            this.updateDevice(device.device);
+            if (device !== undefined) {
+                this.updateDevice(device.device);
+            }
         });
     }
 
@@ -138,8 +140,9 @@ export class RoomService {
         const editDialogRef = this.dialog.open(RoomEditStateDialogComponent, dialogConfig);
 
         editDialogRef.afterClosed().subscribe((device: DeviceResponseModel) => {
-            console.log(device);
-          //  this.updateDevice(device.device);
+            if (device !== undefined) {
+                this.updateDevice(device.device);
+            }
         });
     }
 
