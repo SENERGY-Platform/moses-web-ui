@@ -1,4 +1,4 @@
 export interface StatesMapModel {
-    [key: string]: {};
+    [key: string]: string | number | boolean | null;
 }
 

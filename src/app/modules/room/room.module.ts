@@ -22,6 +22,7 @@ import {RoomEditDeviceDialogComponent} from './dialogs/room-edit-device-dialog.c
 import {RoomAddChangeRoutineDialogComponent} from './dialogs/room-add-change-routine-dialog.component';
 import {RoomEditChangeRoutineDialogComponent} from './dialogs/room-edit-change-routine-dialog.component';
 import {RoomAddDeviceStateDialogComponent} from './dialogs/room-add-device-state-dialog.component';
+import {RoomEditStateDialogComponent} from './dialogs/room-edit-state-dialog.component';
 
 const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component: RoomComponent, data: {header: 'Room'}};
 
@@ -51,6 +52,7 @@ const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component:
         RoomAddChangeRoutineDialogComponent,
         RoomEditChangeRoutineDialogComponent,
         RoomAddDeviceStateDialogComponent,
+        RoomEditStateDialogComponent,
     ],
     entryComponents: [RoomDeleteDialogComponent,
         RoomNewDeviceDialogComponent,
@@ -58,6 +60,7 @@ const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component:
         RoomAddChangeRoutineDialogComponent,
         RoomEditChangeRoutineDialogComponent,
         RoomAddDeviceStateDialogComponent,
+        RoomEditStateDialogComponent,
     ],
 })
 export class RoomModule {

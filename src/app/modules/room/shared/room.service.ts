@@ -23,6 +23,7 @@ import {ChangeRoutineService} from '../../change-routines/shared/change-routine.
 import {RoomEditChangeRoutineDialogComponent} from '../dialogs/room-edit-change-routine-dialog.component';
 import {RoomAddDeviceStateDialogComponent} from '../dialogs/room-add-device-state-dialog.component';
 import {StatesModel} from '../../states/shared/states.model';
+import {RoomEditStateDialogComponent} from '../dialogs/room-edit-state-dialog.component';
 
 @Injectable({
     providedIn: 'root'
@@ -127,6 +128,18 @@ export class RoomService {
 
         editDialogRef.afterClosed().subscribe((device: DeviceResponseModel) => {
             this.updateDevice(device.device);
+        });
+    }
+
+    openStateEditDialog(deviceId: string) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = deviceId;
+        const editDialogRef = this.dialog.open(RoomEditStateDialogComponent, dialogConfig);
+
+        editDialogRef.afterClosed().subscribe((device: DeviceResponseModel) => {
+            console.log(device);
+          //  this.updateDevice(device.device);
         });
     }
 

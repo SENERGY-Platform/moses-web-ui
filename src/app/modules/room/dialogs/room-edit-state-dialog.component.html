@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Edit States</h2>
+
+<mat-dialog-content>
+    <form class="size">
+        <div *ngIf="states.length > 0">
+            <div *ngFor="let state of states; let i = index">
+                <mat-form-field color="accent" appearance="outline" fxFlex="90">
+                    <mat-label>{{state.name}}</mat-label>
+                    <input matInput
+                           placeholder="{{state.name}}" type="" [(ngModel)]="state.value" [ngModelOptions]="{standalone: true}">
+                </mat-form-field>
+                <button mat-icon-button (click)="delete(i)" fxFlex="10"color="accent" matTooltip="Delete change routine">
+                    <mat-icon>delete</mat-icon>
+                </button>
+
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayoutAlign="end center">
+    <button class="mat-raised-button color-accent" (click)="close()">Cancel</button>
+    <button class="mat-raised-button mat-accent" (click)="edit()">Save</button>
+</mat-dialog-actions>

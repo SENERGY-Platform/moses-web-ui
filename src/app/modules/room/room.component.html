@@ -30,6 +30,7 @@
                                     <mat-icon>edit</mat-icon>
                                     <span>Edit services</span>
                                 </button>
+                                <mat-divider></mat-divider>
                                 <button mat-menu-item (click)="addChangeRoutine(device.id)">
                                     <mat-icon>add_circle_outline</mat-icon>
                                     <span>Add change routine</span>
@@ -38,9 +39,14 @@
                                     <mat-icon>edit</mat-icon>
                                     <span>Edit change routine</span>
                                 </button>
+                                <mat-divider></mat-divider>
                                 <button mat-menu-item (click)="addState(device)">
                                     <mat-icon>add_circle_outline</mat-icon>
                                     <span>Add state</span>
+                                </button>
+                                <button mat-menu-item (click)="editStates(device.id)">
+                                    <mat-icon>edit</mat-icon>
+                                    <span>Edit state</span>
                                 </button>
                             </mat-menu>
                         </div>

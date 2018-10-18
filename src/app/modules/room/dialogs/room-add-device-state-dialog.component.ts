@@ -9,7 +9,7 @@ import {StatesModel} from '../../states/shared/states.model';
 export class RoomAddDeviceStateDialogComponent {
 
     @Output() stateUserInput = {name: '', type: '', value: ''};
-    @Output() types: string[] = ['string', 'numeric', 'boolean'];
+    @Output() types: string[] = ['string', 'number', 'boolean'];
 
     constructor(private dialogRef: MatDialogRef<RoomAddDeviceStateDialogComponent>) {
 
@@ -26,7 +26,7 @@ export class RoomAddDeviceStateDialogComponent {
                 state.value = this.stateUserInput.value;
                 break;
             }
-            case 'numeric': {
+            case 'number': {
                 state.value = parseFloat(this.stateUserInput.value);
                 break;
             }

@@ -1,5 +1,6 @@
 export interface StatesModel {
     name: string;
-    value: any;
+    value: string | number | boolean | null ;
+    type?: string;
 }
 
