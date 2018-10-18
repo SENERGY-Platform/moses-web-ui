@@ -12,11 +12,12 @@
                     <textarea [rows]="3" matInput
                               placeholder="Code" [(ngModel)]="changeRoutine.code" [ngModelOptions]="{standalone: true}"></textarea>
                 </mat-form-field>
-                <mat-form-field color="accent" style="width: 100%">
+                <mat-form-field color="accent" fxFill>
                     <input class="right-align" type="number" matInput placeholder="Interval" [(ngModel)]="changeRoutine.interval" [ngModelOptions]="{standalone: true}">
                     <div matSuffix>s</div>
                 </mat-form-field>
                 <button mat-icon-button (click)="delete(i)" color="accent" matTooltip="Delete change routine">
+                    <mat-icon>delete</mat-icon>
                 </button>
             </div>
         </div>
@@ -25,5 +26,5 @@
 
 <mat-dialog-actions fxLayoutAlign="end center">
     <button class="mat-raised-button color-accent" (click)="close()">Cancel</button>
-    <button class="mat-raised-button mat-accent" (click)="edit()">Edit</button>
+    <button class="mat-raised-button mat-accent" (click)="edit()">Save</button>
 </mat-dialog-actions>

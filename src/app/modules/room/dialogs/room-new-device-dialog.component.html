@@ -1,10 +1,12 @@
 <h2 mat-dialog-title>Create Devices</h2>
 
 <mat-dialog-content>
-    <mat-form-field color="accent" fxFill>
+    <mat-form-field color="accent" fxFill appearance="outline">
+        <mat-label>Name</mat-label>
         <input #input matInput placeholder="Name">
     </mat-form-field>
-    <mat-form-field color="accent" fxFill>
+    <mat-form-field color="accent" fxFill appearance="outline">
+        <mat-label>Device type</mat-label>
         <mat-select placeholder="Device type" [formControl]="selected">
             <mat-option *ngFor="let deviceType of deviceTypes" value="{{deviceType.id}}">{{deviceType.name}}
             </mat-option>
