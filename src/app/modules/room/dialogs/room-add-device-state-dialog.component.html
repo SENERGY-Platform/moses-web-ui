@@ -3,18 +3,26 @@
 <mat-dialog-content>
     <mat-form-field fxFill color="accent" appearance="outline">
         <mat-label>Name</mat-label>
-        <input [(ngModel)]="state.name" matInput placeholder="Name">
+        <input [(ngModel)]="name" matInput placeholder="Name">
     </mat-form-field>
-    <mat-radio-group class="example-radio-group" [(ngModel)]="state.type" fxLayout="column" fxLayoutGap="5px">
+    <mat-radio-group class="example-radio-group" [(ngModel)]="valueType" fxLayout="column" fxLayoutGap="5px">
         <mat-label>Device type</mat-label>
         <mat-radio-button *ngFor="let type of types" [value]="type" fxFill>
             {{type}}
         </mat-radio-button>
     </mat-radio-group>
-    <mat-form-field fxFill color="accent" appearance="outline">
+    <mat-form-field fxFill color="accent" appearance="outline" *ngIf="valueType === 'string'">
         <mat-label>Value</mat-label>
-        <input [(ngModel)]="state.value" matInput placeholder="Value">
+        <input type="text" [(ngModel)]="valueString" matInput placeholder="Value">
     </mat-form-field>
+    <mat-form-field fxFill color="accent" appearance="outline" *ngIf="valueType === 'number'">
+        <mat-label>Value</mat-label>
+        <input type="number" [(ngModel)]="valueNumber" matInput placeholder="Value">
+    </mat-form-field>
+    <div *ngIf="valueType === 'boolean'" fxLayout="column" class="switch-group" fxFill>
+        <mat-slide-toggle class="slide" [(ngModel)]="valueBoolean">{{valueBoolean}}
+        </mat-slide-toggle>
+    </div>
 </mat-dialog-content>
 
 <mat-dialog-actions fxLayoutAlign="end center">

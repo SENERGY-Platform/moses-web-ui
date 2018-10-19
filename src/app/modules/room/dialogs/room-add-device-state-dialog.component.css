@@ -5,3 +5,12 @@
 .example-radio-group {
     margin-bottom: 15px;
 }
+
+.switch-group {
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.slide {
+    margin-left: 5px;
+}

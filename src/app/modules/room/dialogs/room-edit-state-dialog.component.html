@@ -5,9 +5,14 @@
         <div *ngIf="states.length > 0">
             <div *ngFor="let state of states; let i = index">
                 <div fxFlex="90">
-                    <mat-form-field color="accent" appearance="outline" *ngIf="state.type !== 'boolean'" fxFill>
+                    <mat-form-field color="accent" appearance="outline" *ngIf="state.type === 'string'" fxFill>
                         <mat-label>{{state.name}}</mat-label>
-                        <input matInput placeholder="{{state.name}}" [(ngModel)]="state.value"
+                        <input type="text" matInput placeholder="{{state.name}}" [(ngModel)]="state.value"
+                               [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                    <mat-form-field color="accent" appearance="outline" *ngIf="state.type === 'number'" fxFill>
+                        <mat-label>{{state.name}}</mat-label>
+                        <input type="number" matInput placeholder="{{state.name}}" [(ngModel)]="state.value"
                                [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
                     <div *ngIf="state.type === 'boolean'" fxLayout="column" class="switch-group" fxFill>

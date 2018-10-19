@@ -1,7 +1,6 @@
 import {Component, Output} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {StatesModel} from '../../states/shared/states.model';
-import {StatesServices} from '../../states/shared/states.services';
 
 @Component({
     templateUrl: './room-add-device-state-dialog.component.html',
@@ -9,11 +8,15 @@ import {StatesServices} from '../../states/shared/states.services';
 })
 export class RoomAddDeviceStateDialogComponent {
 
-    @Output() state: StatesModel = {name: '', type: '', value: ''};
+
+    @Output() name = '';
+    @Output() valueType = '';
+    @Output() valueString = '';
+    @Output() valueNumber = 0;
+    @Output() valueBoolean = false;
     @Output() types: string[] = ['string', 'number', 'boolean'];
 
-    constructor(private dialogRef: MatDialogRef<RoomAddDeviceStateDialogComponent>,
-                private statesServices: StatesServices) {
+    constructor(private dialogRef: MatDialogRef<RoomAddDeviceStateDialogComponent>) {
 
     }
 
@@ -22,9 +25,23 @@ export class RoomAddDeviceStateDialogComponent {
     }
 
     create(): void {
-        /**  convert value in correct datatype */
-        this.state.value = this.statesServices.convertValue(this.state.type, this.state.value);
-        this.dialogRef.close(this.state);
+        const state: StatesModel = {name: this.name, type: this.valueType, value: ''};
+        switch (this.valueType) {
+            case 'string': {
+                state.value = this.valueString;
+                break;
+            }
+            case 'number': {
+                state.value = this.valueNumber;
+                break;
+            }
+            case 'boolean': {
+                state.value = this.valueBoolean;
+                break;
+            }
+        }
+
+        this.dialogRef.close(state);
     }
 
 }

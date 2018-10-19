@@ -15,10 +15,9 @@
                           [ngModelOptions]="{standalone: true}"></textarea>
             </mat-form-field>
             <mat-form-field color="accent" fxFill appearance="outline">
-                <mat-label>Interval</mat-label>
-                <input class="right-align" type="number" matInput placeholder="Interval"
+                <mat-label>Interval (seconds)</mat-label>
+                <input class="right-align" type="number" matInput placeholder="Interval (s)"
                        [(ngModel)]="service.sensor_interval" [ngModelOptions]="{standalone: true}">
-                <div matSuffix>s</div>
             </mat-form-field>
         </div>
     </div>
