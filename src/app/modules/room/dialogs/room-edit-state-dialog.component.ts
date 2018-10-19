@@ -38,8 +38,10 @@ export class RoomEditStateDialogComponent implements OnInit {
 
     edit(): void {
         if (this.device) {
-            this.device.device.states = this.statesServices.convertArrayToMap(this.states);;
+            console.log(this.states);
+            this.device.device.states = this.statesServices.convertArrayToMap(this.states);
         }
+        console.log(this.device);
         this.dialogRef.close(this.device);
     }
 
@@ -51,7 +53,7 @@ export class RoomEditStateDialogComponent implements OnInit {
                     Object.entries(device.device.states).forEach((states) => {
                         this.states.push({name: states[0], value: states[1], type: typeof states[1]});
                     });
-               this.sortServicesArray();
+                    this.sortServicesArray();
                 }
             }
         });
@@ -59,13 +61,11 @@ export class RoomEditStateDialogComponent implements OnInit {
 
     private sortServicesArray() {
         this.states.sort((a, b) => {
-            if (a.name < b.name) {
-                return -1;
+            if (a.type === b.type) {
+                return (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0;
+            } else {
+                return (a.type > b.type) ? -1 : 1;
             }
-            if (a.name > b.name) {
-                return 1;
-            }
-            return 0;
         });
     }
 }

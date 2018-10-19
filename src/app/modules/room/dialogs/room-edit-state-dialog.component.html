@@ -4,15 +4,22 @@
     <form class="size">
         <div *ngIf="states.length > 0">
             <div *ngFor="let state of states; let i = index">
-                <mat-form-field color="accent" appearance="outline" fxFlex="90">
-                    <mat-label>{{state.name}}</mat-label>
-                    <input matInput
-                           placeholder="{{state.name}}" type="" [(ngModel)]="state.value" [ngModelOptions]="{standalone: true}">
-                </mat-form-field>
-                <button mat-icon-button (click)="delete(i)" fxFlex="10"color="accent" matTooltip="Delete change routine">
+                <div fxFlex="90">
+                    <mat-form-field color="accent" appearance="outline" *ngIf="state.type !== 'boolean'" fxFill>
+                        <mat-label>{{state.name}}</mat-label>
+                        <input matInput placeholder="{{state.name}}" [(ngModel)]="state.value"
+                               [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                    <div *ngIf="state.type === 'boolean'" fxLayout="column" class="switch" fxFill>
+                        <mat-label>{{state.name}}</mat-label>
+                        <mat-slide-toggle [(ngModel)]="state.value" [ngModelOptions]="{standalone: true}">{{state.value}}
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+                <button mat-icon-button (click)="delete(i)" fxFlex="10" color="accent"
+                        matTooltip="Delete change routine">
                     <mat-icon>delete</mat-icon>
                 </button>
-
             </div>
         </div>
     </form>

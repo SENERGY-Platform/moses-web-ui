@@ -9,8 +9,10 @@ import {
     MatGridListModule,
     MatIconModule,
     MatInputModule,
-    MatMenuModule, MatRadioModule,
+    MatMenuModule,
+    MatRadioModule,
     MatSelectModule,
+    MatSlideToggleModule,
     MatTooltipModule
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -43,6 +45,7 @@ const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component:
         ReactiveFormsModule,
         FormsModule,
         MatRadioModule,
+        MatSlideToggleModule,
         RouterModule.forChild([room])],
     declarations: [
         RoomComponent,

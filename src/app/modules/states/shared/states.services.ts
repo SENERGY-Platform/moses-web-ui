@@ -30,10 +30,10 @@ export class StatesServices {
                 break;
             }
             case 'boolean': {
-                if (stateValue === 'true') {
+                if (stateValue === true || stateValue === 'true') {
                     convertedValue = true;
                 }
-                if (stateValue === 'false') {
+                if (stateValue === false || stateValue === 'false') {
                     convertedValue = false;
                 }
                 break;

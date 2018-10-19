@@ -5,3 +5,8 @@
 .right-align {
     text-align: right;
 }
+
+.switch {
+    overflow: hidden;
+    margin-bottom: 5px;
+}
