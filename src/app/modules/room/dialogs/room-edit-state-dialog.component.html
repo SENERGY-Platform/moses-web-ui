@@ -10,9 +10,9 @@
                         <input matInput placeholder="{{state.name}}" [(ngModel)]="state.value"
                                [ngModelOptions]="{standalone: true}">
                     </mat-form-field>
-                    <div *ngIf="state.type === 'boolean'" fxLayout="column" class="switch" fxFill>
+                    <div *ngIf="state.type === 'boolean'" fxLayout="column" class="switch-group" fxFill>
                         <mat-label>{{state.name}}</mat-label>
-                        <mat-slide-toggle [(ngModel)]="state.value" [ngModelOptions]="{standalone: true}">{{state.value}}
+                        <mat-slide-toggle class="slide" [(ngModel)]="state.value" [ngModelOptions]="{standalone: true}">{{state.value}}
                         </mat-slide-toggle>
                     </div>
                 </div>

@@ -6,7 +6,11 @@
     text-align: right;
 }
 
-.switch {
+.switch-group {
     overflow: hidden;
     margin-bottom: 5px;
+}
+
+.slide {
+    margin-left: 5px;
 }
