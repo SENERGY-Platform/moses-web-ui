@@ -1,6 +1,7 @@
 import {Component, Output} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {StatesModel} from '../../states/shared/states.model';
+import {StatesServices} from '../../states/shared/states.services';
 
 @Component({
     templateUrl: './room-add-device-state-dialog.component.html',
@@ -8,10 +9,11 @@ import {StatesModel} from '../../states/shared/states.model';
 })
 export class RoomAddDeviceStateDialogComponent {
 
-    @Output() stateUserInput = {name: '', type: '', value: ''};
+    @Output() state: StatesModel = {name: '', type: '', value: ''};
     @Output() types: string[] = ['string', 'number', 'boolean'];
 
-    constructor(private dialogRef: MatDialogRef<RoomAddDeviceStateDialogComponent>) {
+    constructor(private dialogRef: MatDialogRef<RoomAddDeviceStateDialogComponent>,
+                private statesServices: StatesServices) {
 
     }
 
@@ -20,28 +22,9 @@ export class RoomAddDeviceStateDialogComponent {
     }
 
     create(): void {
-        const state: StatesModel = {name: this.stateUserInput.name, value: null};
-        switch (this.stateUserInput.type) {
-            case 'string': {
-                state.value = this.stateUserInput.value;
-                break;
-            }
-            case 'number': {
-                state.value = parseFloat(this.stateUserInput.value);
-                break;
-            }
-            case 'boolean': {
-                if (this.stateUserInput.value === 'true') {
-                    state.value = true;
-                }
-
-                if (this.stateUserInput.value === 'false') {
-                    state.value = false;
-                }
-                break;
-            }
-        }
-        this.dialogRef.close(state);
+        /**  convert value in correct datatype */
+        this.state.value = this.statesServices.convertValue(this.state.type, this.state.value);
+        this.dialogRef.close(this.state);
     }
 
 }

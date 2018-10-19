@@ -22,8 +22,8 @@ import {ChangeRequestModel} from '../../change-routines/shared/change-request.mo
 import {ChangeRoutineService} from '../../change-routines/shared/change-routine.service';
 import {RoomEditChangeRoutineDialogComponent} from '../dialogs/room-edit-change-routine-dialog.component';
 import {RoomAddDeviceStateDialogComponent} from '../dialogs/room-add-device-state-dialog.component';
-import {StatesModel} from '../../states/shared/states.model';
 import {RoomEditStateDialogComponent} from '../dialogs/room-edit-state-dialog.component';
+import {StatesModel} from '../../states/shared/states.model';
 
 @Injectable({
     providedIn: 'root'
@@ -99,7 +99,7 @@ export class RoomService {
                     device.states = {};
                 }
                 device.states[state.name] = state.value;
-                this.updateDevice(device);
+               this.updateDevice(device);
             }
         });
     }

@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {DeviceService} from '../../device/shared/device.service';
 import {DeviceResponseModel} from '../../device/shared/deviceResponse.model';
 import {StatesModel} from '../../states/shared/states.model';
-import {StatesMapModel} from '../../states/shared/states-map.model';
+import {StatesServices} from '../../states/shared/states.services';
 
 
 @Component({
@@ -19,6 +19,7 @@ export class RoomEditStateDialogComponent implements OnInit {
 
     constructor(private dialogRef: MatDialogRef<RoomEditStateDialogComponent>,
                 private deviceService: DeviceService,
+                private statesServices: StatesServices,
                 @Inject(MAT_DIALOG_DATA) deviceId: string) {
         this.deviceId = deviceId;
     }
@@ -36,30 +37,8 @@ export class RoomEditStateDialogComponent implements OnInit {
     }
 
     edit(): void {
-        const statesMap: StatesMapModel = {};
-        this.states.forEach((state: StatesModel) => {
-            switch (state.type) {
-                case 'string': {
-                    statesMap[state.name] = state.value;
-                    break;
-                }
-                case 'number': {
-                    statesMap[state.name] = parseFloat(<string>state.value);
-                    break;
-                }
-                case 'boolean': {
-                    if (state.value === 'true') {
-                        statesMap[state.name] = true;
-                    }
-                    if (state.value === 'false') {
-                        statesMap[state.name] = false;
-                    }
-                    break;
-                }
-            }
-        });
         if (this.device) {
-            this.device.device.states = statesMap;
+            this.device.device.states = this.statesServices.convertArrayToMap(this.states);;
         }
         this.dialogRef.close(this.device);
     }
