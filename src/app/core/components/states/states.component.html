@@ -1,3 +1,59 @@
-<div>
-<div>states works!</div>
+<h3 class="layout-margin">Room State</h3>
+<div class="layout-margin" fxLayout="row">
+    <mat-grid-list cols="{{4}}" rowHeight="100px" gutterSize="16px" fxFlex="90">
+        <mat-grid-tile class="mat-elevation-z1">
+            <div class="widget-icon-blue" fxFill fxFlex="30" fxLayoutAlign="center center">
+                <mat-icon color="accent" class="mat-48">invert_colors</mat-icon>
+            </div>
+            <div fxFill fxFlex="70" fxLayout="column">
+                <h2 class="states-header">Humidity: {{value}}%</h2>
+                <mat-slider class="slider"
+                            [max]="100"
+                            [min]="0"
+                            [step]="1"
+                            [thumbLabel]="true"
+                            [(ngModel)]="value"
+                            [vertical]="false">
+                </mat-slider>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="mat-elevation-z1">
+            <div class="widget-icon-blue" fxFill fxFlex="30" fxLayoutAlign="center center">
+                <mat-icon color="accent" class="mat-48">wb_sunny</mat-icon>
+            </div>
+            <div fxFill fxFlex="70" fxLayout="column">
+                <h2 class="states-header">Temperature: {{value}}°</h2>
+                <mat-slider class="slider"
+                            [max]="100"
+                            [min]="0"
+                            [step]="1"
+                            [thumbLabel]="true"
+                            [(ngModel)]="value"
+                            [vertical]="false">
+                </mat-slider>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="mat-elevation-z1">
+            <div class="widget-icon-blue" fxFill fxFlex="30" fxLayoutAlign="center center">
+                <mat-icon color="accent" class="mat-48">brightness_medium</mat-icon>
+            </div>
+            <div fxFill fxFlex="70" fxLayout="column">
+                <h2 class="states-header">Brightness: {{value}} lux</h2>
+                <mat-slider class="slider"
+                            [max]="100"
+                            [min]="0"
+                            [step]="1"
+                            [thumbLabel]="true"
+                            [(ngModel)]="value"
+                            [vertical]="false">
+                </mat-slider>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <div fxFlex="10" fxLayoutAlign="end start">
+        <button mat-icon-button color="accent" (click)="deleteRoom()" matTooltip="Delete room">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
 </div>

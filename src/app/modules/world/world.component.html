@@ -1,11 +1,7 @@
 <div>
-  <div>This is {{world.name}} !</div>
-  <div fxLayout="row" fxLayoutAlign="end center">
-    <button mat-icon-button color="accent" (click)="delete()"  matTooltip="Delete world">
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
-  <button mat-fab class="fab" (click)="add()" matTooltip="Create a room">
-    <mat-icon>add</mat-icon>
-  </button>
+    <div>This is {{world.name}} !</div>
+    <moses-states></moses-states>
 </div>
+<button mat-fab class="fab" (click)="add()" matTooltip="Create a room">
+    <mat-icon>add</mat-icon>
+</button>

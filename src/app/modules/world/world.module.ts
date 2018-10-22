@@ -13,6 +13,7 @@ import {
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {WorldCreateRoomDialogComponent} from './dialogs/world-create-room-dialog.component';
+import {CoreModule} from '../../core/core.module';
 
 const world = {path: 'world/:id', pathMatch: 'full', component: WorldComponent, data: {header: 'World'}};
 
@@ -26,6 +27,7 @@ const world = {path: 'world/:id', pathMatch: 'full', component: WorldComponent, 
         MatButtonModule,
         MatTooltipModule,
         MatInputModule,
+        CoreModule,
         RouterModule.forChild([world])],
     declarations: [
         WorldComponent,
