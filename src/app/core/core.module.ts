@@ -16,6 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
 import {StatesComponent} from './components/states/states.component';
 import {FormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
     imports: [
@@ -29,7 +30,7 @@ import {FormsModule} from '@angular/forms';
         MatGridListModule,
         MatSliderModule,
         FormsModule,
-
+        CommonModule,
     ],
     declarations: [
         ToolbarComponent,

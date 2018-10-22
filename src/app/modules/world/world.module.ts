@@ -14,6 +14,7 @@ import {
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {WorldCreateRoomDialogComponent} from './dialogs/world-create-room-dialog.component';
 import {CoreModule} from '../../core/core.module';
+import {CommonModule} from '@angular/common';
 
 const world = {path: 'world/:id', pathMatch: 'full', component: WorldComponent, data: {header: 'World'}};
 
@@ -28,6 +29,7 @@ const world = {path: 'world/:id', pathMatch: 'full', component: WorldComponent, 
         MatTooltipModule,
         MatInputModule,
         CoreModule,
+        CommonModule,
         RouterModule.forChild([world])],
     declarations: [
         WorldComponent,

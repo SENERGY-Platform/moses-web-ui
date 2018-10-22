@@ -1,6 +1,5 @@
-<div>
-    <moses-states [type]="'World'" [world]="world"></moses-states>
-</div>
+<moses-states *ngIf="ready" [type]="'World'" [world]="world"></moses-states>
+
 <button mat-fab class="fab" (click)="add()" matTooltip="Create a room">
     <mat-icon>add</mat-icon>
 </button>

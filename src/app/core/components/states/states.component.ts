@@ -4,6 +4,7 @@ import {RoomService} from '../../../modules/room/shared/room.service';
 import {WorldModel} from '../../../modules/world/shared/world.model';
 import {WorldService} from '../../../modules/world/shared/world.service';
 import {ResponsiveService} from '../../services/responsive.service';
+import {StatesMapModel} from './shared/states-map.model';
 
 const grid = new Map([
     ['xs', 1],
@@ -21,17 +22,20 @@ const grid = new Map([
 export class StatesComponent implements OnInit {
 
     @Input() type = '';
-    @Input() room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null}};
-    @Input() world: WorldModel = {id: '', name: '', rooms: null};
+    @Input() room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null}};
+    @Input() world: WorldModel = {id: '', name: '', rooms: null, states: null};
     @Output() gridCols = 0;
+    @Output() stateMap: StatesMapModel = {};
 
     constructor(private roomService: RoomService,
                 private worldService: WorldService,
                 private responsiveService: ResponsiveService) {
     }
 
+
     ngOnInit() {
         this.initGridCols();
+        this.initStates();
     }
 
     delete(): void {
@@ -55,5 +59,17 @@ export class StatesComponent implements OnInit {
         });
     }
 
+    private initStates(): void {
+        switch (this.type) {
+            case 'Room': {
+                this.stateMap = this.room.room.states || {};
+                break;
+            }
+            case 'World': {
+                this.stateMap = this.world.states || {};
+                break;
+            }
+        }
+    }
 
 }

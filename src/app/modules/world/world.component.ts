@@ -10,7 +10,8 @@ import {WorldModel} from './shared/world.model';
 })
 export class WorldComponent implements OnInit {
 
-    @Output() world: WorldModel = {id: '', name: '', rooms: null};
+    @Output() ready = false;
+    @Output() world: WorldModel = {id: '', name: '', rooms: null, states: null};
 
     constructor(private activatedRoute: ActivatedRoute,
                 private worldService: WorldService) {
@@ -30,6 +31,7 @@ export class WorldComponent implements OnInit {
                 this.worldService.get(params['id']).subscribe((world: WorldModel | null) => {
                     if (world !== null) {
                         this.world = world ;
+                        this.ready = true;
                     }
                 });
             }
