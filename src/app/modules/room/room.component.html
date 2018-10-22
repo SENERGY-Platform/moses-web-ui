@@ -14,11 +14,14 @@
                 </div>
                 <mat-grid-tile-footer>
                     <div fxLayout="row" fxLayout="row" fxLayoutAlign="start center" fxFill>
-                        <div fxFlex="70" fxLayout="row">
+                        <div fxFlex="65" fxLayout="row">
                             <div class="truncate" matTooltip="{{device.name}}">{{device.name}}</div>
-                            <mat-slide-toggle #slide (change)="slideChange(device, slide.checked)" [checked]="device.states['level'] === 'on'"></mat-slide-toggle>
                         </div>
-                        <div fxFlex="30" fxLayout="row" fxLayoutAlign="end center">
+                        <div fxFlex="15" fxLayout="row" fxLayoutAlign="end center">
+                            <mat-slide-toggle #slide (change)="slideChange(device, slide.checked)"
+                                              [checked]="device.states['level'] === 'on'"></mat-slide-toggle>
+                        </div>
+                        <div fxFlex="20" fxLayout="row" fxLayoutAlign="end center">
                             <button mat-icon-button [matMenuTriggerFor]="menu" color="accent">
                                 <mat-icon>more_vert</mat-icon>
                             </button>
