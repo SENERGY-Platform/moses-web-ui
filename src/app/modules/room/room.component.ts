@@ -4,6 +4,15 @@ import {RoomService} from './shared/room.service';
 import {RoomResponseModel} from './shared/roomResponse.model';
 import {DeviceModel} from '../device/shared/device.model';
 import {environment} from '../../../environments/environment';
+import {ResponsiveService} from '../../core/services/responsive.service';
+
+const grid = new Map([
+    ['xs', 1],
+    ['sm', 2],
+    ['md', 3],
+    ['lg', 4],
+    ['xl', 6],
+]);
 
 @Component({
     selector: 'moses-room',
@@ -16,23 +25,22 @@ export class RoomComponent implements OnInit {
     @Output() devices: DeviceModel[] = [];
     @Output() value = 50;
     @Output() switchTypeId = environment.zwaySwitchBinaryTypeId;
+    @Output() gridCols = 0;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private roomService: RoomService,
+                private responsiveService: ResponsiveService,
                 ) {
     }
 
     ngOnInit() {
         this.initRoom();
         this.initDevices();
+        this.initGridCols();
     }
 
     add() {
         this.roomService.openDeviceCreateDialog(this.room);
-    }
-
-    deleteRoom() {
-        this.roomService.openRoomDeleteDialog(this.room);
     }
 
     deleteDevice(deviceId: string) {
@@ -81,5 +89,12 @@ export class RoomComponent implements OnInit {
                 });
             }
         );
+    }
+
+    private initGridCols(): void {
+        this.gridCols = grid.get(this.responsiveService.getActiveMqAlias()) || 0;
+        this.responsiveService.observeMqAlias().subscribe((mqAlias) => {
+            this.gridCols = grid.get(mqAlias) || 0;
+        });
     }
 }

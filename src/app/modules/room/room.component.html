@@ -2,7 +2,7 @@
     <moses-states [type]="'Room'" [room]="room"></moses-states>
     <h3 class="layout-margin">Devices</h3>
     <div class="layout-margin" fxLayout="column">
-        <mat-grid-list cols="{{6}}" rowHeight="250px" gutterSize="16px"
+        <mat-grid-list cols="{{gridCols}}" rowHeight="250px" gutterSize="16px"
                        *ngIf="devices.length > 0">
             <mat-grid-tile class="mat-elevation-z1" *ngFor="let device of devices">
                 <div class="background" fxFill>
