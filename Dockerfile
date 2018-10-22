@@ -12,8 +12,7 @@ RUN $(npm bin)/ng build --prod
 ## STAGE 2: Run nginx to serve application ##
 FROM nginx
 
-COPY --from=builder /workspace/dist/moses-web-ui/* /usr/share/nginx/html/
-COPY --from=builder /workspace/dist/moses-web-ui/src/ /usr/share/nginx/html/src/
+COPY --from=builder /workspace/dist/moses-web-ui/ /usr/share/nginx/html/
 COPY --from=builder /workspace/dist/moses-web-ui/assets/nginx-custom.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
