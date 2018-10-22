@@ -24,10 +24,6 @@ export class WorldComponent implements OnInit {
         this.worldService.openCreateRoomDialog(this.world);
     }
 
-    delete() {
-        this.worldService.openDeleteDialog(this.world);
-    }
-
     private init() {
         this.activatedRoute.params.subscribe(
             (params: Params) => {

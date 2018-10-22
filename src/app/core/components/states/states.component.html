@@ -1,4 +1,4 @@
-<h3 class="layout-margin">Room State</h3>
+<h3 class="layout-margin">{{type}} State</h3>
 <div class="layout-margin" fxLayout="row">
     <mat-grid-list cols="{{4}}" rowHeight="100px" gutterSize="16px" fxFlex="90">
         <mat-grid-tile class="mat-elevation-z1">
@@ -52,7 +52,7 @@
     </mat-grid-list>
 
     <div fxFlex="10" fxLayoutAlign="end start">
-        <button mat-icon-button color="accent" (click)="deleteRoom()" matTooltip="Delete room">
+        <button mat-icon-button color="accent" (click)="delete()" matTooltip="Delete room">
             <mat-icon>delete</mat-icon>
         </button>
     </div>
