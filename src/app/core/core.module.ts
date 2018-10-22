@@ -7,6 +7,7 @@ import {ToolbarComponent} from './components/toolbar/toolbar.component';
 import {SidenavComponent} from './components/sidenav/sidenav.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterModule} from '@angular/router';
+import {StatesComponent} from './components/states/states.component';
 
 @NgModule({
     imports: [
@@ -21,11 +22,13 @@ import {RouterModule} from '@angular/router';
     ],
     declarations: [
         ToolbarComponent,
-        SidenavComponent
+        SidenavComponent,
+        StatesComponent,
     ],
     exports: [
         ToolbarComponent,
-        SidenavComponent
+        SidenavComponent,
+        StatesComponent
     ],
 
 })

@@ -15,7 +15,7 @@ mat-grid-tile-footer {
     color: black !important;
 }
 
-mat-grid-list {
+mat-grid-list:last-child {
     margin-bottom: 100px;
 }
 
@@ -31,4 +31,23 @@ mat-grid-list {
     margin: auto;
     display: block;
     position: relative;
+}
+
+.mat-48 {
+    height: 48px;
+    width: 48px;
+    font-size: 48px;
+}
+
+.states-header {
+    margin-top: 8px;
+    margin-left: 8px;
+    margin-bottom: 0px;
+}
+
+.slider {
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-right: 16px;
 }

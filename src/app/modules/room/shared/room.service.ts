@@ -23,7 +23,7 @@ import {ChangeRoutineService} from '../../change-routines/shared/change-routine.
 import {RoomEditChangeRoutineDialogComponent} from '../dialogs/room-edit-change-routine-dialog.component';
 import {RoomAddDeviceStateDialogComponent} from '../dialogs/room-add-device-state-dialog.component';
 import {RoomEditStateDialogComponent} from '../dialogs/room-edit-state-dialog.component';
-import {StatesModel} from '../../states/shared/states.model';
+import {StatesModel} from '../../../core/components/states/shared/states.model';
 import {ServicesModel} from '../../services/shared/services.model';
 import {ServicesService} from '../../services/shared/services.service';
 

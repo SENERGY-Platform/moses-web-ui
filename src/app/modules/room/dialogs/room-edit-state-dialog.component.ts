@@ -3,8 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 import {DeviceService} from '../../device/shared/device.service';
 import {DeviceResponseModel} from '../../device/shared/deviceResponse.model';
-import {StatesModel} from '../../states/shared/states.model';
-import {StatesServices} from '../../states/shared/states.services';
+import {StatesModel} from '../../../core/components/states/shared/states.model';
+import {StatesServices} from '../../../core/components/states/shared/states.services';
 
 
 @Component({

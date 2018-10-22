@@ -3,9 +3,10 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {RoomService} from './shared/room.service';
 import {RoomResponseModel} from './shared/roomResponse.model';
 import {DeviceModel} from '../device/shared/device.model';
+import {environment} from '../../../environments/environment';
 
 @Component({
-    selector: 'moses-home',
+    selector: 'moses-room',
     templateUrl: './room.component.html',
     styleUrls: ['./room.component.css']
 })
@@ -13,6 +14,8 @@ export class RoomComponent implements OnInit {
 
     @Output() room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null}};
     @Output() devices: DeviceModel[] = [];
+    @Output() value = 50;
+    @Output() switchTypeId = environment.zwaySwitchBinaryTypeId;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private roomService: RoomService,

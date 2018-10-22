@@ -11,7 +11,7 @@ import {
     MatInputModule,
     MatMenuModule,
     MatRadioModule,
-    MatSelectModule,
+    MatSelectModule, MatSliderModule,
     MatSlideToggleModule,
     MatTooltipModule
 } from '@angular/material';
@@ -25,6 +25,7 @@ import {RoomAddChangeRoutineDialogComponent} from './dialogs/room-add-change-rou
 import {RoomEditChangeRoutineDialogComponent} from './dialogs/room-edit-change-routine-dialog.component';
 import {RoomAddDeviceStateDialogComponent} from './dialogs/room-add-device-state-dialog.component';
 import {RoomEditStateDialogComponent} from './dialogs/room-edit-state-dialog.component';
+import {CoreModule} from '../../core/core.module';
 
 const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component: RoomComponent, data: {header: 'Room'}};
 
@@ -46,6 +47,8 @@ const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component:
         FormsModule,
         MatRadioModule,
         MatSlideToggleModule,
+        MatSliderModule,
+        CoreModule,
         RouterModule.forChild([room])],
     declarations: [
         RoomComponent,

@@ -1,6 +1,6 @@
 import {Component, Output} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
-import {StatesModel} from '../../states/shared/states.model';
+import {StatesModel} from '../../../core/components/states/shared/states.model';
 
 @Component({
     templateUrl: './room-add-device-state-dialog.component.html',

@@ -4,7 +4,7 @@ import {WorldService} from './shared/world.service';
 import {WorldModel} from './shared/world.model';
 
 @Component({
-    selector: 'moses-home',
+    selector: 'moses-world',
     templateUrl: './world.component.html',
     styleUrls: ['./world.component.css']
 })
