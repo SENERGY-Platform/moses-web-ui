@@ -24,6 +24,8 @@ import {RoomEditChangeRoutineDialogComponent} from '../dialogs/room-edit-change-
 import {RoomAddDeviceStateDialogComponent} from '../dialogs/room-add-device-state-dialog.component';
 import {RoomEditStateDialogComponent} from '../dialogs/room-edit-state-dialog.component';
 import {StatesModel} from '../../states/shared/states.model';
+import {ServicesModel} from '../../services/shared/services.model';
+import {ServicesService} from '../../services/shared/services.service';
 
 @Injectable({
     providedIn: 'root'
@@ -40,7 +42,8 @@ export class RoomService {
                 private errorHandlerService: ErrorHandlerService,
                 private sidenavService: SidenavService,
                 private deviceService: DeviceService,
-                private changeRoutineService: ChangeRoutineService) {
+                private changeRoutineService: ChangeRoutineService,
+                private servicesService: ServicesService) {
     }
 
     get(roomId: string): Observable<RoomResponseModel | null> {
@@ -167,7 +170,9 @@ export class RoomService {
         const editDialogRef = this.dialog.open(RoomEditChangeRoutineDialogComponent, dialogConfig);
 
         editDialogRef.afterClosed().subscribe((device: DeviceResponseModel) => {
-            this.updateDevice(device.device);
+            if (device !== undefined) {
+                this.updateDevice(device.device);
+            }
         });
     }
 
@@ -175,6 +180,15 @@ export class RoomService {
         this.get(room.room.id).subscribe((roomResp: (RoomResponseModel | null)) => {
             if (roomResp !== null) {
                 this.devices.next(this.convertToDevicesArray(roomResp));
+            }
+        });
+    }
+
+    slideChangeStartServices(device: DeviceModel, slide: boolean): void {
+        const key = slide ? 'on' : 'off';
+        Object.values(device.services).forEach((service: ServicesModel) => {
+            if (service.name === key) {
+                this.servicesService.runService(service.id).subscribe();
             }
         });
     }

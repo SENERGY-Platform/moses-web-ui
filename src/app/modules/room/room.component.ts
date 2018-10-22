@@ -56,6 +56,10 @@ export class RoomComponent implements OnInit {
         this.roomService.openStateEditDialog(deviceId);
     }
 
+    slideChange(device: DeviceModel, slide: boolean) {
+        this.roomService.slideChangeStartServices(device, slide);
+    }
+
     private initDevices() {
         this.roomService.currentDevices.subscribe((devices: DeviceModel[]) => {
             this.devices = devices;
