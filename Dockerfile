@@ -16,4 +16,4 @@ COPY --from=builder /workspace/dist/moses-web-ui/ /usr/share/nginx/html/
 
 COPY --from=builder /nginx-custom.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 80 
+EXPOSE 80
