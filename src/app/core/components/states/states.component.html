@@ -13,7 +13,7 @@
                         <div fxFill fxFlex="70" fxLayout="column">
                             <h2 class="states-header">Humidity: {{state.value}}%</h2>
                             <mat-slider (change)="changed(state.key, state.value)" class="slider"
-                                        [(value)]="state.value">
+                                        [value]="state.value">
                             </mat-slider>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                                         [max]="60"
                                         [min]="-30"
                                         [step]="0.1"
-                                        [(value)]="state.value">
+                                        [value]="state.value">
                             </mat-slider>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                                         [max]="100000"
                                         [min]="0"
                                         [step]="1"
-                                        [(value)]="state.value">
+                                        [value]="state.value">
                             </mat-slider>
                         </div>
                     </div>
