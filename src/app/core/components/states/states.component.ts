@@ -52,6 +52,23 @@ export class StatesComponent implements OnInit {
         }
     }
 
+    changed(key: string, value: number): void {
+        const stateUpdate = this.stateMap;
+        stateUpdate[key] = value;
+        switch (this.type) {
+            case 'Room': {
+                this.room.room.states = stateUpdate;
+                this.roomService.update(this.room.room).subscribe();
+                break;
+            }
+            case 'World': {
+                this.world.states = stateUpdate;
+                this.worldService.update(this.world).subscribe();
+                break;
+            }
+        }
+    }
+
     private initGridCols(): void {
         this.gridCols = grid.get(this.responsiveService.getActiveMqAlias()) || 0;
         this.responsiveService.observeMqAlias().subscribe((mqAlias) => {
@@ -62,11 +79,21 @@ export class StatesComponent implements OnInit {
     private initStates(): void {
         switch (this.type) {
             case 'Room': {
-                this.stateMap = this.room.room.states || {};
+                this.roomService.get(this.room.room.id).subscribe((room: RoomResponseModel | null) => {
+                    if (room !== null) {
+                        this.room = room;
+                        this.stateMap = room.room.states || {};
+                    }
+                });
                 break;
             }
             case 'World': {
-                this.stateMap = this.world.states || {};
+                this.worldService.get(this.world.id).subscribe((world: WorldModel | null) => {
+                    if (world !== null) {
+                        this.world = world;
+                        this.stateMap = world.states || {};
+                    }
+                });
                 break;
             }
         }

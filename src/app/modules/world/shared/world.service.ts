@@ -37,6 +37,12 @@ export class WorldService {
         );
     }
 
+    update(world: WorldModel) {
+        return this.http.put(environment.mosesUrl + '/world', world).pipe(
+            catchError(this.errorHandlerService.handleError(WorldService.name, 'update', null))
+        );
+    }
+
     openDeleteDialog(world: WorldModel) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;

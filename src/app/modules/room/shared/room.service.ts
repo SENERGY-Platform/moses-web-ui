@@ -26,6 +26,7 @@ import {RoomEditStateDialogComponent} from '../dialogs/room-edit-state-dialog.co
 import {StatesModel} from '../../../core/components/states/shared/states.model';
 import {ServicesModel} from '../../services/shared/services.model';
 import {ServicesService} from '../../services/shared/services.service';
+import {RoomModel} from './room.model';
 
 @Injectable({
     providedIn: 'root'
@@ -55,6 +56,12 @@ export class RoomService {
     create(world: WorldModel, name: string): Observable<RoomResponseModel | null> {
         return this.http.post<RoomResponseModel>(environment.mosesUrl + '/room', {'world': world.id, 'name': name}).pipe(
             catchError(this.errorHandlerService.handleError(RoomService.name, 'create', null))
+        );
+    }
+
+    update(room: RoomModel) {
+        return this.http.put(environment.mosesUrl + '/room', room).pipe(
+            catchError(this.errorHandlerService.handleError(RoomService.name, 'update', null))
         );
     }
 
