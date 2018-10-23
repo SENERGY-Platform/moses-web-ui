@@ -36,6 +36,9 @@ export class StatesComponent implements OnInit {
     ngOnInit() {
         this.initGridCols();
         this.initStates();
+        setInterval(() => {
+            this.initStates();
+        }, 30000);
     }
 
     delete(): void {
