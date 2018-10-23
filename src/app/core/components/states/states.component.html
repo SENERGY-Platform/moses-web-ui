@@ -1,63 +1,61 @@
-<h3 class="layout-margin">{{type}} State</h3>
+<div *ngIf="ready">
+    <h3 class="layout-margin">{{type}} State</h3>
 
-<div class="layout-margin" fxLayout="row">
-    <mat-grid-list cols="{{gridCols}}" rowHeight="100px" gutterSize="16px" fxFlex="90">
-        <mat-grid-tile class="mat-elevation-z1" *ngFor="let state of stateMap | keyvalue">
+    <div class="layout-margin" fxLayout="row">
+        <mat-grid-list cols="{{gridCols}}" rowHeight="100px" gutterSize="16px" fxFlex="90">
+            <mat-grid-tile class="mat-elevation-z1" *ngFor="let state of stateMap | keyvalue">
 
-            <div [ngSwitch]="state.key" fxFill>
-                <div *ngSwitchCase="'humidity'">
-                    <div fxFlex="30" fxLayoutAlign="center center">
-                        <mat-icon color="accent" class="mat-48">invert_colors</mat-icon>
+                <div [ngSwitch]="state.key" fxFill>
+                    <div *ngSwitchCase="'humidity'">
+                        <div fxFlex="30" fxLayoutAlign="center center">
+                            <mat-icon color="accent" class="mat-48">invert_colors</mat-icon>
+                        </div>
+                        <div fxFill fxFlex="70" fxLayout="column">
+                            <h2 class="states-header">Humidity: {{state.value}}%</h2>
+                            <mat-slider (change)="changed(state.key, state.value)" class="slider"
+                                        [(value)]="state.value">
+                            </mat-slider>
+                        </div>
                     </div>
-                    <div fxFill fxFlex="70" fxLayout="column">
-                        <h2 class="states-header">Humidity: {{state.value}}%</h2>
-                        <mat-slider (change)="changed(state.key, state.value)" class="slider"
 
-                                    [(value)]="state.value"
-                                    >
-                        </mat-slider>
+                    <div *ngSwitchCase="'temperature'">
+                        <div fxFlex="30" fxLayoutAlign="center center">
+                            <mat-icon color="accent" class="mat-48">wb_sunny</mat-icon>
+                        </div>
+                        <div fxFill fxFlex="70" fxLayout="column">
+                            <h2 class="states-header">Temperature: {{state.value}}°</h2>
+                            <mat-slider (change)="changed(state.key, state.value)" class="slider"
+                                        [max]="60"
+                                        [min]="-30"
+                                        [step]="0.1"
+                                        [(value)]="state.value">
+                            </mat-slider>
+                        </div>
                     </div>
-                </div>
 
-                <div *ngSwitchCase="'temperature'">
-                    <div fxFlex="30" fxLayoutAlign="center center">
-                        <mat-icon color="accent" class="mat-48">wb_sunny</mat-icon>
-                    </div>
-                    <div fxFill fxFlex="70" fxLayout="column">
-                        <h2 class="states-header">Temperature: {{state.value}}°</h2>
-                        <mat-slider (change)="changed(state.key, state.value)" class="slider"
-                                    [max]="60"
-                                    [min]="-30"
-                                    [step]="0.1"
-                                    [(value)]="state.value"
-                                    >
-                        </mat-slider>
-                    </div>
-                </div>
-
-                <div *ngSwitchCase="'lux'">
-                    <div fxFlex="30" fxLayoutAlign="center center">
-                        <mat-icon color="accent" class="mat-48">brightness_medium</mat-icon>
-                    </div>
-                    <div fxFill fxFlex="70" fxLayout="column">
-                        <h2 class="states-header">Brightness: {{state.value}} lux</h2>
-                        <mat-slider (change)="changed(state.key, state.value)" class="slider"
-                                    [max]="100000"
-                                    [min]="0"
-                                    [step]="1"
-                                    [(value)]="state.value"
-                                    >
-                        </mat-slider>
+                    <div *ngSwitchCase="'lux'">
+                        <div fxFlex="30" fxLayoutAlign="center center">
+                            <mat-icon color="accent" class="mat-48">brightness_medium</mat-icon>
+                        </div>
+                        <div fxFill fxFlex="70" fxLayout="column">
+                            <h2 class="states-header">Brightness: {{state.value}} lux</h2>
+                            <mat-slider (change)="changed(state.key, state.value)" class="slider"
+                                        [max]="100000"
+                                        [min]="0"
+                                        [step]="1"
+                                        [(value)]="state.value">
+                            </mat-slider>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </mat-grid-tile>
-    </mat-grid-list>
+            </mat-grid-tile>
+        </mat-grid-list>
 
-    <div fxFlex="10" fxLayoutAlign="end start">
-        <button mat-icon-button color="accent" (click)="delete()" matTooltip="Delete room">
-            <mat-icon>delete</mat-icon>
-        </button>
+        <div fxFlex="10" fxLayoutAlign="end start">
+            <button mat-icon-button color="accent" (click)="delete()" matTooltip="Delete {{type}}">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
     </div>
 </div>

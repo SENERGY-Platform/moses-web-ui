@@ -16,7 +16,7 @@ import {WorldCreateRoomDialogComponent} from './dialogs/world-create-room-dialog
 import {CoreModule} from '../../core/core.module';
 import {CommonModule} from '@angular/common';
 
-const world = {path: 'world/:id', pathMatch: 'full', component: WorldComponent, data: {header: 'World'}};
+const world = {path: 'world/:worldid', pathMatch: 'full', component: WorldComponent, data: {header: 'World'}};
 
 @NgModule({
     imports: [

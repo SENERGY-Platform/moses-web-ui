@@ -5,6 +5,7 @@ import {WorldModel} from '../../../modules/world/shared/world.model';
 import {WorldService} from '../../../modules/world/shared/world.service';
 import {ResponsiveService} from '../../services/responsive.service';
 import {StatesMapModel} from './shared/states-map.model';
+import {ActivatedRoute, Params} from '@angular/router';
 
 const grid = new Map([
     ['xs', 1],
@@ -26,19 +27,18 @@ export class StatesComponent implements OnInit {
     @Input() world: WorldModel = {id: '', name: '', rooms: null, states: null};
     @Output() gridCols = 0;
     @Output() stateMap: StatesMapModel = {};
+    @Output() ready = false;
 
     constructor(private roomService: RoomService,
                 private worldService: WorldService,
-                private responsiveService: ResponsiveService) {
+                private responsiveService: ResponsiveService,
+                private activatedRoute: ActivatedRoute) {
     }
 
 
     ngOnInit() {
         this.initGridCols();
         this.initStates();
-        setInterval(() => {
-            this.initStates();
-        }, 30000);
     }
 
     delete(): void {
@@ -48,7 +48,6 @@ export class StatesComponent implements OnInit {
                 break;
             }
             case 'World': {
-                console.log(this.world);
                 this.worldService.openDeleteDialog(this.world);
                 break;
             }
@@ -80,26 +79,36 @@ export class StatesComponent implements OnInit {
     }
 
     private initStates(): void {
-        switch (this.type) {
-            case 'Room': {
-                this.roomService.get(this.room.room.id).subscribe((room: RoomResponseModel | null) => {
-                    if (room !== null) {
-                        this.room = room;
-                        this.stateMap = room.room.states || {};
-                    }
-                });
-                break;
-            }
-            case 'World': {
-                this.worldService.get(this.world.id).subscribe((world: WorldModel | null) => {
+        this.activatedRoute.params.subscribe(
+            (params: Params) => {
+                const roomId = params['roomid'];
+                const worldId = params['worldid'];
+                this.getStateMap(roomId, worldId);
+            });
+
+    }
+
+    private getStateMap(roomId: string, worldId: string) {
+        if (roomId !== undefined) {
+          this.roomService.get(roomId).subscribe((room: RoomResponseModel | null) => {
+                if (room !== null) {
+                    this.room = room;
+                    this.stateMap = room.room.states || {};
+                    this.type = 'Room';
+                    this.ready = true;
+                }
+            });
+        } else {
+            if (worldId !== undefined) {
+                this.worldService.get(worldId).subscribe((world: WorldModel | null) => {
                     if (world !== null) {
                         this.world = world;
                         this.stateMap = world.states || {};
+                        this.type = 'World';
+                        this.ready = true;
                     }
                 });
-                break;
             }
         }
     }
-
 }

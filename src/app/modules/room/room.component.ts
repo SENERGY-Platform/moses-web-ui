@@ -26,7 +26,6 @@ export class RoomComponent implements OnInit {
     @Output() value = 50;
     @Output() switchTypeId = environment.zwaySwitchBinaryTypeId;
     @Output() gridCols = 0;
-    @Output() ready = false;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private roomService: RoomService,
@@ -86,7 +85,6 @@ export class RoomComponent implements OnInit {
                     if (room !== null) {
                         this.room = room;
                         this.roomService.refreshDevices(this.room);
-                        this.ready = true;
                     }
                 });
             }

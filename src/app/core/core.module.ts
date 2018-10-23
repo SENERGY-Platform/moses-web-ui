@@ -6,7 +6,7 @@ import {
     MatIconModule,
     MatSidenavModule,
     MatSliderModule,
-    MatToolbarModule
+    MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 
 import {throwIfAlreadyLoaded} from './module-import-guard';
@@ -31,6 +31,7 @@ import {CommonModule} from '@angular/common';
         MatSliderModule,
         FormsModule,
         CommonModule,
+        MatTooltipModule,
     ],
     declarations: [
         ToolbarComponent,
