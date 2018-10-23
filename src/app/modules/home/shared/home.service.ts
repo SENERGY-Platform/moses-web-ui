@@ -24,7 +24,7 @@ export class HomeService {
             if (name !== undefined) {
                 this.worldService.create(name).subscribe((world: WorldModel | null) => {
                         if (world !== null) {
-                            this.sidenavService.addWorldSection(world);
+                            this.sidenavService.addWorldSection();
                         }
                     }
                 );

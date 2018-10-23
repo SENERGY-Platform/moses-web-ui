@@ -40,7 +40,7 @@ export class SidenavService {
 
     initSidenav() {
         this.getWorlds().subscribe((worlds: WorldModel[]) => {
-            this.sections.push(new SidenavSectionModel('home', 'link', 'home', '/home', 'start', []));
+            this.sections = [];
             worlds.forEach((world: WorldModel) => {
                 const pages: SidenavPageModel[] = [];
                 if (world.rooms !== null) {
@@ -50,13 +50,31 @@ export class SidenavService {
                 }
                 this.sections.push(new SidenavSectionModel(world.name, 'toggle', 'public', '/world', world.id, pages));
             });
+
+            this.sortSectionArray();
+            this.sections.splice(0, 0, new SidenavSectionModel('HOME', 'link', 'home', '/home', 'start', []));
+
             this.sidenavSections.next(this.sections);
+
         });
     }
 
-    addWorldSection(world: WorldModel) {
-        this.sections.push(new SidenavSectionModel(world.name, 'toggle', 'public', '/world', world.id, []));
-        this.sidenavSections.next(this.sections);
+    private sortSectionArray() {
+        this.sections.sort((a, b) => {
+
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+
+        });
+    }
+
+    addWorldSection() {
+        this.initSidenav();
     }
 
     addRoomSection(world: WorldModel, room: RoomResponseModel) {
@@ -70,7 +88,10 @@ export class SidenavService {
     }
 
     deleteWorldSection(world: WorldModel) {
-        let deleteIndex = 0;
+        this.initSidenav();
+        this.router.navigate(['/home/start']);
+
+       /* let deleteIndex = 0;
         this.sections.forEach((section: SidenavSectionModel, index: number) => {
             if (section.id === world.id) {
                 deleteIndex = index;
@@ -81,7 +102,7 @@ export class SidenavService {
             this.sections.splice(deleteIndex, 1);
             this.sidenavSections.next(this.sections);
             this.router.navigate(['/home/start']);
-        }
+        }*/
     }
 
     deleteRoomSection(room: RoomResponseModel) {

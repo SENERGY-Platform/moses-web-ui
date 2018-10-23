@@ -7,7 +7,7 @@
                     (click)="toggleSection(section)"
                     class="md-button-toggle">
                     <mat-icon>{{section.icon}}</mat-icon>
-                    {{section.name | uppercase}}
+                    {{section.name}}
                     </button>
                 <button mat-button *ngIf="section.type === 'toggle'"
                         (click)="toggleSection(section)"
@@ -16,7 +16,7 @@
                         [routerLink]="[section.state, section.id]" routerLinkActive="background-color-accent">
                     <div fxLayout="row" fxLayoutAlign=" center">
                         <mat-icon>{{section.icon}}</mat-icon>
-                        <div fxFlexOffset="5px">{{section.name | uppercase}}</div>
+                        <div fxFlexOffset="5px">{{section.name}}</div>
                         <mat-icon class="md-toggle-icon"
                                   [ngClass]="{'toggled': isSectionOpen(section)}">
                             keyboard_arrow_down
