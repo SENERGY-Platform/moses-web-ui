@@ -4,3 +4,7 @@
     right: 15px;
     z-index: 100;
 }
+
+.layout-margin {
+    margin: 8px;
+}
