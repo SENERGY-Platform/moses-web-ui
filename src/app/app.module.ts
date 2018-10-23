@@ -35,7 +35,7 @@ import {DeviceModule} from './modules/device/device.module';
             useFactory: keycloakInitializerService,
             multi: true,
             deps: [KeycloakService]
-        }
+        },
     ],
     bootstrap: [AppComponent]
 })

@@ -104,7 +104,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
             map(() => {
                 return this.activatedRoute.firstChild;
             }),
-            mergeMap((activatedRoute: ActivatedRoute) => activatedRoute.url)
+            mergeMap((activatedRoute: any) =>  activatedRoute.url)
         ).subscribe((activeRoute: any) => {
                 this.openSection = '/' + activeRoute[0].path + '/' + activeRoute[1].path;
             });
