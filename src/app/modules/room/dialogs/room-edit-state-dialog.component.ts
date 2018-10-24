@@ -38,10 +38,8 @@ export class RoomEditStateDialogComponent implements OnInit {
 
     edit(): void {
         if (this.device) {
-            console.log(this.states);
             this.device.device.states = this.statesServices.convertArrayToMap(this.states);
         }
-        console.log(this.device);
         this.dialogRef.close(this.device);
     }
 

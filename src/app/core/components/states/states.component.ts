@@ -54,7 +54,7 @@ export class StatesComponent implements OnInit {
         }
     }
 
-    changed(key: string, value: number): void {
+    clicked(key: string, value: number) {
         const stateUpdate = this.stateMap;
         stateUpdate[key] = value;
         switch (this.type) {
@@ -69,6 +69,16 @@ export class StatesComponent implements OnInit {
                 break;
             }
         }
+    }
+
+    formatLabel(value: number | null) {
+        if (!value) {
+            return 0;
+        }
+        if (value >= 1000) {
+            return Math.round(value / 1000) + 'k';
+        }
+        return value;
     }
 
     private initGridCols(): void {
