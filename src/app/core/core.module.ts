@@ -1,7 +1,7 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {
-    MatButtonModule,
+    MatButtonModule, 
     MatGridListModule,
     MatIconModule,
     MatSidenavModule,

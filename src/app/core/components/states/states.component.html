@@ -3,57 +3,58 @@
 
     <div class="layout-margin" fxLayout="row">
         <mat-grid-list cols="{{gridCols}}" rowHeight="100px" gutterSize="16px" fxFlex="90">
-            <mat-grid-tile class="mat-elevation-z1" *ngFor="let state of stateMap | keyvalue">
-
-                <div [ngSwitch]="state.key" fxFill>
-                    <div *ngSwitchCase="'humidity'">
-                        <div fxFlex="30" fxLayoutAlign="center center">
-                            <mat-icon color="accent" class="mat-48">invert_colors</mat-icon>
-                        </div>
-                        <div fxFill fxFlex="70" fxLayout="column">
-                            <h2 class="states-header">Humidity: {{state.value}}%</h2>
-                            <mat-slider class="slider" (click)="clicked(state.key, state.value)"
-                                        [(ngModel)]="state.value"
-                                        [thumbLabel]="true">
-                            </mat-slider>
-                        </div>
-                    </div>
-
-                    <div *ngSwitchCase="'temperature'">
-                        <div fxFlex="30" fxLayoutAlign="center center">
-                            <mat-icon color="accent" class="mat-48">wb_sunny</mat-icon>
-                        </div>
-                        <div fxFill fxFlex="70" fxLayout="column">
-                            <h2 class="states-header">Temperature: {{state.value}}°</h2>
-                            <mat-slider class="slider" (click)="clicked(state.key, state.value)"
-                                        [max]="60"
-                                        [min]="-30"
-                                        [step]="0.1"
-                                        [(ngModel)]="state.value"
-                                        [thumbLabel]="true">
-                            </mat-slider>
-                        </div>
-                    </div>
-
-                    <div *ngSwitchCase="'lux'">
-                        <div fxFlex="30" fxLayoutAlign="center center">
-                            <mat-icon color="accent" class="mat-48">brightness_medium</mat-icon>
-                        </div>
-                        <div fxFill fxFlex="70" fxLayout="column">
-                            <h2 class="states-header">Brightness: {{state.value}} lux</h2>
-                            <mat-slider class="slider" (click)="clicked(state.key, state.value)"
-                                        [max]="100000"
-                                        [min]="0"
-                                        [step]="1"
-                                        [displayWith]="formatLabel"
-                                        [(ngModel)]="state.value"
-                                        [thumbLabel]="true">
-                            </mat-slider>
-                        </div>
-                    </div>
+            <mat-grid-tile class="mat-elevation-z1">
+                <div fxFlex="30" fxLayoutAlign="center center">
+                    <mat-icon color="accent" class="mat-48">invert_colors</mat-icon>
                 </div>
-
+                <div fxFill fxFlex="70" fxLayout="column">
+                    <h2 class="states-header">Humiditiy: {{humidity}}%</h2>
+                    <mat-slider fxFill class="slider" (valueChange)="clicked()"
+                                [max]="100"
+                                [min]="0"
+                                [step]="1"
+                                tickInterval="10"
+                                [(ngModel)]="humidity"
+                                [thumbLabel]="true">
+                    </mat-slider>
+                </div>
             </mat-grid-tile>
+
+            <mat-grid-tile class="mat-elevation-z1">
+                <div fxFlex="30" fxLayoutAlign="center center">
+                    <mat-icon color="accent" class="mat-48">wb_sunny</mat-icon>
+                </div>
+                <div fxFill fxFlex="70" fxLayout="column">
+                    <h2 class="states-header">Temperature: {{temperature}}°</h2>
+                    <mat-slider fxFill class="slider" (valueChange)="clicked()"
+                                [max]="60"
+                                [min]="-30"
+                                [step]="0.1"
+                                tickInterval="100"
+                                [(ngModel)]="temperature"
+                                [thumbLabel]="true">
+                    </mat-slider>
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile class="mat-elevation-z1">
+                <div fxFlex="30" fxLayoutAlign="center center">
+                    <mat-icon color="accent" class="mat-48">brightness_medium</mat-icon>
+                </div>
+                <div fxFill fxFlex="70" fxLayout="column">
+                    <h2 class="states-header">Brightness: {{lux}} lux</h2>
+                    <mat-slider class="slider" (valueChange)="clicked()"
+                                [max]="100000"
+                                [min]="0"
+                                [step]="1"
+                                [displayWith]="formatLabel"
+                                tickInterval="10000"
+                                [(ngModel)]="lux"
+                                [thumbLabel]="true">
+                    </mat-slider>
+                </div>
+            </mat-grid-tile>
+
         </mat-grid-list>
 
         <div fxFlex="10" fxLayoutAlign="end start">

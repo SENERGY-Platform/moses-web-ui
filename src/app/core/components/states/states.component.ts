@@ -28,6 +28,9 @@ export class StatesComponent implements OnInit {
     @Output() gridCols = 0;
     @Output() stateMap: StatesMapModel = {};
     @Output() ready = false;
+    @Output() temperature = 0;
+    @Output() humidity = 0;
+    @Output() lux = 0;
 
     constructor(private roomService: RoomService,
                 private worldService: WorldService,
@@ -54,17 +57,19 @@ export class StatesComponent implements OnInit {
         }
     }
 
-    clicked(key: string, value: number) {
-        const stateUpdate = this.stateMap;
-        stateUpdate[key] = value;
+    clicked() {
+        const updateStateMap: StatesMapModel = {};
+        updateStateMap['humidity'] = this.humidity;
+        updateStateMap['lux'] = this.lux;
+        updateStateMap['temperature'] = this.temperature;
         switch (this.type) {
             case 'Room': {
-                this.room.room.states = stateUpdate;
+                this.room.room.states = updateStateMap;
                 this.roomService.update(this.room.room).subscribe();
                 break;
             }
             case 'World': {
-                this.world.states = stateUpdate;
+                this.world.states = updateStateMap;
                 this.worldService.update(this.world).subscribe();
                 break;
             }
@@ -98,6 +103,12 @@ export class StatesComponent implements OnInit {
 
     }
 
+    private setValues() {
+        this.humidity = <number>this.stateMap['humidity'];
+        this.lux = <number>this.stateMap['lux'];
+        this.temperature = <number>this.stateMap['temperature'];
+    }
+
     private getStateMap(roomId: string, worldId: string) {
         if (roomId !== undefined) {
           this.roomService.get(roomId).subscribe((room: RoomResponseModel | null) => {
@@ -105,6 +116,7 @@ export class StatesComponent implements OnInit {
                     this.room = room;
                     this.stateMap = room.room.states || {};
                     this.type = 'Room';
+                    this.setValues();
                     this.ready = true;
                 }
             });
@@ -115,10 +127,12 @@ export class StatesComponent implements OnInit {
                         this.world = world;
                         this.stateMap = world.states || {};
                         this.type = 'World';
+                        this.setValues();
                         this.ready = true;
                     }
                 });
             }
         }
+
     }
 }
