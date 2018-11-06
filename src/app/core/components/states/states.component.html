@@ -55,9 +55,30 @@
                 </div>
             </mat-grid-tile>
 
+            <mat-grid-tile class="mat-elevation-z1">
+                <div fxFlex="30" fxLayoutAlign="center center">
+                    <mat-icon color="accent" class="mat-48">bubble_chart</mat-icon>
+                </div>
+                <div fxFill fxFlex="70" fxLayout="column">
+                    <h2 class="states-header">CO: {{co}} ppm</h2>
+                    <mat-slider class="slider" (valueChange)="clicked()"
+                                [max]="1000"
+                                [min]="0"
+                                [step]="1"
+                                [displayWith]="formatLabel"
+                                tickInterval="100"
+                                [(ngModel)]="co"
+                                [thumbLabel]="true">
+                    </mat-slider>
+                </div>
+            </mat-grid-tile>
+
         </mat-grid-list>
 
         <div fxFlex="10" fxLayoutAlign="end start">
+            <button mat-icon-button color="accent" (click)="edit()" matTooltip="Edit {{type}}">
+                <mat-icon>edit</mat-icon>
+            </button>
             <button mat-icon-button color="accent" (click)="delete()" matTooltip="Delete {{type}}">
                 <mat-icon>delete</mat-icon>
             </button>

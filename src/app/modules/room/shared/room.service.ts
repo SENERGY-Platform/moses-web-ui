@@ -17,10 +17,6 @@ import {DeviceDeleteDialogComponent} from '../../device/dialogs/device-delete-di
 import {DeviceRequestModel} from '../../device/shared/deviceRequest.model';
 import {DeviceModel} from '../../device/shared/device.model';
 import {RoomEditDeviceDialogComponent} from '../dialogs/room-edit-device-dialog.component';
-import {RoomAddChangeRoutineDialogComponent} from '../dialogs/room-add-change-routine-dialog.component';
-import {ChangeRequestModel} from '../../change-routines/shared/change-request.model';
-import {ChangeRoutineService} from '../../change-routines/shared/change-routine.service';
-import {RoomEditChangeRoutineDialogComponent} from '../dialogs/room-edit-change-routine-dialog.component';
 import {RoomAddDeviceStateDialogComponent} from '../dialogs/room-add-device-state-dialog.component';
 import {RoomEditStateDialogComponent} from '../dialogs/room-edit-state-dialog.component';
 import {StatesModel} from '../../../core/components/states/shared/states.model';
@@ -43,7 +39,6 @@ export class RoomService {
                 private errorHandlerService: ErrorHandlerService,
                 private sidenavService: SidenavService,
                 private deviceService: DeviceService,
-                private changeRoutineService: ChangeRoutineService,
                 private servicesService: ServicesService) {
     }
 
@@ -156,7 +151,7 @@ export class RoomService {
         });
     }
 
-    openCreateChangeRoutineDialog(deviceId: string) {
+/*    openCreateChangeRoutineDialog(deviceId: string) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(RoomAddChangeRoutineDialogComponent, dialogConfig);
@@ -168,20 +163,7 @@ export class RoomService {
                 this.changeRoutineService.create(changeRequest).subscribe();
             }
         });
-    }
-
-    openEditChangeRoutineDialog(deviceId: string) {
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        dialogConfig.data = deviceId;
-        const editDialogRef = this.dialog.open(RoomEditChangeRoutineDialogComponent, dialogConfig);
-
-        editDialogRef.afterClosed().subscribe((device: DeviceResponseModel) => {
-            if (device !== undefined) {
-                this.updateDevice(device.device);
-            }
-        });
-    }
+    }*/
 
     refreshDevices(room: RoomResponseModel): void {
         this.get(room.room.id).subscribe((roomResp: (RoomResponseModel | null)) => {
@@ -193,11 +175,13 @@ export class RoomService {
 
     slideChangeStartServices(device: DeviceModel, slide: boolean): void {
         const key = slide ? 'on' : 'off';
-        Object.values(device.services).forEach((service: ServicesModel) => {
-            if (service.name === key) {
-                this.servicesService.runService(service.id).subscribe();
-            }
-        });
+        if (device.services !== null) {
+            Object.values(device.services).forEach((service: ServicesModel) => {
+                if (service.name === key) {
+                    this.servicesService.runService(service.id).subscribe();
+                }
+            });
+        }
     }
 
     private updateDevice(device: DeviceModel) {

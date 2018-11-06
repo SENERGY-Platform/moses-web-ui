@@ -8,7 +8,7 @@ export interface DeviceModel {
     image_url: string;
     external_ref: string;
     external_type_id: string;
-    services: ServicesMapModel;
-    states: StatesMapModel;
-    change_routines: ChangeRoutinesMapModel;
+    services: ServicesMapModel | null;
+    states: StatesMapModel | null;
+    change_routines: ChangeRoutinesMapModel | null;
 }

@@ -1,12 +1,7 @@
 <h2 mat-dialog-title>Edit Change Routine</h2>
-
 <mat-dialog-content>
     <form class="size">
-        <mat-form-field color="accent" fxFill appearance="outline">
-            <mat-label>Name</mat-label>
-            <input disabled matInput placeholder="Name" value="{{device?.device.name}}">
-        </mat-form-field>
-        <h3>Change Routine</h3>
+        <h3>Change Routine for {{type}}</h3>
         <div *ngIf="changeRoutines.length > 0">
             <div *ngFor="let changeRoutine of changeRoutines; let i = index">
                 <mat-form-field color="accent" fxFill appearance="outline">

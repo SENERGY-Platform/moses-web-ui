@@ -6,6 +6,7 @@ import {WorldService} from '../../../modules/world/shared/world.service';
 import {ResponsiveService} from '../../services/responsive.service';
 import {StatesMapModel} from './shared/states-map.model';
 import {ActivatedRoute, Params} from '@angular/router';
+import {ChangeRoutineService} from '../../../modules/change-routines/shared/change-routine.service';
 
 const grid = new Map([
     ['xs', 1],
@@ -23,7 +24,7 @@ const grid = new Map([
 export class StatesComponent implements OnInit {
 
     @Input() type = '';
-    @Input() room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null}};
+    @Input() room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null, change_routines: null}};
     @Input() world: WorldModel = {id: '', name: '', rooms: null, states: null};
     @Output() gridCols = 0;
     @Output() stateMap: StatesMapModel = {};
@@ -31,8 +32,10 @@ export class StatesComponent implements OnInit {
     @Output() temperature = 0;
     @Output() humidity = 0;
     @Output() lux = 0;
+    @Output() co = 0;
 
     constructor(private roomService: RoomService,
+                private changeRoutineService: ChangeRoutineService,
                 private worldService: WorldService,
                 private responsiveService: ResponsiveService,
                 private activatedRoute: ActivatedRoute) {
@@ -57,11 +60,16 @@ export class StatesComponent implements OnInit {
         }
     }
 
+    edit(): void {
+        this.changeRoutineService.openEditChangeRoutineDialog(this.type, this.room.room.id);
+    }
+
     clicked() {
         const updateStateMap: StatesMapModel = {};
         updateStateMap['humidity'] = this.humidity;
         updateStateMap['lux'] = this.lux;
         updateStateMap['temperature'] = this.temperature;
+        updateStateMap['co-ppm'] = this.co;
         switch (this.type) {
             case 'Room': {
                 this.room.room.states = updateStateMap;
@@ -107,6 +115,7 @@ export class StatesComponent implements OnInit {
         this.humidity = <number>this.stateMap['humidity'];
         this.lux = <number>this.stateMap['lux'];
         this.temperature = <number>this.stateMap['temperature'];
+        this.co = <number>this.stateMap['co-ppm'];
     }
 
     private getStateMap(roomId: string, worldId: string) {

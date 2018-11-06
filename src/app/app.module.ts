@@ -12,6 +12,7 @@ import {HomeModule} from './modules/home/home.module';
 import {WorldModule} from './modules/world/world.module';
 import {RoomModule} from './modules/room/room.module';
 import {DeviceModule} from './modules/device/device.module';
+import {ChangeRoutinesModule} from './modules/change-routines/change-routines.module';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import {DeviceModule} from './modules/device/device.module';
         WorldModule,
         RoomModule,
         DeviceModule,
+        ChangeRoutinesModule,
         KeycloakAngularModule,
         HttpClientModule
     ],

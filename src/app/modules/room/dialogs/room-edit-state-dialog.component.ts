@@ -48,7 +48,7 @@ export class RoomEditStateDialogComponent implements OnInit {
             if (device !== null) {
                 this.device = device;
                 if (this.device.device.states !== null) {
-                    Object.entries(device.device.states).forEach((states) => {
+                    Object.entries(this.device.device.states).forEach((states) => {
                         this.states.push({name: states[0], value: states[1], type: typeof states[1]});
                     });
                     this.sortServicesArray();

@@ -5,6 +5,7 @@ import {RoomResponseModel} from './shared/roomResponse.model';
 import {DeviceModel} from '../device/shared/device.model';
 import {environment} from '../../../environments/environment';
 import {ResponsiveService} from '../../core/services/responsive.service';
+import {ChangeRoutineService} from '../change-routines/shared/change-routine.service';
 
 const grid = new Map([
     ['xs', 1],
@@ -21,7 +22,7 @@ const grid = new Map([
 })
 export class RoomComponent implements OnInit {
 
-    @Output() room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null}};
+    @Output() room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null, change_routines: null}};
     @Output() devices: DeviceModel[] = [];
     @Output() value = 50;
     @Output() switchTypeId = environment.zwaySwitchBinaryTypeId;
@@ -29,6 +30,7 @@ export class RoomComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute,
                 private roomService: RoomService,
+                private changeRoutineService: ChangeRoutineService,
                 private responsiveService: ResponsiveService,
                 ) {
     }
@@ -52,7 +54,7 @@ export class RoomComponent implements OnInit {
     }
 
     addChangeRoutine(deviceId: string) {
-        this.roomService.openCreateChangeRoutineDialog(deviceId);
+      //  this.roomService.openCreateChangeRoutineDialog(deviceId);
     }
 
     addState(device: DeviceModel) {
@@ -60,7 +62,7 @@ export class RoomComponent implements OnInit {
     }
 
     editChangeRoutine(deviceId: string) {
-        this.roomService.openEditChangeRoutineDialog(deviceId);
+        this.changeRoutineService.openEditChangeRoutineDialog('Device', deviceId);
     }
 
     editStates(deviceId: string) {

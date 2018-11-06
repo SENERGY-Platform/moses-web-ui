@@ -46,10 +46,12 @@ export class RoomEditDeviceDialogComponent implements OnInit {
             if (device !== null) {
               this.device = device;
 
-                Object.values(device.device.services).forEach((service: ServicesModel) => {
-                    this.services.push(service);
-                });
-                this.sortServicesArray();
+              if (this.device.device.services !== null) {
+                  Object.values(this.device.device.services).forEach((service: ServicesModel) => {
+                      this.services.push(service);
+                  });
+                  this.sortServicesArray();
+              }
             }
         });
     }
