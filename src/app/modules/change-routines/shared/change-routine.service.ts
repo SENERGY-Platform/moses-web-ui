@@ -7,13 +7,13 @@ import {ErrorHandlerService} from '../../../core/services/error-handler.service'
 import {ChangeRequestModel} from './change-request.model';
 import {environment} from '../../../../environments/environment';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {ChangeRoutineEditDialogComponent} from './change-routine-edit-dialog.component';
+import {ChangeRoutineEditDialogComponent} from '../dialog/change-routine-edit-dialog.component';
 import {ChangeRoutinesMapModel} from './change-routines-map.model';
 import {DeviceService} from '../../device/shared/device.service';
 import {DeviceResponseModel} from '../../device/shared/deviceResponse.model';
 import {RoomService} from '../../room/shared/room.service';
 import {RoomResponseModel} from '../../room/shared/roomResponse.model';
-
+import {ChangeRoutineAddDialogComponent} from '../dialog/change-routine-add-dialog.component';
 
 
 @Injectable({
@@ -26,10 +26,10 @@ export class ChangeRoutineService {
                 private dialog: MatDialog,
                 private deviceService: DeviceService,
                 private roomService: RoomService,
-                ) {
+    ) {
     }
 
-    create(changeRequest: ChangeRequestModel): Observable<ChangeRequestModel | null>   {
+    create(changeRequest: ChangeRequestModel): Observable<ChangeRequestModel | null> {
         return this.http.post<ChangeRequestModel>(environment.mosesUrl + '/changeroutine', changeRequest).pipe(
             catchError(this.errorHandlerService.handleError(ChangeRoutineService.name, 'create', null))
         );
@@ -44,7 +44,7 @@ export class ChangeRoutineService {
         editDialogRef.afterClosed().subscribe((changeRoutines: ChangeRoutinesMapModel) => {
             if (changeRoutines !== undefined) {
                 switch (type) {
-                    case 'Device': {
+                    case 'device': {
                         this.deviceService.get(id).subscribe((device: DeviceResponseModel | null) => {
                             if (device) {
                                 device.device.change_routines = changeRoutines;
@@ -53,7 +53,7 @@ export class ChangeRoutineService {
                         });
                         break;
                     }
-                    case 'Room': {
+                    case 'room': {
                         this.roomService.get(id).subscribe((room: RoomResponseModel | null) => {
                             if (room) {
                                 room.room.change_routines = changeRoutines;
@@ -63,6 +63,20 @@ export class ChangeRoutineService {
                         break;
                     }
                 }
+            }
+        });
+    }
+
+    openCreateChangeRoutineDialog(type: string, deviceId: string) {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.autoFocus = true;
+        const editDialogRef = this.dialog.open(ChangeRoutineAddDialogComponent, dialogConfig);
+
+        editDialogRef.afterClosed().subscribe((changeRequest: ChangeRequestModel) => {
+            if (changeRequest !== undefined) {
+                changeRequest.ref_type = type;
+                changeRequest.ref_id = deviceId;
+                this.create(changeRequest).subscribe();
             }
         });
     }

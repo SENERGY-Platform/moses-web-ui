@@ -21,12 +21,10 @@ import {RoomNewDeviceDialogComponent} from './dialogs/room-new-device-dialog.com
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RoomEditDeviceDialogComponent} from './dialogs/room-edit-device-dialog.component';
-import {RoomAddChangeRoutineDialogComponent} from './dialogs/room-add-change-routine-dialog.component';
-import {RoomAddDeviceStateDialogComponent} from './dialogs/room-add-device-state-dialog.component';
-import {RoomEditStateDialogComponent} from './dialogs/room-edit-state-dialog.component';
 import {CoreModule} from '../../core/core.module';
+import {RoomAddDeviceStateDialogComponent} from './dialogs/room-add-device-state-dialog.component';
 
-const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component: RoomComponent, data: {header: 'Room'}};
+const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component: RoomComponent, data: {header: 'room'}};
 
 @NgModule({
     imports: [
@@ -53,17 +51,13 @@ const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component:
         RoomComponent,
         RoomDeleteDialogComponent,
         RoomNewDeviceDialogComponent,
-        RoomEditDeviceDialogComponent,
-        RoomAddChangeRoutineDialogComponent,
         RoomAddDeviceStateDialogComponent,
-        RoomEditStateDialogComponent,
+        RoomEditDeviceDialogComponent,
     ],
     entryComponents: [RoomDeleteDialogComponent,
         RoomNewDeviceDialogComponent,
         RoomEditDeviceDialogComponent,
-        RoomAddChangeRoutineDialogComponent,
         RoomAddDeviceStateDialogComponent,
-        RoomEditStateDialogComponent,
     ],
 })
 export class RoomModule {

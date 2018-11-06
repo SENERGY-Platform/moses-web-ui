@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RoomResponseModel} from '../../../modules/room/shared/roomResponse.model';
 import {RoomService} from '../../../modules/room/shared/room.service';
 import {WorldModel} from '../../../modules/world/shared/world.model';
@@ -23,16 +23,18 @@ const grid = new Map([
 })
 export class StatesComponent implements OnInit {
 
-    @Input() type = '';
-    @Input() room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null, change_routines: null}};
-    @Input() world: WorldModel = {id: '', name: '', rooms: null, states: null};
-    @Output() gridCols = 0;
-    @Output() stateMap: StatesMapModel = {};
-    @Output() ready = false;
-    @Output() temperature = 0;
-    @Output() humidity = 0;
-    @Output() lux = 0;
-    @Output() co = 0;
+    type = '';
+    room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null, change_routines: null}};
+    world: WorldModel = {id: '', name: '', rooms: null, states: null};
+    gridCols = 0;
+    stateMap: StatesMapModel = {};
+    ready = false;
+    temperature = 0;
+    humidity = 0;
+    lux = 0;
+    co = 0;
+
+    private typeId = '';
 
     constructor(private roomService: RoomService,
                 private changeRoutineService: ChangeRoutineService,
@@ -41,7 +43,6 @@ export class StatesComponent implements OnInit {
                 private activatedRoute: ActivatedRoute) {
     }
 
-
     ngOnInit() {
         this.initGridCols();
         this.initStates();
@@ -49,19 +50,23 @@ export class StatesComponent implements OnInit {
 
     delete(): void {
         switch (this.type) {
-            case 'Room': {
+            case 'room': {
                 this.roomService.openRoomDeleteDialog(this.room);
                 break;
             }
-            case 'World': {
-                this.worldService.openDeleteDialog(this.world);
+            case 'world': {
+                this.worldService.openDeleteDialog(this.typeId);
                 break;
             }
         }
     }
 
     edit(): void {
-        this.changeRoutineService.openEditChangeRoutineDialog(this.type, this.room.room.id);
+        this.changeRoutineService.openEditChangeRoutineDialog(this.type, this.typeId);
+    }
+
+    add(): void {
+        this.changeRoutineService.openCreateChangeRoutineDialog(this.type, this.typeId);
     }
 
     clicked() {
@@ -71,12 +76,12 @@ export class StatesComponent implements OnInit {
         updateStateMap['temperature'] = this.temperature;
         updateStateMap['co-ppm'] = this.co;
         switch (this.type) {
-            case 'Room': {
+            case 'room': {
                 this.room.room.states = updateStateMap;
                 this.roomService.update(this.room.room).subscribe();
                 break;
             }
-            case 'World': {
+            case 'world': {
                 this.world.states = updateStateMap;
                 this.worldService.update(this.world).subscribe();
                 break;
@@ -123,8 +128,9 @@ export class StatesComponent implements OnInit {
           this.roomService.get(roomId).subscribe((room: RoomResponseModel | null) => {
                 if (room !== null) {
                     this.room = room;
+                    this.typeId = this.room.room.id;
                     this.stateMap = room.room.states || {};
-                    this.type = 'Room';
+                    this.type = 'room';
                     this.setValues();
                     this.ready = true;
                 }
@@ -134,8 +140,9 @@ export class StatesComponent implements OnInit {
                 this.worldService.get(worldId).subscribe((world: WorldModel | null) => {
                     if (world !== null) {
                         this.world = world;
+                        this.typeId = this.world.id;
                         this.stateMap = world.states || {};
-                        this.type = 'World';
+                        this.type = 'world';
                         this.setValues();
                         this.ready = true;
                     }

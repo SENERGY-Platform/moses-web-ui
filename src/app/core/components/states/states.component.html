@@ -1,5 +1,5 @@
 <div *ngIf="ready">
-    <h3 class="layout-margin">{{type}} State</h3>
+    <h3 class="layout-margin">{{type}} state</h3>
 
     <div class="layout-margin" fxLayout="row">
         <mat-grid-list cols="{{gridCols}}" rowHeight="100px" gutterSize="16px" fxFlex="90">
@@ -76,7 +76,10 @@
         </mat-grid-list>
 
         <div fxFlex="10" fxLayoutAlign="end start">
-            <button mat-icon-button color="accent" (click)="edit()" matTooltip="Edit {{type}}">
+            <button mat-icon-button color="accent" (click)="add()" matTooltip="Add {{type}} change routine">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button mat-icon-button color="accent" (click)="edit()" matTooltip="Edit {{type}} change routine">
                 <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button color="accent" (click)="delete()" matTooltip="Delete {{type}}">

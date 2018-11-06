@@ -97,7 +97,7 @@ export class SidenavService {
         this.initSidenav();
     }
 
-    deleteWorldSection(world: WorldModel) {
+    deleteWorldSection() {
         this.initSidenav();
         this.router.navigate(['/home/start']);
     }

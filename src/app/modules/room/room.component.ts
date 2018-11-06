@@ -54,7 +54,7 @@ export class RoomComponent implements OnInit {
     }
 
     addChangeRoutine(deviceId: string) {
-      //  this.roomService.openCreateChangeRoutineDialog(deviceId);
+      this.changeRoutineService.openCreateChangeRoutineDialog('device', deviceId);
     }
 
     addState(device: DeviceModel) {
@@ -62,7 +62,7 @@ export class RoomComponent implements OnInit {
     }
 
     editChangeRoutine(deviceId: string) {
-        this.changeRoutineService.openEditChangeRoutineDialog('Device', deviceId);
+        this.changeRoutineService.openEditChangeRoutineDialog('device', deviceId);
     }
 
     editStates(deviceId: string) {

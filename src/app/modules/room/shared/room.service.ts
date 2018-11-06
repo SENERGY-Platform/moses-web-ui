@@ -151,20 +151,6 @@ export class RoomService {
         });
     }
 
-/*    openCreateChangeRoutineDialog(deviceId: string) {
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.autoFocus = true;
-        const editDialogRef = this.dialog.open(RoomAddChangeRoutineDialogComponent, dialogConfig);
-
-        editDialogRef.afterClosed().subscribe((changeRequest: ChangeRequestModel) => {
-            if (changeRequest !== undefined) {
-                changeRequest.ref_type = 'device';
-                changeRequest.ref_id = deviceId;
-                this.changeRoutineService.create(changeRequest).subscribe();
-            }
-        });
-    }*/
-
     refreshDevices(room: RoomResponseModel): void {
         this.get(room.room.id).subscribe((roomResp: (RoomResponseModel | null)) => {
             if (roomResp !== null) {

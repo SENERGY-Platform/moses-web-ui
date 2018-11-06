@@ -1,16 +1,16 @@
 import {Component, Output} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
-import {ChangeRequestModel} from '../../change-routines/shared/change-request.model';
+import {ChangeRequestModel} from '../shared/change-request.model';
 
 @Component({
-    templateUrl: './room-add-change-routine-dialog.component.html',
-    styleUrls: ['./room-add-change-routine-dialog.component.css']
+    templateUrl: './change-routine-add-dialog.component.html',
+    styleUrls: ['./change-routine-add-dialog.component.css']
 })
-export class RoomAddChangeRoutineDialogComponent {
+export class ChangeRoutineAddDialogComponent {
 
     @Output() changeRoutine: ChangeRequestModel = {ref_id: '', code: '', interval: 0, ref_type: ''};
 
-    constructor(private dialogRef: MatDialogRef<RoomAddChangeRoutineDialogComponent>) {
+    constructor(private dialogRef: MatDialogRef<ChangeRoutineAddDialogComponent>) {
 
     }
 

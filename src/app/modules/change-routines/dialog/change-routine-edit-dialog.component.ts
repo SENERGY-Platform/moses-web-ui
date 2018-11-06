@@ -3,8 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 import {DeviceService} from '../../device/shared/device.service';
 import {DeviceResponseModel} from '../../device/shared/deviceResponse.model';
-import {ChangeRoutinesModel} from './change-routines.model';
-import {ChangeRoutinesMapModel} from './change-routines-map.model';
+import {ChangeRoutinesModel} from '../shared/change-routines.model';
+import {ChangeRoutinesMapModel} from '../shared/change-routines-map.model';
 import {RoomResponseModel} from '../../room/shared/roomResponse.model';
 import {RoomService} from '../../room/shared/room.service';
 
@@ -51,7 +51,7 @@ export class ChangeRoutineEditDialogComponent implements OnInit {
 
     private init() {
         switch (this.type) {
-            case 'Device': {
+            case 'device': {
                 this.deviceService.get(this.Id).subscribe((device: DeviceResponseModel | null) => {
                     if (device !== null) {
                         this.device = device;
@@ -60,7 +60,7 @@ export class ChangeRoutineEditDialogComponent implements OnInit {
                 });
                 break;
             }
-            case 'Room': {
+            case 'room': {
                 this.roomService.get(this.Id).subscribe((room: RoomResponseModel | null) => {
                     if (room !== null) {
                         this.room = room;

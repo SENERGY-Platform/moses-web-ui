@@ -43,16 +43,16 @@ export class WorldService {
         );
     }
 
-    openDeleteDialog(world: WorldModel) {
+    openDeleteDialog(worldId: string) {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         const editDialogRef = this.dialog.open(WorldDeleteDialogComponent, dialogConfig);
 
         editDialogRef.afterClosed().subscribe((deleteWorld: boolean) => {
             if (deleteWorld === true) {
-                this.delete(world.id).subscribe((status: (string | null)) => {
+                this.delete(worldId).subscribe((status: (string | null)) => {
                     if (status === 'ok') {
-                        this.sidenavService.deleteWorldSection(world);
+                        this.sidenavService.deleteWorldSection();
                     }
                 });
             }
