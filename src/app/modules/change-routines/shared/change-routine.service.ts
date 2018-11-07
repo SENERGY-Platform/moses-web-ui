@@ -14,6 +14,8 @@ import {DeviceResponseModel} from '../../device/shared/deviceResponse.model';
 import {RoomService} from '../../room/shared/room.service';
 import {RoomResponseModel} from '../../room/shared/roomResponse.model';
 import {ChangeRoutineAddDialogComponent} from '../dialog/change-routine-add-dialog.component';
+import {WorldService} from '../../world/shared/world.service';
+import {WorldModel} from '../../world/shared/world.model';
 
 
 @Injectable({
@@ -26,6 +28,7 @@ export class ChangeRoutineService {
                 private dialog: MatDialog,
                 private deviceService: DeviceService,
                 private roomService: RoomService,
+                private worldService: WorldService,
     ) {
     }
 
@@ -58,6 +61,15 @@ export class ChangeRoutineService {
                             if (room) {
                                 room.room.change_routines = changeRoutines;
                                 this.roomService.update(room.room).subscribe();
+                            }
+                        });
+                        break;
+                    }
+                    case 'world': {
+                        this.worldService.get(id).subscribe((world: WorldModel | null) => {
+                            if (world) {
+                                world.change_routines = changeRoutines;
+                                this.worldService.update(world).subscribe();
                             }
                         });
                         break;

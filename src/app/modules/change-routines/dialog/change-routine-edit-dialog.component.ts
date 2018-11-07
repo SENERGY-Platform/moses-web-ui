@@ -7,6 +7,8 @@ import {ChangeRoutinesModel} from '../shared/change-routines.model';
 import {ChangeRoutinesMapModel} from '../shared/change-routines-map.model';
 import {RoomResponseModel} from '../../room/shared/roomResponse.model';
 import {RoomService} from '../../room/shared/room.service';
+import {WorldService} from '../../world/shared/world.service';
+import {WorldModel} from '../../world/shared/world.model';
 
 @Component({
     templateUrl: './change-routine-edit-dialog.component.html',
@@ -14,8 +16,6 @@ import {RoomService} from '../../room/shared/room.service';
 })
 export class ChangeRoutineEditDialogComponent implements OnInit {
 
-    device: DeviceResponseModel | null = null;
-    room: RoomResponseModel | null = null;
     changeRoutines: ChangeRoutinesModel[] = [];
     type = '';
     private Id: string;
@@ -23,6 +23,7 @@ export class ChangeRoutineEditDialogComponent implements OnInit {
     constructor(private dialogRef: MatDialogRef<ChangeRoutineEditDialogComponent>,
                 private deviceService: DeviceService,
                 private roomService: RoomService,
+                private worldService: WorldService,
                 @Inject(MAT_DIALOG_DATA) data: { type: string, id: string }) {
         this.Id = data.id;
         this.type = data.type;
@@ -54,8 +55,7 @@ export class ChangeRoutineEditDialogComponent implements OnInit {
             case 'device': {
                 this.deviceService.get(this.Id).subscribe((device: DeviceResponseModel | null) => {
                     if (device !== null) {
-                        this.device = device;
-                        this.convertMapToArray(this.device.device.change_routines);
+                        this.convertMapToArray(device.device.change_routines);
                     }
                 });
                 break;
@@ -63,8 +63,16 @@ export class ChangeRoutineEditDialogComponent implements OnInit {
             case 'room': {
                 this.roomService.get(this.Id).subscribe((room: RoomResponseModel | null) => {
                     if (room !== null) {
-                        this.room = room;
-                        this.convertMapToArray(this.room.room.change_routines);
+                        this.convertMapToArray(room.room.change_routines);
+                    }
+                });
+                break;
+            }
+            case 'world': {
+                this.worldService.get(this.Id).subscribe((world: WorldModel | null) => {
+                    if (world !== null) {
+                        console.log(world);
+                        this.convertMapToArray(world.change_routines);
                     }
                 });
                 break;

@@ -28,7 +28,7 @@ export class StatesComponent implements OnInit {
     @Input() showButtons = false;
 
     room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null, change_routines: null}};
-    world: WorldModel = {id: '', name: '', rooms: null, states: null};
+    world: WorldModel = {id: '', name: '', rooms: null, states: null, change_routines: null};
     gridCols = 0;
     stateMap: StatesMapModel = {};
     ready = false;
@@ -128,7 +128,6 @@ export class StatesComponent implements OnInit {
     private initStates(): void {
         this.activatedRoute.params.subscribe(
             (params: Params) => {
-                console.log('params');
                 this.roomId = params['roomid'];
                 this.worldId = params['worldid'];
                 this.getStateMap(this.roomId, this.worldId);
