@@ -2,7 +2,7 @@
     <div class="layout-margin" fxLayout="row">
         <h3>{{type}} state</h3>
         <div fxFlex></div>
-        <div >
+        <div *ngIf="showButtons">
             <button mat-icon-button color="accent" (click)="add()" matTooltip="Add {{type}} change routine">
                 <mat-icon>add</mat-icon>
             </button>

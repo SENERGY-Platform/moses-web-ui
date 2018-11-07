@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {RoomResponseModel} from '../../../modules/room/shared/roomResponse.model';
 import {RoomService} from '../../../modules/room/shared/room.service';
 import {WorldModel} from '../../../modules/world/shared/world.model';
@@ -7,6 +7,7 @@ import {ResponsiveService} from '../../services/responsive.service';
 import {StatesMapModel} from './shared/states-map.model';
 import {ActivatedRoute, Params} from '@angular/router';
 import {ChangeRoutineService} from '../../../modules/change-routines/shared/change-routine.service';
+import {Subscription} from 'rxjs/index';
 
 const grid = new Map([
     ['xs', 1],
@@ -23,7 +24,9 @@ const grid = new Map([
 })
 export class StatesComponent implements OnInit {
 
-    type = '';
+    @Input() type = '';
+    @Input() showButtons = false;
+
     room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null, change_routines: null}};
     world: WorldModel = {id: '', name: '', rooms: null, states: null};
     gridCols = 0;
@@ -34,7 +37,12 @@ export class StatesComponent implements OnInit {
     lux = 0;
     co = 0;
 
+    worldId = '';
+    roomId = '';
+
     private typeId = '';
+    private roomSub!: Subscription;
+    private worldSub!: Subscription;
 
     constructor(private roomService: RoomService,
                 private changeRoutineService: ChangeRoutineService,
@@ -43,7 +51,18 @@ export class StatesComponent implements OnInit {
                 private activatedRoute: ActivatedRoute) {
     }
 
+
     ngOnInit() {
+        switch (this.typeId) {
+            case 'room': {
+                this.roomSub.unsubscribe();
+                break;
+            }
+            case 'world': {
+                this.worldSub.unsubscribe();
+                break;
+            }
+        }
         this.initGridCols();
         this.initStates();
     }
@@ -109,10 +128,12 @@ export class StatesComponent implements OnInit {
     private initStates(): void {
         this.activatedRoute.params.subscribe(
             (params: Params) => {
-                const roomId = params['roomid'];
-                const worldId = params['worldid'];
-                this.getStateMap(roomId, worldId);
+                console.log('params');
+                this.roomId = params['roomid'];
+                this.worldId = params['worldid'];
+                this.getStateMap(this.roomId, this.worldId);
             });
+
 
     }
 
@@ -124,31 +145,28 @@ export class StatesComponent implements OnInit {
     }
 
     private getStateMap(roomId: string, worldId: string) {
-        if (roomId !== undefined) {
-          this.roomService.get(roomId).subscribe((room: RoomResponseModel | null) => {
+        if (this.type === 'room') {
+            this.roomSub = this.roomService.get(roomId).subscribe((room: RoomResponseModel | null) => {
                 if (room !== null) {
                     this.room = room;
                     this.typeId = this.room.room.id;
                     this.stateMap = room.room.states || {};
-                    this.type = 'room';
                     this.setValues();
                     this.ready = true;
                 }
             });
-        } else {
-            if (worldId !== undefined) {
-                this.worldService.get(worldId).subscribe((world: WorldModel | null) => {
-                    if (world !== null) {
-                        this.world = world;
-                        this.typeId = this.world.id;
-                        this.stateMap = world.states || {};
-                        this.type = 'world';
-                        this.setValues();
-                        this.ready = true;
-                    }
-                });
-            }
         }
 
+        if (this.type === 'world') {
+            this.worldSub = this.worldService.get(worldId).subscribe((world: WorldModel | null) => {
+                if (world !== null) {
+                    this.world = world;
+                    this.typeId = this.world.id;
+                    this.stateMap = world.states || {};
+                    this.setValues();
+                    this.ready = true;
+                }
+            });
+        }
     }
 }
