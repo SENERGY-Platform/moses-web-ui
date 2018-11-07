@@ -1,4 +1,4 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {RoomService} from './shared/room.service';
 import {RoomResponseModel} from './shared/roomResponse.model';
@@ -22,11 +22,11 @@ const grid = new Map([
 })
 export class RoomComponent implements OnInit {
 
-    @Output() room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null, change_routines: null}};
-    @Output() devices: DeviceModel[] = [];
-    @Output() value = 50;
-    @Output() switchTypeId = environment.zwaySwitchBinaryTypeId;
-    @Output() gridCols = 0;
+    room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null, change_routines: null}};
+    devices: DeviceModel[] = [];
+    value = 50;
+    switchTypeId = environment.zwaySwitchBinaryTypeId;
+    gridCols = 0;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private roomService: RoomService,
