@@ -15,7 +15,7 @@
                             <div class="truncate" matTooltip="{{device.name}}">{{device.name}}</div>
                         </div>
                         <div fxFlex="15" fxLayout="row" fxLayoutAlign="end center">
-                            <mat-slide-toggle *ngIf="device.external_type_id === switchTypeId" #slide (change)="slideChange(device, slide.checked)"
+                            <mat-slide-toggle *ngIf="device.external_type_id === switchTypeId && device.states" #slide (change)="slideChange(device, slide.checked)"
                                               [checked]="device.states['level'] === 'on'"></mat-slide-toggle>
                         </div>
                         <div fxFlex="20" fxLayout="row" fxLayoutAlign="end center">
