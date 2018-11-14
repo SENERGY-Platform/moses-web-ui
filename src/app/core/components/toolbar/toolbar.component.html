@@ -7,28 +7,21 @@
         src="src/img/SENERGY_LOGO-bunt_horizontal_medium_boldBulb130.svg">
     </a>
     <div>MOSES toolbar</div>
-    <!--div class="mat-h4 color-accent">{{header}}</div>
-    <span class="fill-remaining-space"></span>
-    <button mat-icon-button color="accent">
-        <mat-icon>notifications_none</mat-icon>
-    </button>
-
+    <div fxFlex></div>
     <button mat-icon-button [matMenuTriggerFor]="user" color="accent">
         <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #user="matMenu" [overlapTrigger]="false">
-        <div mat-menu-item>User</div>
-        <mat-divider></mat-divider>
-        <button mat-menu-item>
-            <mat-icon>settings</mat-icon>
-            Settings
+        <button disabled mat-menu-item>
+            <mat-icon>face</mat-icon>
+            {{userName}}
         </button>
         <mat-divider></mat-divider>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="logout()">
             <mat-icon>power_settings_new</mat-icon>
             Logout
         </button>
-    </mat-menu>-->
+    </mat-menu>
 </mat-toolbar>
 
 

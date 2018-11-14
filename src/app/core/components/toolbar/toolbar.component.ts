@@ -1,4 +1,5 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthorizationService} from '../../services/authorization.service';
 
 @Component({
     selector: 'moses-toolbar',
@@ -7,13 +8,13 @@ import {Component, OnInit, Output} from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-    @Output() header = '';
+    userName = '';
 
-    constructor() {
+    constructor(private authorizationService: AuthorizationService) {
     }
 
     ngOnInit() {
-       // this.setHeader();
+        this.initUser();
     }
 
     toggle(sidenavOpen: boolean): void {
@@ -24,26 +25,11 @@ export class ToolbarComponent implements OnInit {
        // this.sidenavService.reset();
     }
 
-    /*private setHeader() {
-        this.router.events.pipe(
-            filter(event => event instanceof NavigationEnd),
-            map(() => {
-                let route = this.activatedRoute.firstChild;
-                let child = route;
-                while (child) {
-                    if (child.firstChild) {
-                        child = child.firstChild;
-                        route = child;
-                    } else {
-                        child = null;
-                    }
-                }
-                return route;
-            }),
-            mergeMap((route: ActivatedRoute) => route.data)
-        ).subscribe((data: any) => {
-            this.header = data.header;
-        });
-    }*/
+    logout(): void {
+        this.authorizationService.logout();
+    }
 
+    private initUser() {
+        this.userName = this.authorizationService.getUserName();
+    }
 }

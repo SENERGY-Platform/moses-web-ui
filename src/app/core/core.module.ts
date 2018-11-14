@@ -1,9 +1,9 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {
-    MatButtonModule, 
+    MatButtonModule, MatDividerModule,
     MatGridListModule,
-    MatIconModule,
+    MatIconModule, MatMenuModule,
     MatSidenavModule,
     MatSliderModule,
     MatToolbarModule, MatTooltipModule
@@ -32,6 +32,8 @@ import {CommonModule} from '@angular/common';
         FormsModule,
         CommonModule,
         MatTooltipModule,
+        MatMenuModule,
+        MatDividerModule,
     ],
     declarations: [
         ToolbarComponent,
