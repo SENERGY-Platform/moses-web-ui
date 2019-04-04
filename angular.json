@@ -46,6 +46,15 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
+            },
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "serviceWorker": true
             }
           }
         },
@@ -57,6 +66,9 @@
           "configurations": {
             "production": {
               "browserTarget": "moses-web-ui:build:production"
+            },
+            "dev": {
+              "browserTarget": "moses-web-ui:build:dev"
             }
           }
         },
