@@ -3,7 +3,6 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {RoomService} from './shared/room.service';
 import {RoomResponseModel} from './shared/roomResponse.model';
 import {DeviceModel} from '../device/shared/device.model';
-import {environment} from '../../../environments/environment';
 import {ResponsiveService} from '../../core/services/responsive.service';
 import {ChangeRoutineService} from '../change-routines/shared/change-routine.service';
 
@@ -25,7 +24,6 @@ export class RoomComponent implements OnInit {
     room: RoomResponseModel = {world: '', room: {id: '', name: '', devices: null, states: null, change_routines: null}};
     devices: DeviceModel[] = [];
     value = 50;
-    switchTypeId = environment.zwaySwitchBinaryTypeId;
     gridCols = 0;
 
     constructor(private activatedRoute: ActivatedRoute,
