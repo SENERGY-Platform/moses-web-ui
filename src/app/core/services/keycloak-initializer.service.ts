@@ -2,12 +2,6 @@ import {KeycloakService} from 'keycloak-angular';
 import {environment} from '../../../environments/environment';
 
 export function keycloakInitializerService(keycloak: KeycloakService): () => Promise<any> {
-/*    const tokenStored = localStorage.getItem('kc_token');
-    let token = '';
-    if (tokenStored !== null) {
-        token = tokenStored;
-    }*/
-
     return (): Promise<any> => keycloak.init({
         config: {
             url: environment.keycloakUrl + '/auth',
@@ -18,11 +12,7 @@ export function keycloakInitializerService(keycloak: KeycloakService): () => Pro
             onLoad: 'login-required',
             checkLoginIframe: false,
             // token: token,
-        }
+        },
+        bearerPrefix: 'Bearer',
     });
-/*        .then(success => {
-        keycloak.getToken().then(res => {
-            localStorage.setItem('kc_token', res);
-        });
-    });*/
 }
