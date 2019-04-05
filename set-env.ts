@@ -36,6 +36,7 @@ export const environment = {
   keycloakUrl: '${process.env.KEYCLOACK_URL}',
   permissionSearchUrl: '${process.env.PERMISSION_SEARCH_URL}',
   mosesUrl: '${process.env.MOSES_URL}',
+  zwaySwitchBinaryTypeId: '${process.env.ZWAY_SWITCH_BINARY_TYPE_ID}',
 };
 `;
 

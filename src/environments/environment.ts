@@ -25,6 +25,7 @@ export const environment = {
     keycloakUrl: 'https://localhost',
     permissionSearchUrl: 'http://localhost',
     mosesUrl: 'http://localhost',
+    zwaySwitchBinaryTypeId: 'iot#123456789',
 };
 
 /*

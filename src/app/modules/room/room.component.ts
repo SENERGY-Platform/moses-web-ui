@@ -5,6 +5,7 @@ import {RoomResponseModel} from './shared/roomResponse.model';
 import {DeviceModel} from '../device/shared/device.model';
 import {ResponsiveService} from '../../core/services/responsive.service';
 import {ChangeRoutineService} from '../change-routines/shared/change-routine.service';
+import {environment} from '../../../environments/environment';
 
 const grid = new Map([
     ['xs', 1],
@@ -25,6 +26,7 @@ export class RoomComponent implements OnInit {
     devices: DeviceModel[] = [];
     value = 50;
     gridCols = 0;
+    switchTypeId = environment.zwaySwitchBinaryTypeId;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private roomService: RoomService,
