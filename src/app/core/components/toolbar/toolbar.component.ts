@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthorizationService} from '../../services/authorization.service';
+import {SidenavService} from '../sidenav/shared/sidenav.service';
 
 @Component({
     selector: 'moses-toolbar',
@@ -10,7 +11,8 @@ export class ToolbarComponent implements OnInit {
 
     userName = '';
 
-    constructor(private authorizationService: AuthorizationService) {
+    constructor(private authorizationService: AuthorizationService,
+                private sidenavService: SidenavService) {
     }
 
     ngOnInit() {
@@ -18,11 +20,11 @@ export class ToolbarComponent implements OnInit {
     }
 
     toggle(sidenavOpen: boolean): void {
-      //  this.sidenavService.toggle(sidenavOpen);
+      this.sidenavService.toggle(sidenavOpen);
     }
 
     resetSidenav(): void {
-       // this.sidenavService.reset();
+       this.sidenavService.reset();
     }
 
     logout(): void {
