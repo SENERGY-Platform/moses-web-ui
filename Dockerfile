@@ -8,8 +8,7 @@ WORKDIR /workspace
 # use git
 RUN apk add --no-cache git
 
-RUN npm install
-RUN npm rebuild node-sass
+RUN npm ci
 RUN npm run config -- --environment=prod
 RUN $(npm bin)/ng build --prod
 
