@@ -24,7 +24,7 @@ export class DeviceTypesService {
     }
 
     getDeviceTypesMetadata(idArray: string[]): Observable<DeviceTypeModel[]> {
-        return this.http.post<DeviceTypeModel[]>(environment.permissionSearchUrl + '/ids/select/devicetype/r', idArray).pipe(
+        return this.http.post<DeviceTypeModel[]>(environment.permissionSearchUrl + '/ids/select/device-types/r', idArray).pipe(
             map((resp) => resp || []),
             catchError(this.errorHandlerService.handleError(DeviceTypesService.name, 'getDeviceTypesMetadata', []))
         );
