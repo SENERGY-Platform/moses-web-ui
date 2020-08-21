@@ -1,4 +1,4 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import { EventEmitter, Injectable, Output, Directive } from '@angular/core';
 import {SidenavSectionModel} from './sidenav-section.model';
 import {WorldModel} from '../../../../modules/world/shared/world.model';
 import {BehaviorSubject, Observable} from 'rxjs/index';
@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import {SidenavPageModel} from './sidenav-page.model';
 import {RoomResponseModel} from '../../../../modules/room/shared/roomResponse.model';
 
+@Directive()
 @Injectable({
     providedIn: 'root',
 })

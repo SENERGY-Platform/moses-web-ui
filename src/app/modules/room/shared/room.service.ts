@@ -1,4 +1,4 @@
-import {Injectable, Output} from '@angular/core';
+import { Injectable, Output, Directive } from '@angular/core';
 import {catchError} from 'rxjs/internal/operators';
 import {environment} from '../../../../environments/environment';
 import {Observable, Subject} from 'rxjs/index';
@@ -24,6 +24,7 @@ import {ServicesModel} from '../../services/shared/services.model';
 import {ServicesService} from '../../services/shared/services.service';
 import {RoomModel} from './room.model';
 
+@Directive()
 @Injectable({
     providedIn: 'root'
 })
