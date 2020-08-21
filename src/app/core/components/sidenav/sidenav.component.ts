@@ -15,7 +15,7 @@ import {SidenavSectionModel} from './shared/sidenav-section.model';
 
 export class SidenavComponent implements OnInit, AfterViewInit {
 
-    @ViewChild('sidenav') sidenav!: MatSidenav;
+    @ViewChild('sidenav', {static: false}) sidenav!: MatSidenav;
     @Output() mode = '';
     @Output() sections: SidenavSectionModel[] = [];
     @Output() openSection: null | string = null;
