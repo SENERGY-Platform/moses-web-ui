@@ -1,5 +1,5 @@
 import {Component, Output} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import {ChangeRequestModel} from '../shared/change-request.model';
 
 @Component({

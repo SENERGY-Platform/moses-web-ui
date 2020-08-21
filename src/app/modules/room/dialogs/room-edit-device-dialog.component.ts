@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit, Output} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import {DeviceService} from '../../device/shared/device.service';
 import {ServicesModel} from '../../services/shared/services.model';

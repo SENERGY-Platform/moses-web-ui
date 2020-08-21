@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {HomeNewWorldDialogComponent} from '../dialogs/home-new-world-dialog.component';
 import {WorldService} from '../../world/shared/world.service';
 import {WorldModel} from '../../world/shared/world.model';

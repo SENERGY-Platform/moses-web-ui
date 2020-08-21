@@ -1,13 +1,14 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {
-    MatButtonModule, MatDividerModule,
-    MatGridListModule,
-    MatIconModule, MatMenuModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatToolbarModule, MatTooltipModule
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import {throwIfAlreadyLoaded} from './module-import-guard';
 import {ToolbarComponent} from './components/toolbar/toolbar.component';

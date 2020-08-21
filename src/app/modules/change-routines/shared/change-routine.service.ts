@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/index';
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {ChangeRequestModel} from './change-request.model';
 import {environment} from '../../../../environments/environment';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import {ChangeRoutineEditDialogComponent} from '../dialog/change-routine-edit-dialog.component';
 import {ChangeRoutinesMapModel} from './change-routines-map.model';
 import {DeviceService} from '../../device/shared/device.service';

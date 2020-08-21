@@ -3,7 +3,7 @@ import {catchError} from 'rxjs/internal/operators';
 import {environment} from '../../../../environments/environment';
 import {Observable, Subject} from 'rxjs/index';
 import {HttpClient} from '@angular/common/http';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {RoomResponseModel} from './roomResponse.model';

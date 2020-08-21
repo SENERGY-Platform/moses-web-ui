@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/internal/operators';
 import {Observable} from 'rxjs/index';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {environment} from '../../../../environments/environment';

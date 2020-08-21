@@ -1,5 +1,5 @@
 import {Component, Output} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import {StatesModel} from '../../../core/components/states/shared/states.model';
 
 @Component({

@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit, Output} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {FormControl, Validators} from '@angular/forms';
 
 import {DeviceTypesService} from '../../device-types/shared/device-types.service';
