@@ -28,7 +28,11 @@
               "src/styles.css",
               "src/theme.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "keycloak-js",
+              "rxjs"
+            ]
           },
           "configurations": {
             "production": {
