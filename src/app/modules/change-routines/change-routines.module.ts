@@ -45,9 +45,6 @@ import {ChangeRoutineAddDialogComponent} from './dialog/change-routine-add-dialo
         ChangeRoutineEditDialogComponent,
         ChangeRoutineAddDialogComponent
     ],
-    entryComponents: [ChangeRoutineEditDialogComponent,
-        ChangeRoutineAddDialogComponent,
-    ],
 })
 export class ChangeRoutinesModule {
 }

@@ -55,12 +55,6 @@ const room = {path: 'world/:worldid/room/:roomid', pathMatch: 'full', component:
         RoomEditDeviceDialogComponent,
         RoomEditStateDialogComponent,
     ],
-    entryComponents: [RoomDeleteDialogComponent,
-        RoomNewDeviceDialogComponent,
-        RoomEditDeviceDialogComponent,
-        RoomAddDeviceStateDialogComponent,
-        RoomEditStateDialogComponent,
-    ],
 })
 export class RoomModule {
 }

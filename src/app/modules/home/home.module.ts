@@ -23,7 +23,6 @@ import {HomeNewWorldDialogComponent} from './dialogs/home-new-world-dialog.compo
         HomeComponent,
         HomeNewWorldDialogComponent
     ],
-    entryComponents: [HomeNewWorldDialogComponent],
 })
 export class HomeModule {
 }

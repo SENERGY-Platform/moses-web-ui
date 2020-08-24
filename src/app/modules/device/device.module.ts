@@ -9,7 +9,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     declarations: [
         DeviceDeleteDialogComponent,
     ],
-    entryComponents: [DeviceDeleteDialogComponent],
 })
 export class DeviceModule {
 }

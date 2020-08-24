@@ -34,7 +34,6 @@ const world = {path: 'world/:worldid', pathMatch: 'full', component: WorldCompon
         WorldDeleteDialogComponent,
         WorldCreateRoomDialogComponent,
     ],
-    entryComponents: [WorldDeleteDialogComponent, WorldCreateRoomDialogComponent],
 })
 export class WorldModule {
 }

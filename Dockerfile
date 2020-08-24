@@ -1,14 +1,14 @@
 ## STAGE 1: Build Angular application ##
 FROM node:10-alpine as builder
-
-COPY . /workspace
-
 WORKDIR /workspace
 
-# use git
-RUN apk add --no-cache git
+# install dependencies
+ADD package.json .
+ADD package-lock.json .
+RUN npm ci --unsafe-perm
 
-RUN npm ci
+# copy sourcecode and build
+COPY . /workspace
 RUN npm run config -- --environment=prod
 RUN $(npm bin)/ng build --prod
 
