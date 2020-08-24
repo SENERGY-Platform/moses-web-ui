@@ -3,19 +3,23 @@ import {KeycloakService} from 'keycloak-angular';
 
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 
 export class AuthorizationService {
 
-    constructor(private keycloakService: KeycloakService) {
-    }
+  constructor(private keycloakService: KeycloakService) {
+  }
 
-    getUserName(): string {
-        return this.keycloakService.getUsername();
-    }
+  getUserName(): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      this.keycloakService.loadUserProfile()
+        .then(() => resolve(this.keycloakService.getUsername()))
+        .catch(() => reject(undefined));
+    });
+  }
 
-    logout() {
-        this.keycloakService.logout();
-    }
+  logout() {
+    this.keycloakService.logout();
+  }
 }
