@@ -31,7 +31,8 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "keycloak-js",
-              "rxjs"
+              "rxjs",
+              "core-js"
             ]
           },
           "configurations": {
