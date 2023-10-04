@@ -18,13 +18,15 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+const env = (window as any)['env'] || {};
+
 export const environment = {
     production: false,
-    keyCloakRealm: 'master',
-    keyCloakClientId: 'frontend',
-    keycloakUrl: 'https://localhost',
-    permissionSearchUrl: 'http://localhost',
-    mosesUrl: 'http://localhost',
+    keyCloakRealm: env.keyCloakRealm || 'master',
+    keyCloakClientId: env.keyCloakClientId || 'frontend',
+    keycloakUrl: env.keycloakUrl || 'http://localhost',
+    permissionSearchUrl: env.permissionSearchUrl || 'http://localhost',
+    mosesUrl: env.mosesUrl || 'http://localhost',
     zwaySwitchBinaryTypeId: 'iot#123456789',
 };
 
