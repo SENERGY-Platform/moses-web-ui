@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {catchError} from 'rxjs/internal/operators';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/index';
+import {catchError, Observable} from 'rxjs';
 
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {ChangeRequestModel} from './change-request.model';

@@ -2,7 +2,7 @@
 
 <mat-dialog-content>
     <mat-form-field color="accent" fxFill>
-        <input disabled matInput placeholder="Name" value="{{device?.device.name}}">
+        <input disabled matInput placeholder="Name" [value]="device?.device?.name">
     </mat-form-field>
     <h3>Services</h3>
     <div *ngIf="services.length > 0">

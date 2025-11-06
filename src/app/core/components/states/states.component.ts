@@ -7,7 +7,7 @@ import {ResponsiveService} from '../../services/responsive.service';
 import {StatesMapModel} from './shared/states-map.model';
 import {ActivatedRoute, Params} from '@angular/router';
 import {ChangeRoutineService} from '../../../modules/change-routines/shared/change-routine.service';
-import {Subscription} from 'rxjs/index';
+import {Subscription} from 'rxjs';
 
 const grid = new Map([
     ['xs', 1],
@@ -108,14 +108,14 @@ export class StatesComponent implements OnInit {
         }
     }
 
-    formatLabel(value: number | null) {
+    formatLabel(value: number): string {
         if (!value) {
-            return 0;
+            return '0';
         }
         if (value >= 1000) {
             return Math.round(value / 1000) + 'k';
         }
-        return value;
+        return '' + value;
     }
 
     private initGridCols(): void {

@@ -1,5 +1,4 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -18,6 +17,7 @@ import {RouterModule} from '@angular/router';
 import {StatesComponent} from './components/states/states.component';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 
 @NgModule({
     imports: [

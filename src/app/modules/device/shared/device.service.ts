@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {catchError} from 'rxjs/internal/operators';
+import {catchError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/index';
+import {Observable} from 'rxjs';
 
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {DeviceResponseModel} from './deviceResponse.model';

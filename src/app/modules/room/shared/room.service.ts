@@ -1,7 +1,6 @@
 import { Injectable, Output, Directive } from '@angular/core';
-import {catchError} from 'rxjs/internal/operators';
 import {environment} from '../../../../environments/environment';
-import {Observable, Subject} from 'rxjs/index';
+import {Observable, Subject, catchError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 

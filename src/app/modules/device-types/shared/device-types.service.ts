@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {catchError, map} from 'rxjs/internal/operators';
+import {catchError, map} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs/index';
+import {Observable} from 'rxjs';
 
 import {ErrorHandlerService} from '../../../core/services/error-handler.service';
 import {environment} from '../../../../environments/environment';
@@ -24,8 +24,8 @@ export class DeviceTypesService {
     }
 
     getDeviceTypesMetadata(idArray: string[]): Observable<DeviceTypeModel[]> {
-        return this.http.post<DeviceTypeModel[]>(environment.permissionSearchUrl + '/ids/select/device-types/r', idArray).pipe(
-            map((resp) => resp || []),
+        return this.http.get<DeviceTypeModel[]>(environment.permissionSearchUrl + '/v3/device-types?ids=' + idArray.join(',')).pipe(
+            map((resp: any) => resp || []),
             catchError(this.errorHandlerService.handleError(DeviceTypesService.name, 'getDeviceTypesMetadata', []))
         );
     }

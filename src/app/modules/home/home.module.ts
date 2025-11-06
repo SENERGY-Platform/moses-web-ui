@@ -6,8 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {HomeNewWorldDialogComponent} from './dialogs/home-new-world-dialog.component';
+import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 
 @NgModule({
     imports: [

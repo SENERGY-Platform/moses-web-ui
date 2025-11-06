@@ -13,12 +13,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {CommonModule} from '@angular/common';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {CoreModule} from '../../core/core.module';
 import {ChangeRoutineEditDialogComponent} from './dialog/change-routine-edit-dialog.component';
 import {ChangeRoutineAddDialogComponent} from './dialog/change-routine-add-dialog.component';
+import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 
 @NgModule({
     imports: [

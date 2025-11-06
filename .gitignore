@@ -44,3 +44,7 @@ Thumbs.db
 
 /src/environments/environment.dev.ts
 /src/environments/environment.prod.ts
+src/assets/env.js
+.vscode
+__debug*
+.angular

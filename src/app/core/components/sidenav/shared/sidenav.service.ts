@@ -1,8 +1,8 @@
 import { EventEmitter, Injectable, Output, Directive } from '@angular/core';
 import {SidenavSectionModel} from './sidenav-section.model';
 import {WorldModel} from '../../../../modules/world/shared/world.model';
-import {BehaviorSubject, Observable} from 'rxjs/index';
-import {catchError, map} from 'rxjs/internal/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {catchError, map} from 'rxjs';
 import {environment} from '../../../../../environments/environment';
 import {ErrorHandlerService} from '../../../services/error-handler.service';
 import {HttpClient} from '@angular/common/http';

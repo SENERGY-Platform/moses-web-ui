@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit, Output, ViewChild} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {filter, map, mergeMap, take} from 'rxjs/internal/operators';
+import {filter, map, mergeMap, take} from 'rxjs';
 
 import {ResponsiveService} from '../../services/responsive.service';
 import {SidenavService} from './shared/sidenav.service';

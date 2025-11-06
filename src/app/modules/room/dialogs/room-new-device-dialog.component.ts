@@ -33,7 +33,10 @@ export class RoomNewDeviceDialogComponent implements OnInit {
         this.dialogRef.close();
     }
 
-    create(name: string, deviceTypeId: string): void {
+    create(name: string, deviceTypeId: string | null): void {
+        if (deviceTypeId === null) {
+            return;
+        }
         const deviceRequest: DeviceRequestModel = {device_type_id: deviceTypeId, name: name, room: this.room.room.id};
         this.dialogRef.close(deviceRequest);
     }
